@@ -1,0 +1,12 @@
+{
+  "model": "gpt-image-1.5",
+  "prompt": "Change the person's hair style to Blunt Bob. Keep the original face, lighting, background, and composition exactly the same.",
+  "config": {
+    "background": "opaque",
+    "quality": "low",
+    "size": "1024x1536",
+    "images": [
+      "https://raw.githubusercontent.com/github/explore/main/topics/android/android.png"
+    ]
+  }
+}

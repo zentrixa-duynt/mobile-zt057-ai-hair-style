@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginBottom="32dp"
+    android:background="@drawable/bg_block_dark"
+    android:orientation="vertical"
+    android:paddingTop="11dp"
+    android:paddingBottom="12dp"
+    android:paddingHorizontal="12dp">
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_color_palette"
+        android:textColor="#6A7282"
+        android:textSize="12sp"
+        android:layout_marginStart="2dp"
+        android:fontFamily="@font/poppins_medium"
+        android:includeFontPadding="false" />
+        
+    <!-- Best neutrals -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_best_neutrals"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        android:fontFamily="@font/poppins_medium"
+        android:includeFontPadding="false"
+        android:layout_marginTop="14dp" />
+    <LinearLayout
+        android:id="@+id/cg_best_neutrals"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:orientation="horizontal" />
+
+    <!-- Best blush & lip tones -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_best_blush_amp_lip_tones"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        android:fontFamily="@font/poppins_medium"
+        android:includeFontPadding="false"
+        android:layout_marginTop="16dp" />
+
+    <LinearLayout
+        android:id="@+id/cg_best_blush_lip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:orientation="horizontal" />
+
+    <!-- Best eyes shadow tones -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_best_eyes_shadow_tones"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        android:fontFamily="@font/poppins_medium"
+        android:includeFontPadding="false"
+        android:layout_marginTop="16dp" />
+    <LinearLayout
+        android:id="@+id/cg_best_eyes_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:orientation="horizontal" />
+
+    <!-- Best liner & mascara -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_best_liner_amp_mascara"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        android:fontFamily="@font/poppins_medium"
+        android:includeFontPadding="false"
+        android:layout_marginTop="16dp" />
+    <LinearLayout
+        android:id="@+id/cg_best_liner_mascara"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:orientation="horizontal" />
+        
+</LinearLayout>

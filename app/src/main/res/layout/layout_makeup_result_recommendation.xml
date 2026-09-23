@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginTop="16dp"
+    android:background="@drawable/bg_block_dark"
+    android:orientation="vertical"
+    android:paddingTop="12dp"
+    android:paddingBottom="3dp"
+    android:paddingHorizontal="13dp">
+    
+    <!-- Tab headers -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:baselineAligned="false">
+        
+        <!-- Brows -->
+        <LinearLayout
+            android:id="@+id/tab_brows"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/txt_tab_brows"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/text_brows"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"
+                android:fontFamily="@font/poppins_medium"
+                android:includeFontPadding="false"
+                android:textAlignment="center"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:focusable="true"
+                android:focusableInTouchMode="true" />
+            <View
+                android:id="@+id/indicator_brows"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="4dp"
+                android:background="#F6339A" />
+        </LinearLayout>
+
+        <!-- Eyes -->
+        <LinearLayout
+            android:id="@+id/tab_eyes"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/txt_tab_eyes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/text_eyes"
+                android:textColor="#6A7282"
+                android:textSize="12sp"
+                android:fontFamily="@font/poppins_medium"
+                android:includeFontPadding="false"
+                android:textAlignment="center"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:focusable="true"
+                android:focusableInTouchMode="true" />
+            <View
+                android:id="@+id/indicator_eyes"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="4dp"
+                android:background="#F6339A"
+                android:visibility="invisible"/>
+        </LinearLayout>
+        
+        <!-- Nose -->
+        <LinearLayout
+            android:id="@+id/tab_nose"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/txt_tab_nose"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/text_nose"
+                android:textColor="#6A7282"
+                android:textSize="12sp"
+                android:fontFamily="@font/poppins_medium"
+                android:includeFontPadding="false"
+                android:textAlignment="center"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:focusable="true"
+                android:focusableInTouchMode="true" />
+            <View
+                android:id="@+id/indicator_nose"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="4dp"
+                android:background="#F6339A"
+                android:visibility="invisible"/>
+        </LinearLayout>
+
+        <!-- Skin -->
+        <LinearLayout
+            android:id="@+id/tab_skin"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/txt_tab_skin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/text_skin"
+                android:textColor="#6A7282"
+                android:textSize="12sp"
+                android:fontFamily="@font/poppins_medium"
+                android:includeFontPadding="false"
+                android:textAlignment="center"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:focusable="true"
+                android:focusableInTouchMode="true" />
+            <View
+                android:id="@+id/indicator_skin"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="4dp"
+                android:background="#F6339A"
+                android:visibility="invisible"/>
+        </LinearLayout>
+        
+        <!-- Blush -->
+        <LinearLayout
+            android:id="@+id/tab_blush"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/txt_tab_blush"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/text_blush"
+                android:textColor="#6A7282"
+                android:textSize="12sp"
+                android:fontFamily="@font/poppins_medium"
+                android:includeFontPadding="false"
+                android:textAlignment="center"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:focusable="true"
+                android:focusableInTouchMode="true" />
+            <View
+                android:id="@+id/indicator_blush"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="4dp"
+                android:background="#F6339A"
+                android:visibility="invisible"/>
+        </LinearLayout>
+
+        <!-- Lip -->
+        <LinearLayout
+            android:id="@+id/tab_lip"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/txt_tab_lip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/text_lip"
+                android:textColor="#6A7282"
+                android:textSize="12sp"
+                android:fontFamily="@font/poppins_medium"
+                android:includeFontPadding="false"
+                android:textAlignment="center"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:focusable="true"
+                android:focusableInTouchMode="true" />
+            <View
+                android:id="@+id/indicator_lip"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="4dp"
+                android:background="#F6339A"
+                android:visibility="invisible"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Bullets -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_recommendations"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        tools:listitem="@layout/item_makeup_recommendation"
+        tools:itemCount="3"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        
+</LinearLayout>

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "39194108632",
+    "project_id": "ai-hair-808f9",
+    "storage_bucket": "ai-hair-808f9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:39194108632:android:269d686b839e187b916dad",
+        "android_client_info": {
+          "package_name": "com.example.aihair"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3B_EQcDI3iaGCIIhJs31rzjzvflBC8EI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

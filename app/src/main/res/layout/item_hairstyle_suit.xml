@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="100dp"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="0dp"
+    app:cardBackgroundColor="#1E2939">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
+            
+            <ImageView
+                android:id="@+id/img_hairstyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/txt_hairstyle_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="4dp"
+                android:paddingBottom="4dp"
+                tools:text="Long Straight Hair"
+                android:textColor="#FFFFFF"
+                android:textSize="10sp"
+                android:fontFamily="@font/poppins_regular"
+                android:includeFontPadding="false"
+                android:textAlignment="center"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
+                app:layout_constraintBottom_toBottomOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="4dp">
+
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:visibility="invisible"
+                android:src="@drawable/ic_flame"
+                app:tint="#FB2C36" />
+
+            <TextView
+                android:id="@+id/txt_views"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                android:layout_marginStart="2dp"
+                tools:text="2.1M"
+                android:textColor="#FFFFFF"
+                android:textSize="10sp"
+                android:fontFamily="@font/poppins_regular"
+                android:includeFontPadding="false" />
+
+            <TextView
+                android:id="@+id/btn_apply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="4dp"
+                android:background="@drawable/bg_btn_apply"
+                android:text="@string/text_apply"
+                android:textColor="#FFFFFF"
+                android:textSize="10sp"
+                android:fontFamily="@font/poppins_regular"
+                android:includeFontPadding="false" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="52dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="12dp"
+    android:background="@drawable/bg_setting_item"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:paddingHorizontal="16dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        app:cardCornerRadius="14dp"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="@android:color/transparent">
+
+        <ImageView
+            android:id="@+id/iv_flag"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/logo_app" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="9dp"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        android:fontFamily="@font/poppins_regular"
+        android:includeFontPadding="false"
+        tools:text="English" />
+
+    <TextView
+        android:id="@+id/tv_local_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:fontFamily="@font/poppins_medium"
+        android:includeFontPadding="false"
+        android:textColor="#030712"
+        android:textSize="16sp"
+        android:visibility="gone"
+        android:textDirection="locale"
+        android:textAlignment="viewStart"
+        tools:text="(English)" />
+
+    <RadioButton
+        android:id="@+id/ivRadio"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:button="@null"
+        android:background="@drawable/ic_selected_radio"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</LinearLayout>

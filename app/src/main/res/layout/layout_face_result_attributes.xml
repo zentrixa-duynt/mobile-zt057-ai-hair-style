@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginTop="16dp"
+    android:background="@drawable/bg_block_dark"
+    android:orientation="vertical"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="18dp">
+    
+    <!-- Chin -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/text_chin"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:fontFamily="@font/poppins_medium"
+            android:includeFontPadding="false" />
+        <TextView
+            android:id="@+id/txt_chin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Defined"
+            android:textColor="#F6339A"
+            android:textSize="14sp"
+            android:fontFamily="@font/poppins_medium"
+            android:includeFontPadding="false" />
+    </LinearLayout>
+
+    <!-- Cheekbone -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/text_cheekbone"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:fontFamily="@font/poppins_medium"
+            android:includeFontPadding="false" />
+        <TextView
+            android:id="@+id/txt_cheekbone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="High"
+            android:textColor="#F6339A"
+            android:textSize="14sp"
+            android:fontFamily="@font/poppins_medium"
+            android:includeFontPadding="false" />
+    </LinearLayout>
+    
+    <!-- Temple -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/text_temple"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:fontFamily="@font/poppins_medium"
+            android:includeFontPadding="false" />
+        <TextView
+            android:id="@+id/txt_temple"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Narrow"
+            android:textColor="#F6339A"
+            android:textSize="14sp"
+            android:fontFamily="@font/poppins_medium"
+            android:includeFontPadding="false" />
+    </LinearLayout>
+
+    <!-- Apple Cheeks -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/text_apple_cheeks"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:fontFamily="@font/poppins_medium"
+            android:includeFontPadding="false" />
+        <TextView
+            android:id="@+id/txt_apple_cheeks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Subtle"
+            android:textColor="#F6339A"
+            android:textSize="14sp"
+            android:fontFamily="@font/poppins_medium"
+            android:includeFontPadding="false" />
+    </LinearLayout>
+</LinearLayout>
