@@ -42,6 +42,25 @@ class HistoryDetailActivity : BaseActivity<ActivityHistoryDetailBinding>(Activit
         val ratioStr = getImageRatio(originalImageUriStr) ?: getImageRatio(resultImageUriStr)
         ratioStr?.let { ratio ->
             binding.imgResultPhoto.setDimensionRatio(ratio)
+
+            val displayMetrics = resources.displayMetrics
+            val screenHeight = displayMetrics.heightPixels
+            val screenWidth = displayMetrics.widthPixels
+            val cardWidth = screenWidth - (60 * displayMetrics.density).toInt()
+
+            val parts = ratio.split(":")
+            if (parts.size == 2) {
+                val w = parts[0].toFloatOrNull() ?: 1f
+                val h = parts[1].toFloatOrNull() ?: 1f
+                if (w > 0) {
+                    val imgHeight = cardWidth * (h / w)
+                    if (imgHeight > screenHeight * 0.6f) {
+                        val maxHeight = (screenHeight * 0.6f).toInt()
+                        binding.cardResultImage.layoutParams.height = maxHeight
+                        binding.cardResultImage.requestLayout()
+                    }
+                }
+            }
         }
 
         val targetImageView = binding.imgResultPhoto

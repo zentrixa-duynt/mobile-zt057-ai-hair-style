@@ -20,7 +20,7 @@ fun createPhotoEditorAdapter(
             } else {
                 binding.txtThumbnailName.text = item.name
             }
-            binding.txtThumbnailName.isSelected = true
+            binding.txtThumbnailName.isSelected = item.isSelected
             
             Glide.with(binding.imgThumbnail.context).clear(binding.imgThumbnail)
             Glide.with(binding.imgThumbnail.context)

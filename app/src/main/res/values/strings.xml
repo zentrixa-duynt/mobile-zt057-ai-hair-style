@@ -93,11 +93,13 @@
     <string name="text_hair_ai">Hair AI</string>
     <string name="text_hair_tools">Hair Tools</string>
     <string name="text_analyzing_face_report">Analyzing face report...</string>
+    <string name="text_analyzing_makeup_report">Analyzing makeup report...</string>
     <string name="text_analysis_result">Analysis Result</string>
     <string name="text_hairstyles_that_suit_you">Hairstyles that suit you</string>
     <string name="text_ai_makeup_analysis">AI Makeup Analysis</string>
     <string name="text_ai_face_analysis">AI Face Analysis</string>
     <string name="text_provides_detailed_insights_int">Provides detailed insights into facial feature for\nenhanced image clarity.</string>
+    <string name="text_provides_detailed_insights_makeup">Provides detailed insights into your makeup look, facial balance, and ideal color palette.</string>
     <string name="text_try_it_now">Try It Now</string>
     <string name="text_home">Home</string>
     <string name="text_history">History</string>
@@ -129,6 +131,8 @@
     <!-- Messages -->
     <string name="msg_error_no_image_selected">Error: No image selected</string>
     <string name="msg_error_no_face">No face detected in the image. Please try another photo.</string>
+    <string name="msg_error_multiple_people">Multiple people detected in the image. Please select a photo with only one person.</string>
+    <string name="msg_error_content_policy">The image violates safety policies (e.g. sensitive/NSFW content). Please try another photo.</string>
     <string name="msg_image_saved_to_gallery">Image saved to gallery</string>
     <string name="msg_error_saving_image">Error saving image</string>
     <string name="msg_error_processing_image">Error processing image</string>

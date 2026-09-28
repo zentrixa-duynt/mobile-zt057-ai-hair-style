@@ -129,7 +129,8 @@ class DrawingManager(private val imageView: PhotoView) {
         val maskCanvas = Canvas(maskComposite)
         val paint = Paint(Paint.ANTI_ALIAS_FLAG)
 
-        // Clear previous mask composite
+        // Clear previous composite and mask
+        canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
         maskCanvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
 
         // Draw the freehand mask
@@ -165,15 +166,19 @@ class DrawingManager(private val imageView: PhotoView) {
             paint.colorFilter = null
             paint.alpha = 255
         } else {
-            // Fallback
-            paint.alpha = 100
+            // Reset paint for composite
+            paint.xfermode = null
+            paint.colorFilter = null
+            paint.alpha = 255
         }
 
         // Draw base image
         canvas.drawBitmap(base, 0f, 0f, paint)
 
         // Draw the unified tinted mask over base
-        canvas.drawBitmap(maskComposite, 0f, 0f, paint)
+        if (colorMatrix != null) {
+            canvas.drawBitmap(maskComposite, 0f, 0f, paint)
+        }
 
         val currentMatrix = Matrix()
         imageView.getSuppMatrix(currentMatrix)

@@ -148,4 +148,8 @@
     <string name="text_no_internet_connection">インターネット接続がありません</string>
     <string name="text_please_turn_on_wifi">Wi-Fiをオンにしてネットワークに接続してください</string>
     <string name="text_go_to_setting">設定へ行く</string>
+    <string name="text_analyzing_makeup_report">メイクアップレポートを分析しています...</string>
+    <string name="text_provides_detailed_insights_makeup">メイクアップ、顔のバランス、理想的なカラーパレットに関する詳細な分析情報を提供します。</string>
+    <string name="msg_error_multiple_people">画像に複数の人が検出されました。一人だけが写っている写真を選択してください。</string>
+    <string name="msg_error_content_policy">画像が安全ポリシー（機密/NSFWコンテンツなど）に違反しています。別の写真を試してください。</string>
 </resources>

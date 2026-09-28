@@ -25,6 +25,8 @@ data class GenerationTaskResult(
 )
 
 data class GenerationErrorReason(
+    @SerializedName("code")
+    val code: String?,
     @SerializedName("message")
     val message: String
 )

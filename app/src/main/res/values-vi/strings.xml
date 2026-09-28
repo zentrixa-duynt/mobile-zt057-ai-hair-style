@@ -150,4 +150,8 @@
     <string name="text_no_internet_connection">Không có kết nối Internet</string>
     <string name="text_please_turn_on_wifi">Vui lòng bật và kết nối với mạng Wi-Fi</string>
     <string name="text_go_to_setting">Đi tới cài đặt</string>
+    <string name="text_analyzing_makeup_report">Đang phân tích báo cáo trang điểm...</string>
+    <string name="text_provides_detailed_insights_makeup">Cung cấp thông tin chi tiết về lớp trang điểm, sự cân đối của khuôn mặt và bảng màu lý tưởng của bạn.</string>
+    <string name="msg_error_multiple_people">Phát hiện có nhiều người trong ảnh. Vui lòng chọn một bức ảnh chỉ có một người.</string>
+    <string name="msg_error_content_policy">Hình ảnh vi phạm chính sách an toàn (ví dụ: nội dung nhạy cảm/NSFW). Vui lòng thử một bức ảnh khác.</string>
 </resources>

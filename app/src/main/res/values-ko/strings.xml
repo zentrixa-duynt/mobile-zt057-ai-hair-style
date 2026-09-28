@@ -150,4 +150,8 @@
     <string name="text_no_internet_connection">인터넷 연결 없음</string>
     <string name="text_please_turn_on_wifi">Wi-Fi를 켜고 네트워크에 연결해 주세요</string>
     <string name="text_go_to_setting">설정으로 이동</string>
+    <string name="text_analyzing_makeup_report">메이크업 보고서 분석 중...</string>
+    <string name="text_provides_detailed_insights_makeup">메이크업 룩, 얼굴 윤곽, 이상적인 컬러 팔레트에 대한 자세한 분석을 제공합니다.</string>
+    <string name="msg_error_multiple_people">이미지에서 여러 사람이 감지되었습니다. 한 사람만 있는 사진을 선택하세요.</string>
+    <string name="msg_error_content_policy">이미지가 안전 정책(예: 민감한/NSFW 콘텐츠)을 위반합니다. 다른 사진을 시도해 보세요.</string>
 </resources>

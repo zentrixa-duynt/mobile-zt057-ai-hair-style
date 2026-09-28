@@ -51,9 +51,10 @@
         android:layout_height="0dp"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="24dp"
-        app:layout_constraintDimensionRatio="3:4"
+        android:layout_marginBottom="32dp"
         android:background="@drawable/bg_dashed_border"
         app:layout_constraintTop_toBottomOf="@id/header"
+        app:layout_constraintBottom_toTopOf="@id/layout_editor"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
         
@@ -148,310 +149,317 @@
         </LinearLayout>
     </FrameLayout>
 
-    <!-- Thumbnails RecyclerView -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_thumbnails"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_editor"
+        android:layout_marginBottom="40dp"
+        app:layout_constraintBottom_toTopOf="@id/btn_continue"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:clipToPadding="false"
-        android:paddingHorizontal="16dp"
-        android:orientation="horizontal"
-        tools:listitem="@layout/item_editor_thumbnail"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/layout_add_photo" />
+        android:layout_height="wrap_content">
 
-    <!-- Colors Horizontal Scroll -->
-    <HorizontalScrollView
-        android:id="@+id/scroll_colors"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:scrollbars="none"
-        android:clipToPadding="false"
-        android:paddingHorizontal="16dp"
-        app:layout_constraintTop_toBottomOf="@id/rv_thumbnails">
-
-        <LinearLayout
-            android:id="@+id/layout_colors_container"
-            android:layout_width="wrap_content"
+        <!-- Thumbnails RecyclerView -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_thumbnails"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-            
-            <!-- Color Picker -->
-            <ImageView
-                android:id="@+id/btn_color_picker"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginEnd="16dp"
-                android:src="@drawable/ic_color_picker" />
+            android:clipToPadding="false"
+            android:paddingHorizontal="16dp"
+            android:orientation="horizontal"
+            tools:listitem="@layout/item_editor_thumbnail"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-            <!-- None -->
-            <FrameLayout
-                android:id="@+id/btn_color_none"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginEnd="16dp">
-                <!-- Background when selected -->
-                <View
-                    android:id="@+id/bg_color_none"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/bg_color_none_selected"
-                    android:visibility="gone" />
-                
-                <!-- Unselected icon (24x24) -->
+        <!-- Colors Horizontal Scroll -->
+        <HorizontalScrollView
+            android:id="@+id/scroll_colors"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:clipToPadding="false"
+            android:layout_marginTop="18dp"
+            android:paddingHorizontal="16dp"
+            app:layout_constraintTop_toBottomOf="@id/rv_thumbnails">
+
+            <LinearLayout
+                android:id="@+id/layout_colors_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <!-- Color Picker -->
                 <ImageView
-                    android:id="@+id/ic_none_unselected"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_none" />
-                    
-                <!-- Selected icon (20x20) -->
-                <ImageView
-                    android:id="@+id/ic_none_selected"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_none"
-                    android:visibility="gone" />
-            </FrameLayout>
+                    android:id="@+id/btn_color_picker"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/ic_color_picker" />
 
-            <!-- Custom Picked Color (Hidden by default) -->
-            <FrameLayout
-                android:id="@+id/color_custom"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginEnd="16dp"
-                android:visibility="gone"> 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/card_color_custom"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:cardBackgroundColor="#FFFFFF" 
-                    app:cardCornerRadius="4dp"
-                    app:cardElevation="0dp" />
-                <View
-                    android:id="@+id/stroke_outer_custom"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/bg_editor_color_stroke"
-                    android:visibility="gone" /> 
-                <View
-                    android:id="@+id/stroke_inner_custom"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/bg_inner_stroke_black"
-                    android:visibility="gone" /> 
-            </FrameLayout>
+                <!-- None -->
+                <FrameLayout
+                    android:id="@+id/btn_color_none"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="16dp">
+                    <!-- Background when selected -->
+                    <View
+                        android:id="@+id/bg_color_none"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_color_none_selected"
+                        android:visibility="gone" />
 
-            <!-- White -->
-            <FrameLayout
-                android:id="@+id/color_white"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginEnd="16dp">
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:cardBackgroundColor="#FFFFFF"
-                    app:cardCornerRadius="4dp"
-                    app:cardElevation="0dp" />
-                <!-- Outer stroke for White -->
-                <View
-                    android:id="@+id/stroke_outer_white"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/bg_editor_color_stroke"
-                    android:visibility="gone" /> <!-- Set to VISIBLE to preview selected state -->
-                <!-- Inner stroke for White -->
-                <View
-                    android:id="@+id/stroke_inner_white"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/bg_inner_stroke_black"
-                    android:visibility="gone" /> <!-- Set to VISIBLE to preview selected state -->
-            </FrameLayout>
+                    <!-- Unselected icon (24x24) -->
+                    <ImageView
+                        android:id="@+id/ic_none_unselected"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_none" />
 
-            <!-- Black -->
-            <FrameLayout
-                android:id="@+id/color_black"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginEnd="16dp">
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:cardBackgroundColor="#000000"
-                    app:cardCornerRadius="4dp"
-                    app:cardElevation="0dp" />
-                <!-- Default outer stroke -->
-                <View
-                    android:id="@+id/stroke_outer_black"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/bg_color_black_stroke" />
-                <!-- Inner stroke when selected -->
-                <View
-                    android:id="@+id/stroke_inner_black"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/bg_inner_stroke_white"
-                    android:visibility="gone" />
-            </FrameLayout>
+                    <!-- Selected icon (20x20) -->
+                    <ImageView
+                        android:id="@+id/ic_none_selected"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_none"
+                        android:visibility="gone" />
+                </FrameLayout>
 
-            <!-- Red -->
-            <FrameLayout
-                android:id="@+id/color_red"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginEnd="16dp">
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:cardBackgroundColor="#FB2C36"
-                    app:cardCornerRadius="4dp"
-                    app:cardElevation="0dp" />
-                <View
-                    android:id="@+id/stroke_inner_red"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/bg_inner_stroke_black"
-                    android:visibility="gone" />
-            </FrameLayout>
+                <!-- Custom Picked Color (Hidden by default) -->
+                <FrameLayout
+                    android:id="@+id/color_custom"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="16dp"
+                    android:visibility="gone">
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_color_custom"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:cardBackgroundColor="#FFFFFF"
+                        app:cardCornerRadius="4dp"
+                        app:cardElevation="0dp" />
+                    <View
+                        android:id="@+id/stroke_outer_custom"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_editor_color_stroke"
+                        android:visibility="gone" />
+                    <View
+                        android:id="@+id/stroke_inner_custom"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/bg_inner_stroke_black"
+                        android:visibility="gone" />
+                </FrameLayout>
 
-            <!-- Pink -->
-            <FrameLayout
-                android:id="@+id/color_pink"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginEnd="16dp">
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:cardBackgroundColor="#F6339A"
-                    app:cardCornerRadius="4dp"
-                    app:cardElevation="0dp" />
-                <View
-                    android:id="@+id/stroke_inner_pink"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/bg_inner_stroke_black"
-                    android:visibility="gone" />
-            </FrameLayout>
-            
-            <!-- Blue -->
-            <FrameLayout
-                android:id="@+id/color_blue"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginEnd="16dp">
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:cardBackgroundColor="#2B7FFF"
-                    app:cardCornerRadius="4dp"
-                    app:cardElevation="0dp" />
-                <View
-                    android:id="@+id/stroke_inner_blue"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/bg_inner_stroke_black"
-                    android:visibility="gone" />
-            </FrameLayout>
-                
-            <!-- Green -->
-            <FrameLayout
-                android:id="@+id/color_green"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginEnd="16dp">
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:cardBackgroundColor="#00C950"
-                    app:cardCornerRadius="4dp"
-                    app:cardElevation="0dp" />
-                <View
-                    android:id="@+id/stroke_inner_green"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/bg_inner_stroke_black"
-                    android:visibility="gone" />
-            </FrameLayout>
-                
-            <!-- Orange -->
-            <FrameLayout
-                android:id="@+id/color_orange"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginEnd="16dp">
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:cardBackgroundColor="#FF6900"
-                    app:cardCornerRadius="4dp"
-                    app:cardElevation="0dp" />
-                <View
-                    android:id="@+id/stroke_inner_orange"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/bg_inner_stroke_black"
-                    android:visibility="gone" />
-            </FrameLayout>
-                
-            <!-- Yellow -->
-            <FrameLayout
-                android:id="@+id/color_yellow"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginEnd="16dp">
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:cardBackgroundColor="#F0B100"
-                    app:cardCornerRadius="4dp"
-                    app:cardElevation="0dp" />
-                <View
-                    android:id="@+id/stroke_inner_yellow"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/bg_inner_stroke_black"
-                    android:visibility="gone" />
-            </FrameLayout>
-                
-            <!-- Purple -->
-            <FrameLayout
-                android:id="@+id/color_purple"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginEnd="16dp">
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:cardBackgroundColor="#AD46FF"
-                    app:cardCornerRadius="4dp"
-                    app:cardElevation="0dp" />
-                <View
-                    android:id="@+id/stroke_inner_purple"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/bg_inner_stroke_black"
-                    android:visibility="gone" />
-            </FrameLayout>
-        </LinearLayout>
-    </HorizontalScrollView>
+                <!-- White -->
+                <FrameLayout
+                    android:id="@+id/color_white"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="16dp">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:cardBackgroundColor="#FFFFFF"
+                        app:cardCornerRadius="4dp"
+                        app:cardElevation="0dp" />
+                    <!-- Outer stroke for White -->
+                    <View
+                        android:id="@+id/stroke_outer_white"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_editor_color_stroke"
+                        android:visibility="gone" /> <!-- Set to VISIBLE to preview selected state -->
+                    <!-- Inner stroke for White -->
+                    <View
+                        android:id="@+id/stroke_inner_white"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/bg_inner_stroke_black"
+                        android:visibility="gone" /> <!-- Set to VISIBLE to preview selected state -->
+                </FrameLayout>
+
+                <!-- Black -->
+                <FrameLayout
+                    android:id="@+id/color_black"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="16dp">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:cardBackgroundColor="#000000"
+                        app:cardCornerRadius="4dp"
+                        app:cardElevation="0dp" />
+                    <!-- Default outer stroke -->
+                    <View
+                        android:id="@+id/stroke_outer_black"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_color_black_stroke" />
+                    <!-- Inner stroke when selected -->
+                    <View
+                        android:id="@+id/stroke_inner_black"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/bg_inner_stroke_white"
+                        android:visibility="gone" />
+                </FrameLayout>
+
+                <!-- Red -->
+                <FrameLayout
+                    android:id="@+id/color_red"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="16dp">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:cardBackgroundColor="#FB2C36"
+                        app:cardCornerRadius="4dp"
+                        app:cardElevation="0dp" />
+                    <View
+                        android:id="@+id/stroke_inner_red"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/bg_inner_stroke_black"
+                        android:visibility="gone" />
+                </FrameLayout>
+
+                <!-- Pink -->
+                <FrameLayout
+                    android:id="@+id/color_pink"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="16dp">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:cardBackgroundColor="#F6339A"
+                        app:cardCornerRadius="4dp"
+                        app:cardElevation="0dp" />
+                    <View
+                        android:id="@+id/stroke_inner_pink"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/bg_inner_stroke_black"
+                        android:visibility="gone" />
+                </FrameLayout>
+
+                <!-- Blue -->
+                <FrameLayout
+                    android:id="@+id/color_blue"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="16dp">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:cardBackgroundColor="#2B7FFF"
+                        app:cardCornerRadius="4dp"
+                        app:cardElevation="0dp" />
+                    <View
+                        android:id="@+id/stroke_inner_blue"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/bg_inner_stroke_black"
+                        android:visibility="gone" />
+                </FrameLayout>
+
+                <!-- Green -->
+                <FrameLayout
+                    android:id="@+id/color_green"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="16dp">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:cardBackgroundColor="#00C950"
+                        app:cardCornerRadius="4dp"
+                        app:cardElevation="0dp" />
+                    <View
+                        android:id="@+id/stroke_inner_green"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/bg_inner_stroke_black"
+                        android:visibility="gone" />
+                </FrameLayout>
+
+                <!-- Orange -->
+                <FrameLayout
+                    android:id="@+id/color_orange"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="16dp">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:cardBackgroundColor="#FF6900"
+                        app:cardCornerRadius="4dp"
+                        app:cardElevation="0dp" />
+                    <View
+                        android:id="@+id/stroke_inner_orange"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/bg_inner_stroke_black"
+                        android:visibility="gone" />
+                </FrameLayout>
+
+                <!-- Yellow -->
+                <FrameLayout
+                    android:id="@+id/color_yellow"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="16dp">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:cardBackgroundColor="#F0B100"
+                        app:cardCornerRadius="4dp"
+                        app:cardElevation="0dp" />
+                    <View
+                        android:id="@+id/stroke_inner_yellow"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/bg_inner_stroke_black"
+                        android:visibility="gone" />
+                </FrameLayout>
+
+                <!-- Purple -->
+                <FrameLayout
+                    android:id="@+id/color_purple"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="16dp">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:cardBackgroundColor="#AD46FF"
+                        app:cardCornerRadius="4dp"
+                        app:cardElevation="0dp" />
+                    <View
+                        android:id="@+id/stroke_inner_purple"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/bg_inner_stroke_black"
+                        android:visibility="gone" />
+                </FrameLayout>
+            </LinearLayout>
+        </HorizontalScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- Continue Button -->
     <androidx.appcompat.widget.AppCompatButton

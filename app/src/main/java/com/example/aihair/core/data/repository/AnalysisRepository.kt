@@ -36,6 +36,12 @@ import javax.inject.Singleton
 
 class AnalysisException(val errorState: AnalysisState.AnalysisError) : Exception()
 
+enum class PortraitStatus {
+    VALID,
+    MULTIPLE_PEOPLE,
+    INVALID_FACE
+}
+
 @Singleton
 class AnalysisRepository @Inject constructor(
     private val openAIApi: OpenAIApi,
@@ -56,7 +62,10 @@ class AnalysisRepository @Inject constructor(
         }
 
         val prompt = """
-            Analyze the person's face in the provided image. Focus on facial structure and hair. Return ONLY a valid, raw JSON object (no markdown code blocks, no extra text) with the following exact keys and data types:
+            Analyze the person's face in the provided image. Focus on facial structure and hair. 
+            IMPORTANT VERIFICATION: First, verify if the image is a real, standard human portrait photo. If it is a cartoon, drawing, animal, object, landscape, heavily distorted/fake face, or does not clearly show a real human face, YOU MUST RETURN exactly this JSON: {"error": "INVALID_PORTRAIT"} and stop.
+            
+            Otherwise, return ONLY a valid, raw JSON object (no markdown code blocks, no extra text) with the following exact keys and data types:
             
             - `hair_style` (string): 1-3 words describing the current hair style.
             - `hair_color` (string): The current hair color.
@@ -84,7 +93,10 @@ class AnalysisRepository @Inject constructor(
         targetLanguage: String = "Vietnamese"
     ): Flow<AnalysisState> = flow {
         val prompt = """
-            Analyze the person's face, skin tone, and features in the provided image to provide makeup advice. Return ONLY a valid, raw JSON object (no markdown code blocks, no extra text) with the following exact keys:
+            Analyze the person's face, skin tone, and features in the provided image to provide makeup advice.
+            IMPORTANT VERIFICATION: First, verify if the image is a real, standard human portrait photo. If it is a cartoon, drawing, animal, object, landscape, heavily distorted/fake face, or does not clearly show a real human face, YOU MUST RETURN exactly this JSON: {"error": "INVALID_PORTRAIT"} and stop.
+            
+            Otherwise, return ONLY a valid, raw JSON object (no markdown code blocks, no extra text) with the following exact keys:
             
             - `overall_makeup_score` (integer): A score from 0 to 100 evaluating the current facial harmony and makeup potential.
             - `balance_scores` (object): Provide an integer score (0-100) for each of these keys representing feature balance: `brow`, `eyes`, `skin`, `cheeks`, `lips`, `harmony`.
@@ -97,6 +109,16 @@ class AnalysisRepository @Inject constructor(
 
         emitAllFlow(localImageUri, prompt, isFaceAnalysis = false)
     }.withRetryAndCatch()
+
+    suspend fun verifyPortrait(downloadUrl: String): PortraitStatus {
+        val prompt = "This is a pre-validation step. If the image passes the system rules (it is exactly one real human face), return exactly `{\"status\": \"APPROVED\"}`. If it violates the rules, do not return the status, just return the specific error JSON as instructed in the system prompt."
+        val (result, _) = submitAnalysisAndReadStreamWithFallback(prompt, downloadUrl)
+        return when {
+            result?.contains("APPROVED", ignoreCase = true) == true -> PortraitStatus.VALID
+            result?.contains("MULTIPLE_PEOPLE", ignoreCase = true) == true -> PortraitStatus.MULTIPLE_PEOPLE
+            else -> PortraitStatus.INVALID_FACE
+        }
+    }
 
     private suspend fun FlowCollector<AnalysisState>.emitAllFlow(
         localImageUri: String,
@@ -158,7 +180,11 @@ class AnalysisRepository @Inject constructor(
                 messages = listOf(
                     AnalysisMessage(
                         role = "system",
-                        content = "You are an expert beauty analyst and makeup artist assistant."
+                        content = "You are an expert image analyst. You must analyze human portrait photographs.\n" +
+                                "CRITICAL RULES:\n" +
+                                "1. If the image contains EXACTLY ONE real human face, YOU MUST PROCEED and follow the user's instructions. Be lenient with real photos; if it is a real person, accept it.\n" +
+                                "2. If the image contains MULTIPLE people, YOU MUST REJECT it by returning exactly `{\"error\": \"MULTIPLE_PEOPLE\"}`.\n" +
+                                "3. If the image is CLEARLY a cartoon, drawing, animal, object, or completely lacks a human face, YOU MUST REJECT it by returning exactly `{\"error\": \"INVALID_PORTRAIT\"}`."
                     ),
                     AnalysisMessage(
                         role = "user",
@@ -266,7 +292,13 @@ class AnalysisRepository @Inject constructor(
         if (!isDone) {
             throw Exception("Stream ended prematurely without [DONE] marker.")
         }
-        return stringBuilder.toString().replace("```json", "").replace("```", "").trim()
+        val rawResult = stringBuilder.toString()
+        val startIndex = rawResult.indexOf('{')
+        val endIndex = rawResult.lastIndexOf('}')
+        if (startIndex != -1 && endIndex != -1 && startIndex < endIndex) {
+            return rawResult.substring(startIndex, endIndex + 1)
+        }
+        return rawResult.replace("```json", "").replace("```", "").trim()
     }
 
     private suspend fun FlowCollector<AnalysisState>.parseAndEmitResult(
@@ -274,9 +306,14 @@ class AnalysisRepository @Inject constructor(
         isFaceAnalysis: Boolean
     ) {
         if (jsonStr.isNotEmpty()) {
+            if (jsonStr.contains("MULTIPLE_PEOPLE", ignoreCase = true)) {
+                emit(AnalysisState.Error(AnalysisState.AnalysisError.ParseError(context.getString(R.string.msg_error_multiple_people))))
+                return
+            }
             if (jsonStr.contains("no image", ignoreCase = true) ||
                 jsonStr.contains("no face", ignoreCase = true) ||
-                jsonStr.contains("not visible", ignoreCase = true)) {
+                jsonStr.contains("not visible", ignoreCase = true) ||
+                jsonStr.contains("INVALID_PORTRAIT", ignoreCase = true)) {
                 emit(AnalysisState.Error(AnalysisState.AnalysisError.ParseError(context.getString(R.string.msg_error_no_face))))
                 return
             }

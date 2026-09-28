@@ -150,4 +150,8 @@ een verbeterde beeldhelderheid.</string>
     <string name="text_no_internet_connection">Geen internetverbinding</string>
     <string name="text_please_turn_on_wifi">Schakel in en maak verbinding met een wifi-netwerk</string>
     <string name="text_go_to_setting">Ga naar instellingen</string>
+    <string name="text_analyzing_makeup_report">Make-uprapport analyseren...</string>
+    <string name="text_provides_detailed_insights_makeup">Biedt gedetailleerd inzicht in uw make-uplook, gezichtsbalans en ideaal kleurenpalet.</string>
+    <string name="msg_error_multiple_people">Meerdere personen gedetecteerd op de afbeelding. Selecteer een foto met slechts één persoon.</string>
+    <string name="msg_error_content_policy">De afbeelding is in strijd met het veiligheidsbeleid (bijv. gevoelige/NSFW-inhoud). Probeer een andere foto.</string>
 </resources>

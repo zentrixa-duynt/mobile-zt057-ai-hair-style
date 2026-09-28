@@ -150,4 +150,8 @@
     <string name="text_no_internet_connection">لا يوجد اتصال بالإنترنت</string>
     <string name="text_please_turn_on_wifi">يرجى التشغيل والاتصال بشبكة Wi-Fi</string>
     <string name="text_go_to_setting">اذهب إلى الإعدادات</string>
+    <string name="text_analyzing_makeup_report">جاري تحليل تقرير المكياج...</string>
+    <string name="text_provides_detailed_insights_makeup">يوفر رؤى تفصيلية حول مظهر مكياجك، وتوازن وجهك، ولوحة الألوان المثالية.</string>
+    <string name="msg_error_multiple_people">تم اكتشاف عدة أشخاص في الصورة. يرجى اختيار صورة بها شخص واحد فقط.</string>
+    <string name="msg_error_content_policy">الصورة تنتهك سياسات الأمان (مثل المحتوى الحساس). يرجى تجربة صورة أخرى.</string>
 </resources>

@@ -150,4 +150,8 @@ peningkatan kejelasan gambar.</string>
     <string name="text_no_internet_connection">Tidak Ada Koneksi Internet</string>
     <string name="text_please_turn_on_wifi">Silakan nyalakan dan sambungkan ke jaringan Wi-Fi</string>
     <string name="text_go_to_setting">Pergi ke pengaturan</string>
+    <string name="text_analyzing_makeup_report">Menganalisis laporan tata rias...</string>
+    <string name="text_provides_detailed_insights_makeup">Memberikan wawasan mendetail tentang tampilan riasan, keseimbangan wajah, dan palet warna ideal Anda.</string>
+    <string name="msg_error_multiple_people">Banyak orang terdeteksi pada gambar. Silakan pilih foto dengan satu orang saja.</string>
+    <string name="msg_error_content_policy">Gambar melanggar kebijakan keamanan (mis. konten sensitif/NSFW). Silakan coba foto lain.</string>
 </resources>

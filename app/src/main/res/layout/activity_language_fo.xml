@@ -50,10 +50,10 @@
         android:paddingBottom="24dp"
         android:clipToPadding="false"
         app:layout_constraintTop_toBottomOf="@id/clToolbar"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/native_language"
         tools:listitem="@layout/item_language" />
 
-    <FrameLayout
+    <dev.zentrixa.common.admob.ZTNativeAdView
         android:id="@+id/native_language"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

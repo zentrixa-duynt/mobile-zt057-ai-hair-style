@@ -150,4 +150,8 @@
     <string name="text_no_internet_connection">Немає підключення до Інтернету</string>
     <string name="text_please_turn_on_wifi">Будь ласка, увімкніть і підключіться до мережі Wi-Fi</string>
     <string name="text_go_to_setting">Перейти до налаштувань</string>
+    <string name="text_analyzing_makeup_report">Аналіз звіту про макіяж...</string>
+    <string name="text_provides_detailed_insights_makeup">Надає детальну інформацію про ваш макіяж, баланс обличчя та ідеальну колірну палітру.</string>
+    <string name="msg_error_multiple_people">На зображенні виявлено кілька осіб. Будь ласка, виберіть фото лише з однією людиною.</string>
+    <string name="msg_error_content_policy">Зображення порушує політику безпеки (наприклад, чутливий вміст). Спробуйте інше фото.</string>
 </resources>

@@ -8,6 +8,7 @@ object NoInternetDialogHelper {
     private var currentDialog: NoInternetDialog? = null
 
     fun show(context: Context, onCancel: () -> Unit = {}) {
+        if (context is android.app.Activity && (context.isFinishing || context.isDestroyed)) return
         if (currentDialog?.isShowing == true) return
 
         currentDialog = NoInternetDialog(
@@ -39,9 +40,22 @@ object NoInternetDialogHelper {
         currentDialog?.show()
     }
     
-    fun dismiss() {
-        currentDialog?.dismiss()
-        currentDialog = null
+    fun dismiss(context: Context? = null) {
+        if (context != null) {
+            // Only dismiss if the dialog's context matches the provided context
+            val dialogContext = currentDialog?.context
+            var baseContext = dialogContext
+            if (dialogContext is android.content.ContextWrapper) {
+                baseContext = dialogContext.baseContext
+            }
+            if (baseContext == context || dialogContext == context) {
+                currentDialog?.dismiss()
+                currentDialog = null
+            }
+        } else {
+            currentDialog?.dismiss()
+            currentDialog = null
+        }
     }
 }
 

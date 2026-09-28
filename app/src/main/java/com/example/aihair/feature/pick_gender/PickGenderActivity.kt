@@ -72,6 +72,7 @@ class PickGenderActivity : BaseActivity<ActivityPickGenderBinding>(ActivityPickG
                 putExtra("EXTRA_SELECTED_GENDER", selectedGender)
             }
             startActivity(resultIntent)
+            finish()
         }
     }
 

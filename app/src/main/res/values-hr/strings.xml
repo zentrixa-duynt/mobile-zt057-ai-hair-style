@@ -150,4 +150,8 @@ poboljšanu jasnoću slike.</string>
     <string name="text_no_internet_connection">Nema internetske veze</string>
     <string name="text_please_turn_on_wifi">Uključite i povežite se s Wi-Fi mrežom</string>
     <string name="text_go_to_setting">Idi na postavke</string>
+    <string name="text_analyzing_makeup_report">Analiza izvješća o šminkanju...</string>
+    <string name="text_provides_detailed_insights_makeup">Pruža detaljne uvide u vaš izgled šminke, ravnotežu lica i idealnu paletu boja.</string>
+    <string name="msg_error_multiple_people">Na slici je otkriveno više osoba. Odaberite fotografiju sa samo jednom osobom.</string>
+    <string name="msg_error_content_policy">Slika krši sigurnosna pravila (npr. osjetljiv sadržaj). Pokušajte s drugom fotografijom.</string>
 </resources>

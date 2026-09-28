@@ -150,4 +150,8 @@ maior clareza de imagem.</string>
     <string name="text_no_internet_connection">Sem conexão com a Internet</string>
     <string name="text_please_turn_on_wifi">Por favor, ligue e conecte-se a uma rede Wi-Fi</string>
     <string name="text_go_to_setting">Ir para as configurações</string>
+    <string name="text_analyzing_makeup_report">Analisando relatório de maquiagem...</string>
+    <string name="text_provides_detailed_insights_makeup">Fornece insights detalhados sobre sua maquiagem, equilíbrio facial e paleta de cores ideal.</string>
+    <string name="msg_error_multiple_people">Várias pessoas detectadas na imagem. Selecione uma foto com apenas uma pessoa.</string>
+    <string name="msg_error_content_policy">A imagem viola as políticas de segurança (ex: conteúdo sensível). Tente outra foto.</string>
 </resources>

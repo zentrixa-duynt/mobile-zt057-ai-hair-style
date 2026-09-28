@@ -150,4 +150,8 @@ javított képélesség érdekében.</string>
     <string name="text_no_internet_connection">Nincs internetkapcsolat</string>
     <string name="text_please_turn_on_wifi">Kérjük, kapcsolja be és csatlakozzon egy Wi-Fi hálózathoz</string>
     <string name="text_go_to_setting">Ugrás a beállításokhoz</string>
+    <string name="text_analyzing_makeup_report">Sminkjelentés elemzése...</string>
+    <string name="text_provides_detailed_insights_makeup">Részletes betekintést nyújt a sminkjébe, az arc egyensúlyába és az ideális színpalettába.</string>
+    <string name="msg_error_multiple_people">Több személy észlelhető a képen. Kérjük, válasszon olyan fotót, amelyen csak egy személy szerepel.</string>
+    <string name="msg_error_content_policy">A kép sérti a biztonsági irányelveket (pl. érzékeny/NSFW tartalom). Kérjük, próbáljon meg egy másik fotót.</string>
 </resources>

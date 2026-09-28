@@ -56,8 +56,10 @@ class AnalysisActivity : BaseActivity<ActivityAnalysisBinding>(ActivityAnalysisB
         val analysisType = intent.getStringExtra(EXTRA_ANALYSIS_TYPE)
         if (analysisType == TYPE_MAKEUP) {
             binding.txtTitle.text = getString(R.string.text_ai_makeup_analysis)
+            binding.txtDesc.text = getString(R.string.text_provides_detailed_insights_makeup)
         } else {
             binding.txtTitle.text = getString(R.string.text_ai_face_analysis)
+            binding.txtDesc.text = getString(R.string.text_provides_detailed_insights_int)
         }
 
         binding.btnTryItNow.setDebouncedClickListener {

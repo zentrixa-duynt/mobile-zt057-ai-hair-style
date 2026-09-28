@@ -25,12 +25,16 @@ class PhotoEditorHelper(private val binding: ActivityPhotoEditorBinding) {
     @SuppressLint("ClickableViewAccessibility")
     fun setupZoomAndPanRouting(isColorMode: Boolean = false, currentStateProvider: () -> PhotoEditorUiState.Success?): View.OnTouchListener {
         val stickerTouchListener = StickerTouchListener(
+            isSticker = true,
             onUnconsumedTouch = { event ->
                 val currentState = currentStateProvider()
                 if (currentState != null && currentState.selectedPhotoUri != null) {
                     val activeBg = binding.imgSelectedPhoto
                     activeBg.dispatchTouchEvent(event)
                 }
+            },
+            getPhotoBounds = {
+                binding.imgSelectedPhoto.displayRect
             }
         )
 

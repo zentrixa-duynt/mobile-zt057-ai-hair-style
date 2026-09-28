@@ -147,6 +147,13 @@ abstract class BaseActivity<VB : ViewBinding>(
         super.onPause()
     }
 
+    override fun onDestroy() {
+        if (observeNetwork) {
+            NoInternetDialogHelper.dismiss(this)
+        }
+        super.onDestroy()
+    }
+
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
         if (ev?.action == MotionEvent.ACTION_DOWN) {

@@ -2,8 +2,8 @@ package com.example.aihair.feature.language
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.aihair.R
 import com.example.aihair.core.data.local.datastore.AppPreferences
+import com.example.aihair.core.language.LanguageProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,35 +20,7 @@ import kotlin.coroutines.cancellation.CancellationException
 class LanguageViewModel @Inject constructor(
     private val appPreferences: AppPreferences
 ) : ViewModel() {
-    private val defaultLanguages = listOf(
-        LanguageItemUiModel(R.string.language_english, "English", "gb", "en"),
-        LanguageItemUiModel(R.string.language_vietnamese, "Tiếng Việt", "vn", "vi"),
-        LanguageItemUiModel(R.string.language_spanish, "Español", "es", "es"),
-        LanguageItemUiModel(R.string.language_french, "Français", "fr", "fr"),
-        LanguageItemUiModel(R.string.language_german, "Deutsch", "de", "de"),
-        LanguageItemUiModel(R.string.language_japanese, "日本語", "jp", "ja"),
-        LanguageItemUiModel(R.string.language_korean, "한국어", "kr", "ko"),
-        LanguageItemUiModel(R.string.language_russian, "Русский", "ru", "ru"),
-        LanguageItemUiModel(R.string.language_hindi, "हिन्दी", "in", "hi"),
-        LanguageItemUiModel(R.string.language_portuguese, "Português", "pt", "pt"),
-        LanguageItemUiModel(R.string.language_turkish, "Türkçe", "tr", "tr"),
-        LanguageItemUiModel(R.string.language_croatian, "Hrvatski", "hr", "hr"),
-        LanguageItemUiModel(R.string.language_hungarian, "Magyar", "hu", "hu"),
-        LanguageItemUiModel(R.string.language_indonesian, "Bahasa Indonesia", "id", "id"),
-        LanguageItemUiModel(R.string.language_italian, "Italiano", "it", "it"),
-        LanguageItemUiModel(R.string.language_nepali, "नेपाली", "np", "ne"),
-        LanguageItemUiModel(R.string.language_thai, "ไทย", "th", "th"),
-        LanguageItemUiModel(R.string.language_ukrainian, "Українська", "ua", "uk"),
-        LanguageItemUiModel(R.string.language_chinese, "中文", "cn", "zh"),
-        LanguageItemUiModel(R.string.language_arabic, "العربية", "sa", "ar"),
-        LanguageItemUiModel(R.string.language_urdu, "اردو", "pk", "ur"),
-        LanguageItemUiModel(R.string.language_bengali, "বাংলা", "bd", "bn"),
-        LanguageItemUiModel(R.string.language_filipino, "Filipino", "ph", "tl"),
-        LanguageItemUiModel(R.string.language_afrikaans, "Afrikaans", "za", "af"),
-        LanguageItemUiModel(R.string.language_dutch, "Nederlands", "nl", "nl"),
-    )
-
-    private val _uiState = MutableStateFlow(LanguageUiState(items = defaultLanguages))
+    private val _uiState = MutableStateFlow(LanguageUiState(items = LanguageProvider.defaultLanguages))
     val uiState: StateFlow<LanguageUiState> = _uiState.asStateFlow()
 
     private val _event = MutableSharedFlow<LanguageEvent>()
@@ -73,7 +45,7 @@ class LanguageViewModel @Inject constructor(
     }
 
     private fun updateStateWithLanguage(languageTag: String, showBackButton: Boolean? = null) {
-        val updatedItems = defaultLanguages.mapIndexed { index, item ->
+        val updatedItems = LanguageProvider.defaultLanguages.mapIndexed { index, item ->
             item.copy(
                 isSelected = item.languageTag == languageTag && languageTag.isNotEmpty(),
                 uiLanguageTag = languageTag
@@ -91,6 +63,16 @@ class LanguageViewModel @Inject constructor(
             is LanguageAction.SelectLanguage -> {
                 if (_uiState.value.selectedLanguageTag == action.languageTag) return
                 updateStateWithLanguage(action.languageTag)
+                
+                viewModelScope.launch {
+                    try {
+                        appPreferences.setLanguageSelected(true, action.languageTag)
+                    } catch (e: Exception) {
+                        if (e is CancellationException) throw e
+                    }
+                }
+                com.example.aihair.core.language.AppLanguageManager.setPendingLanguage(action.languageTag)
+                com.example.aihair.core.language.AppLanguageManager.applyLanguage(action.languageTag)
             }
             is LanguageAction.ConfirmSelection -> onConfirmSelection()
         }

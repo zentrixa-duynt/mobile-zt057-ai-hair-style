@@ -14,9 +14,11 @@ import kotlin.math.sqrt
 
 class StickerTouchListener(
     private val isSticker: Boolean = true,
-    private val onUnconsumedTouch: ((MotionEvent) -> Unit)? = null
+    private val onUnconsumedTouch: ((MotionEvent) -> Unit)? = null,
+    private val getPhotoBounds: (() -> RectF?)? = null
 ) : View.OnTouchListener {
     private val savedMatrix = Matrix()
+    private val initialDragMatrix = Matrix()
 
     private var mode = NONE
     private val start = PointF()
@@ -71,6 +73,7 @@ class StickerTouchListener(
         when (event.actionMasked) {
             MotionEvent.ACTION_DOWN -> {
                 savedMatrix.set(currentMatrix)
+                initialDragMatrix.set(currentMatrix)
                 start.set(event.x, event.y)
                 mode = DRAG
             }
@@ -92,7 +95,28 @@ class StickerTouchListener(
                     mode = ZOOM_ROTATE
                 }
             }
-            MotionEvent.ACTION_UP, MotionEvent.ACTION_POINTER_UP -> {
+            MotionEvent.ACTION_UP -> {
+                mode = NONE
+                if (isSticker && v is ImageView) {
+                    val stickerRect = getDisplayRect(v)
+                    val photoRect = getPhotoBounds?.invoke() ?: RectF(0f, 0f, v.width.toFloat(), v.height.toFloat())
+                    if (stickerRect != null) {
+                        val intersection = RectF(stickerRect)
+                        val hasIntersection = intersection.intersect(photoRect)
+                        val percentInside = if (hasIntersection) {
+                            (intersection.width() * intersection.height()) / (stickerRect.width() * stickerRect.height())
+                        } else {
+                            0f
+                        }
+                        
+                        // Reset nếu tóc giả nằm TRONG ảnh ít hơn 20% (tức là bị kéo ra ngoài quá 80%)
+                        if (percentInside < 0.2f) {
+                            applyMatrix(v, initialDragMatrix)
+                        }
+                    }
+                }
+            }
+            MotionEvent.ACTION_POINTER_UP -> {
                 mode = NONE
             }
             MotionEvent.ACTION_MOVE -> {

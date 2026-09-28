@@ -150,4 +150,8 @@ verbeterde beeldhelderheid.</string>
     <string name="text_no_internet_connection">Geen internetverbinding nie</string>
     <string name="text_please_turn_on_wifi">Skakel asseblief aan en koppel aan \'n Wi-Fi-netwerk</string>
     <string name="text_go_to_setting">Gaan na instelling</string>
+    <string name="text_analyzing_makeup_report">Ontleed grimeringverslag...</string>
+    <string name="text_provides_detailed_insights_makeup">Verskaf gedetailleerde insigte oor jou grimering, gesigbalans en ideale kleurpalet.</string>
+    <string name="msg_error_multiple_people">Verskeie mense in die beeld bespeur. Kies asseblief \'n foto met slegs een persoon.</string>
+    <string name="msg_error_content_policy">Die prent oortree veiligheidsbeleide (bv. sensitiewe/NSFW-inhoud). Probeer asseblief \'n ander foto.</string>
 </resources>

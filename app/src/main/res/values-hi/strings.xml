@@ -150,4 +150,8 @@
     <string name="text_no_internet_connection">कोई इंटरनेट कनेक्शन नहीं</string>
     <string name="text_please_turn_on_wifi">कृपया चालू करें और एक वाई-फाई नेटवर्क से कनेक्ट करें</string>
     <string name="text_go_to_setting">सेटिंग पर जाएं</string>
+    <string name="text_analyzing_makeup_report">मेकअप रिपोर्ट का विश्लेषण किया जा रहा है...</string>
+    <string name="text_provides_detailed_insights_makeup">आपके मेकअप लुक, चेहरे के संतुलन और आदर्श रंग पैलेट के बारे में विस्तृत जानकारी प्रदान करता है।</string>
+    <string name="msg_error_multiple_people">छवि में कई लोगों का पता चला है। कृपया ऐसा फोटो चुनें जिसमें केवल एक ही व्यक्ति हो।</string>
+    <string name="msg_error_content_policy">छवि सुरक्षा नीतियों का उल्लंघन करती है (उदा. संवेदनशील/NSFW सामग्री)। कृपया कोई अन्य फ़ोटो आज़माएँ।</string>
 </resources>

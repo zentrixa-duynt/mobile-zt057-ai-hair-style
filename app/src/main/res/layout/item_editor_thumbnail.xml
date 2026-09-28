@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         tools:text="Jet Black"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/photo_editor_item_color"
         android:textSize="12sp"
         android:fontFamily="@font/poppins_medium"
         android:includeFontPadding="false"

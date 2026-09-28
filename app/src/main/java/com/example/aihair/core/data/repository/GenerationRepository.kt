@@ -31,7 +31,8 @@ class GenerationException(val errorState: GenerationState.GenerationError) : Exc
 class GenerationRepository @Inject constructor(
     private val openAIApi: OpenAIApi,
     private val uploadApi: UploadApi,
-    @ApplicationContext private val context: Context
+    @ApplicationContext private val context: Context,
+    private val analysisRepository: AnalysisRepository
 ): BaseRepository(context) {
 
     fun startGeneration(
@@ -59,8 +60,22 @@ class GenerationRepository @Inject constructor(
                 throw GenerationException(GenerationState.GenerationError.StorageError(context.getString(R.string.msg_error_unknown)))
             }
 
-            // 2. Submitting State
+            // 2. Pre-validate Image (LLM check)
             emit(GenerationState.Submitting)
+            if (downloadUrl != null) {
+                val status = analysisRepository.verifyPortrait(downloadUrl)
+                if (status != PortraitStatus.VALID) {
+                    val errorMsg = if (status == PortraitStatus.MULTIPLE_PEOPLE) {
+                        context.getString(R.string.msg_error_multiple_people)
+                    } else {
+                        context.getString(R.string.msg_error_no_face)
+                    }
+                    emit(GenerationState.Error(GenerationState.GenerationError.TaskFailed(errorMsg)))
+                    return@flow
+                }
+            }
+
+            // 3. Submitting State
             val remoteConfig = FirebaseRemoteConfig.getInstance()
             val model = remoteConfig.getString("generation_model").takeIf { it.isNotEmpty() }
                 ?: "gpt-image-1.5"
@@ -168,12 +183,15 @@ class GenerationRepository @Inject constructor(
                             }
 
                             "FAILURE" -> {
+                                val errCode = body.errorReason?.code
+                                val errMsg = if (errCode == "CONTENT_POLICY") {
+                                    context.getString(R.string.msg_error_content_policy)
+                                } else {
+                                    body.errorReason?.message ?: context.getString(R.string.msg_error_task_failed, "Unknown error")
+                                }
                                 emit(
                                     GenerationState.Error(
-                                        GenerationState.GenerationError.TaskFailed(
-                                            body.errorReason?.message
-                                                ?: "Quá trình tạo ảnh thất bại"
-                                        )
+                                        GenerationState.GenerationError.TaskFailed(errMsg)
                                     )
                                 )
                                 break // Thoát vòng lặp

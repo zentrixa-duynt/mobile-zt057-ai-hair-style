@@ -150,4 +150,8 @@ mas malinaw na imahe.</string>
     <string name="text_no_internet_connection">Walang Koneksyon sa Internet</string>
     <string name="text_please_turn_on_wifi">Mangyaring i-on at kumonekta sa isang Wi-Fi network</string>
     <string name="text_go_to_setting">Pumunta sa setting</string>
+    <string name="text_analyzing_makeup_report">Sinusuri ang ulat sa makeup...</string>
+    <string name="text_provides_detailed_insights_makeup">Nagbibigay ng detalyadong pananaw sa iyong hitsura ng makeup, balanse ng mukha, at perpektong paleta ng kulay.</string>
+    <string name="msg_error_multiple_people">Maraming tao ang nakita sa larawan. Mangyaring pumili ng larawan na may iisang tao lamang.</string>
+    <string name="msg_error_content_policy">Nilalabag ng larawan ang mga patakaran sa kaligtasan (hal. sensitibong nilalaman). Mangyaring sumubok ng ibang larawan.</string>
 </resources>

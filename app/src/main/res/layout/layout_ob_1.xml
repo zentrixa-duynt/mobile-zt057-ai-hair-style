@@ -107,9 +107,10 @@
         </LinearLayout>
     </LinearLayout>
 
-    <FrameLayout
+    <dev.zentrixa.common.admob.ZTNativeAdView
         android:id="@+id/native_container1"
         android:background="@color/white"
+        app:ad_config_key="native_ob_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent" />

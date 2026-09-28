@@ -148,4 +148,8 @@
     <string name="text_no_internet_connection">Sin conexión a Internet</string>
     <string name="text_please_turn_on_wifi">Por favor, activa y conéctate a una red Wi-Fi</string>
     <string name="text_go_to_setting">Ir a configuración</string>
+    <string name="text_analyzing_makeup_report">Analizando informe de maquillaje...</string>
+    <string name="text_provides_detailed_insights_makeup">Proporciona información detallada sobre tu maquillaje, equilibrio facial y paleta de colores ideal.</string>
+    <string name="msg_error_multiple_people">Se han detectado varias personas en la imagen. Seleccione una foto con una sola persona.</string>
+    <string name="msg_error_content_policy">La imagen infringe las políticas de seguridad (p. ej., contenido sensible). Prueba con otra foto.</string>
 </resources>

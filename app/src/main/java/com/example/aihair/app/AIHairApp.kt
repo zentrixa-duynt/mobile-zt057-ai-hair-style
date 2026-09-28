@@ -109,7 +109,7 @@ class AIHairApp : Application() {
 
         ZTUtils.init(
             application = this,
-            appId = "ca-app-pub-3940256099942544~3347511713",
+            appId = BuildConfig.adAppId,
             isProduction = BuildConfig.isProduction,
         )
 

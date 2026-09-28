@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.content.FileProvider
 import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
 import com.example.aihair.core.utils.getImageRatio
 import com.example.aihair.core.utils.setDimensionRatio
 import com.bumptech.glide.Glide
@@ -19,9 +20,11 @@ import com.example.aihair.R
 import com.example.aihair.core.ui.base.BaseActivity
 import com.example.aihair.core.ui.click.setDebouncedClickListener
 import com.example.aihair.core.ui.lifecycle.collectFlow
+import com.example.aihair.core.utils.NetworkUtils
 import com.example.aihair.databinding.ActivityHairResultBinding
 import com.example.aihair.feature.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import java.io.File
 
 @AndroidEntryPoint
@@ -48,6 +51,27 @@ class HairResultActivity : BaseActivity<ActivityHairResultBinding>(ActivityHairR
         getImageRatio(localImageUriString)?.let { ratio ->
             binding.imgResultPhoto.setDimensionRatio(ratio)
             binding.imgProcessingPhoto.setDimensionRatio(ratio)
+
+            val displayMetrics = resources.displayMetrics
+            val screenHeight = displayMetrics.heightPixels
+            val screenWidth = displayMetrics.widthPixels
+            val cardWidth = screenWidth - (60 * displayMetrics.density).toInt()
+
+            val parts = ratio.split(":")
+            if (parts.size == 2) {
+                val w = parts[0].toFloatOrNull() ?: 1f
+                val h = parts[1].toFloatOrNull() ?: 1f
+                if (w > 0) {
+                    val imgHeight = cardWidth * (h / w)
+                    if (imgHeight > screenHeight * 0.6f) {
+                        val maxHeight = (screenHeight * 0.6f).toInt()
+                        binding.cardProcessingImage.layoutParams.height = maxHeight
+                        binding.cardResultImage.layoutParams.height = maxHeight
+                        binding.cardProcessingImage.requestLayout()
+                        binding.cardResultImage.requestLayout()
+                    }
+                }
+            }
         }
         
         // Preload original image to memory cache
@@ -137,6 +161,18 @@ class HairResultActivity : BaseActivity<ActivityHairResultBinding>(ActivityHairR
                     animator.start()
                     // Lưu lại tag để khi cần có thể cancel (hoặc chỉ cần để nguyên)
                     binding.progressBar.setTag(R.id.progress_bar, animator)
+                    
+                    // Lắng nghe sự kiện mất mạng để pause progress bar
+                    lifecycleScope.launch {
+                        NetworkUtils.isConnectedFlow.collect { isConnected ->
+                            val currentAnim = binding.progressBar.getTag(R.id.progress_bar) as? ObjectAnimator
+                            if (isConnected) {
+                                if (currentAnim?.isPaused == true) currentAnim.resume()
+                            } else {
+                                if (currentAnim?.isRunning == true) currentAnim.pause()
+                            }
+                        }
+                    }
                     
                     // Hiển thị ảnh đang xử lý vào khung (nếu có)
                     val localUriStr = intent.getStringExtra("EXTRA_IMAGE_URI")

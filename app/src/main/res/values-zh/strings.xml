@@ -150,4 +150,8 @@
     <string name="text_no_internet_connection">没有网络连接</string>
     <string name="text_please_turn_on_wifi">请开启并连接到Wi-Fi网络</string>
     <string name="text_go_to_setting">前往设置</string>
+    <string name="text_analyzing_makeup_report">正在分析化妆报告...</string>
+    <string name="text_provides_detailed_insights_makeup">提供有关您的妆容、面部平衡和理想调色板的详细见解。</string>
+    <string name="msg_error_multiple_people">图片中检测到多人。请选择仅包含一个人的照片。</string>
+    <string name="msg_error_content_policy">该图片违反了安全政策（例如敏感/NSFW内容）。请尝试其他照片。</string>
 </resources>

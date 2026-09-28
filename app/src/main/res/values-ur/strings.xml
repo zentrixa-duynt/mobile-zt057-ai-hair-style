@@ -150,4 +150,8 @@
     <string name="text_no_internet_connection">انٹرنیٹ کنکشن نہیں ہے</string>
     <string name="text_please_turn_on_wifi">براہ کرم آن کریں اور Wi-Fi نیٹ ورک سے جڑیں</string>
     <string name="text_go_to_setting">ترتیبات میں جائیں</string>
+    <string name="text_analyzing_makeup_report">میک اپ کی رپورٹ کا تجزیہ کیا جا رہا ہے...</string>
+    <string name="text_provides_detailed_insights_makeup">آپ کے میک اپ، چہرے کے توازن، اور مثالی رنگوں کی تفصیلی بصیرت فراہم کرتا ہے۔</string>
+    <string name="msg_error_multiple_people">تصویر میں متعدد افراد کا پتہ چلا ہے۔ براہ کرم ایسی تصویر منتخب کریں جس میں صرف ایک شخص ہو۔</string>
+    <string name="msg_error_content_policy">تصویر حفاظتی پالیسیوں کی خلاف ورزی کرتی ہے (جیسے حساس مواد)۔ براہ کرم کوئی اور تصویر آزمائیں۔</string>
 </resources>

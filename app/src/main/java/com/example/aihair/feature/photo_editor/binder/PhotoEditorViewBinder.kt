@@ -114,7 +114,7 @@ class PhotoEditorViewBinder(
         binding.rvThumbnails.itemAnimator = null
         
         binding.rvThumbnails.isVisible = true
-        binding.scrollColors.isVisible = true
+        binding.scrollColors.isVisible = hairType == PhotoEditorActivity.TYPE_HAIR_STYLE
 
         // Configure zoom limits
         binding.imgSelectedPhoto.minimumScale = 1.0f
@@ -359,6 +359,21 @@ class PhotoEditorViewBinder(
                                     
                                     finalMatrix.set(newBaseMatrix)
                                     finalMatrix.postConcat(userMatrix)
+                                    
+                                    val photoRect = binding.imgSelectedPhoto.displayRect
+                                    if (photoRect != null) {
+                                        val stickerRect = RectF(0f, 0f, resource.intrinsicWidth.toFloat(), resource.intrinsicHeight.toFloat())
+                                        finalMatrix.mapRect(stickerRect)
+                                        
+                                        val intersection = RectF(stickerRect)
+                                        val hasIntersection = intersection.intersect(photoRect)
+                                        
+                                        // Reset to center ONLY if new style is completely outside the photo bounds
+                                        if (!hasIntersection) {
+                                            finalMatrix.set(newBaseMatrix)
+                                            finalMatrix.postScale(0.5f, 0.5f, viewWidth / 2f, viewHeight / 2f)
+                                        }
+                                    }
                                 }
                                 
                                 binding.imgHairOverlay.scaleType = ImageView.ScaleType.MATRIX
