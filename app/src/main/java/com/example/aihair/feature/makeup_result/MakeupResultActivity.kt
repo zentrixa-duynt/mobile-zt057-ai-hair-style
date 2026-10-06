@@ -1,5 +1,8 @@
 package com.example.aihair.feature.makeup_result
 
+import dev.zentrixa.common.admob.ZTInterstitialAdUtils
+import dev.zentrixa.common.firebase.ZTAnalyticsUtils
+
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
@@ -38,6 +41,7 @@ class MakeupResultActivity : BaseActivity<ActivityMakeupResultBinding>(ActivityM
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setupViews()
         observeViewModel()
 
@@ -82,7 +86,9 @@ class MakeupResultActivity : BaseActivity<ActivityMakeupResultBinding>(ActivityM
 
     private fun setupViews() {
         binding.btnBack.setDebouncedClickListener {
-            viewModel.onAction(MakeupResultAction.BackClicked)
+            ZTInterstitialAdUtils.loadAndShowInterstitialAd(this, "inter_back", "p_inter_back") {
+                viewModel.onAction(MakeupResultAction.BackClicked)
+            }
         }
 
         binding.layoutProcessing.txtProcessingDesc.text = getString(R.string.text_analyzing_makeup_report)
@@ -102,27 +108,38 @@ class MakeupResultActivity : BaseActivity<ActivityMakeupResultBinding>(ActivityM
             Triple(binding.layoutRecommendation.tabLip, binding.layoutRecommendation.txtTabLip, "lips")
         )
         
+        val fakeTabs = listOf(
+            Triple(binding.layoutRecommendation.fakeTabBrows, binding.layoutRecommendation.fakeTxtTabBrows, "brows"),
+            Triple(binding.layoutRecommendation.fakeTabEyes, binding.layoutRecommendation.fakeTxtTabEyes, "eyes"),
+            Triple(binding.layoutRecommendation.fakeTabNose, binding.layoutRecommendation.fakeTxtTabNose, "nose"),
+            Triple(binding.layoutRecommendation.fakeTabSkin, binding.layoutRecommendation.fakeTxtTabSkin, "skin"),
+            Triple(binding.layoutRecommendation.fakeTabBlush, binding.layoutRecommendation.fakeTxtTabBlush, "blush"),
+            Triple(binding.layoutRecommendation.fakeTabLip, binding.layoutRecommendation.fakeTxtTabLip, "lips")
+        )
+        
+        val allTabs = tabs + fakeTabs
+        
         val indicators = mapOf(
-            "brows" to binding.layoutRecommendation.indicatorBrows,
-            "eyes" to binding.layoutRecommendation.indicatorEyes,
-            "nose" to binding.layoutRecommendation.indicatorNose,
-            "skin" to binding.layoutRecommendation.indicatorSkin,
-            "blush" to binding.layoutRecommendation.indicatorBlush,
-            "lips" to binding.layoutRecommendation.indicatorLip
+            "brows" to listOf(binding.layoutRecommendation.indicatorBrows, binding.layoutRecommendation.fakeIndicatorBrows),
+            "eyes" to listOf(binding.layoutRecommendation.indicatorEyes, binding.layoutRecommendation.fakeIndicatorEyes),
+            "nose" to listOf(binding.layoutRecommendation.indicatorNose, binding.layoutRecommendation.fakeIndicatorNose),
+            "skin" to listOf(binding.layoutRecommendation.indicatorSkin, binding.layoutRecommendation.fakeIndicatorSkin),
+            "blush" to listOf(binding.layoutRecommendation.indicatorBlush, binding.layoutRecommendation.fakeIndicatorBlush),
+            "lips" to listOf(binding.layoutRecommendation.indicatorLip, binding.layoutRecommendation.fakeIndicatorLip)
         )
 
-        tabs.forEach { (tabView, textView, key) ->
+        allTabs.forEach { (tabView, textView, key) ->
             textView.isSelected = true // Enable marquee effect
             tabView.setDebouncedClickListener {
                 // Hide all indicators and reset text color
-                tabs.forEach { (_, tv, k) ->
-                    indicators[k]?.visibility = View.INVISIBLE
+                allTabs.forEach { (_, tv, k) ->
+                    indicators[k]?.forEach { it.visibility = View.INVISIBLE }
                     tv.setTextColor(Color.parseColor("#6A7282"))
                 }
                 
                 // Show current indicator and set selected text color
-                indicators[key]?.visibility = View.VISIBLE
-                textView.setTextColor(Color.parseColor("#FFFFFF"))
+                indicators[key]?.forEach { it.visibility = View.VISIBLE }
+                allTabs.filter { it.third == key }.forEach { it.second.setTextColor(Color.parseColor("#FFFFFF")) }
                 
                 // Update adapter data
                 currentData?.let { data ->
@@ -137,6 +154,56 @@ class MakeupResultActivity : BaseActivity<ActivityMakeupResultBinding>(ActivityM
                     }
                     adapter.submitList(recs)
                 }
+            }
+        }
+
+        val rewardConfig = dev.zentrixa.common.admob.ZTRewardedAdUtils.getRewardAdsConfig("reward_unlock_infor")
+        val isPlacementEnabled = rewardConfig?.placements?.get("p_reward_unlock_make") ?: true
+        val isAdEnabledByConfig = rewardConfig?.enabled != false && isPlacementEnabled
+
+        if (!isAdEnabledByConfig || dev.zentrixa.common.utils.ZTUtils.isTurnOffAllAds) {
+            binding.layoutPalette.blurView.visibility = View.GONE
+            binding.layoutPalette.txtTitlePalette.visibility = View.VISIBLE
+            binding.layoutBalance.blurViewBalance.visibility = View.GONE
+            binding.layoutBalance.txtFacialBalanceTitle.visibility = View.VISIBLE
+            binding.layoutRecommendation.blurViewRecommendations.visibility = View.GONE
+            binding.layoutRecommendation.layoutTabsReal.visibility = View.VISIBLE
+            binding.layoutBottom.visibility = View.GONE
+        } else {
+            binding.layoutPalette.blurView.visibility = View.VISIBLE
+            binding.layoutPalette.txtTitlePalette.visibility = View.INVISIBLE
+            binding.layoutPalette.blurView.setupWith(binding.layoutPalette.blurTarget).setBlurRadius(8f)
+            
+            binding.layoutBalance.blurViewBalance.visibility = View.VISIBLE
+            binding.layoutBalance.txtFacialBalanceTitle.visibility = View.INVISIBLE
+
+            binding.layoutRecommendation.blurViewRecommendations.visibility = View.VISIBLE
+            binding.layoutRecommendation.layoutTabsReal.visibility = View.INVISIBLE
+            binding.layoutRecommendation.blurViewRecommendations.setupWith(binding.layoutRecommendation.blurTargetRecommendations).setBlurRadius(8f)
+            
+            binding.layoutBottom.visibility = View.VISIBLE
+
+            binding.btnWatchVideo.setDebouncedClickListener {
+                var isAdDone = false
+                dev.zentrixa.common.admob.ZTRewardedAdUtils.loadAndShowRewardAd(
+                    this@MakeupResultActivity,
+                    "reward_unlock_infor",
+                    "p_reward_unlock_make",
+                    onAdEarned = {
+                        isAdDone = true
+                    },
+                    onAdClosed = { isEarned ->
+                        if (isEarned || isAdDone) {
+                            binding.layoutPalette.blurView.visibility = View.GONE
+                            binding.layoutPalette.txtTitlePalette.visibility = View.VISIBLE
+                            binding.layoutBalance.blurViewBalance.visibility = View.GONE
+                            binding.layoutBalance.txtFacialBalanceTitle.visibility = View.VISIBLE
+                            binding.layoutRecommendation.blurViewRecommendations.visibility = View.GONE
+                            binding.layoutRecommendation.layoutTabsReal.visibility = View.VISIBLE
+                            binding.layoutBottom.visibility = View.GONE
+                        }
+                    }
+                )
             }
         }
     }
@@ -163,9 +230,22 @@ class MakeupResultActivity : BaseActivity<ActivityMakeupResultBinding>(ActivityM
                 binding.layoutResult.visibility = View.GONE
                 binding.layoutProcessing.imgSwipeAnalyst.visibility = View.VISIBLE
                 val scanAnim = android.view.animation.AnimationUtils.loadAnimation(this, R.anim.anim_scan_right_to_left)
+                var isFlipped = false
+                scanAnim.setAnimationListener(object : android.view.animation.Animation.AnimationListener {
+                    override fun onAnimationStart(animation: android.view.animation.Animation?) {
+                        binding.layoutProcessing.imgSwipeAnalyst.scaleX = 1f
+                    }
+                    override fun onAnimationEnd(animation: android.view.animation.Animation?) {}
+                    override fun onAnimationRepeat(animation: android.view.animation.Animation?) {
+                        isFlipped = !isFlipped
+                        binding.layoutProcessing.imgSwipeAnalyst.scaleX = if (isFlipped) -1f else 1f
+                    }
+                })
                 binding.layoutProcessing.imgSwipeAnalyst.startAnimation(scanAnim)
             }
             is MakeupResultUiState.Success -> {
+                ZTAnalyticsUtils.logEvent("S_screen_analyze_make")
+
                 binding.layoutProcessing.root.visibility = View.GONE
                 binding.layoutResult.visibility = View.VISIBLE
                 binding.layoutProcessing.imgSwipeAnalyst.clearAnimation()

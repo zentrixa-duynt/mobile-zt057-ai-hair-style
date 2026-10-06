@@ -28,6 +28,12 @@ data class LaunchState(
         get() = if (isLanguageSelected && !isOnboardCompleted) "" else selectedLanguage
 }
 
+data class UsageState(
+    val lastUsageDate: String,
+    val usageCount: Int,
+    val unlockedItems: Set<String>
+)
+
 class AppPreferences @Inject constructor(
     @ApplicationContext private val context: Context
 ) {
@@ -38,6 +44,9 @@ class AppPreferences @Inject constructor(
         private val IS_ONBOARD_COMPLETED = booleanPreferencesKey("is_onboard_completed")
         private val SELECTED_LANGUAGE = stringPreferencesKey("selected_language")
         private val SELECTED_GENDER = stringPreferencesKey("selected_gender")
+        private val DAILY_USAGE_DATE = stringPreferencesKey("daily_usage_date")
+        private val DAILY_USAGE_COUNT = intPreferencesKey("daily_usage_count")
+        private val UNLOCKED_ITEMS = stringSetPreferencesKey("unlocked_items")
     }
 
     val launchState: Flow<LaunchState> = context.dataStore.data.map { preferences ->
@@ -67,6 +76,34 @@ class AppPreferences @Inject constructor(
     suspend fun setSelectedGender(gender: String) {
         context.dataStore.edit { preferences ->
             preferences[SELECTED_GENDER] = gender
+        }
+    }
+
+    val usageState: Flow<UsageState> = context.dataStore.data.map { preferences ->
+        UsageState(
+            lastUsageDate = preferences[DAILY_USAGE_DATE] ?: "",
+            usageCount = preferences[DAILY_USAGE_COUNT] ?: 0,
+            unlockedItems = preferences[UNLOCKED_ITEMS] ?: emptySet()
+        )
+    }
+
+    suspend fun incrementUsageCount(currentDate: String) {
+        context.dataStore.edit { preferences ->
+            val lastDate = preferences[DAILY_USAGE_DATE] ?: ""
+            if (lastDate != currentDate) {
+                preferences[DAILY_USAGE_DATE] = currentDate
+                preferences[DAILY_USAGE_COUNT] = 1
+            } else {
+                val currentCount = preferences[DAILY_USAGE_COUNT] ?: 0
+                preferences[DAILY_USAGE_COUNT] = currentCount + 1
+            }
+        }
+    }
+
+    suspend fun unlockItem(itemId: String) {
+        context.dataStore.edit { preferences ->
+            val current = preferences[UNLOCKED_ITEMS] ?: emptySet()
+            preferences[UNLOCKED_ITEMS] = current + itemId
         }
     }
 }

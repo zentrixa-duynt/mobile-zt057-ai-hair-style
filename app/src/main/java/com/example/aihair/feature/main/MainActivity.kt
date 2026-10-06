@@ -2,6 +2,7 @@ package com.example.aihair.feature.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.OvershootInterpolator
@@ -16,6 +17,8 @@ import com.example.aihair.feature.main.hair_tools.HairToolsFragment
 import com.example.aihair.feature.main.history.HistoryFragment
 import com.example.aihair.feature.main.home.HomeFragment
 import com.example.aihair.feature.settings.SettingsActivity
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import dev.zentrixa.common.firebase.ZTAnalyticsUtils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -63,10 +66,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
             updateBottomNavUI(binding.navHome, animate = true)
         }
         binding.navHairTools.setDebouncedClickListener {
+            ZTAnalyticsUtils.logEvent("D_action_hair_tool")
             switchFragment(hairToolsFragment, 1)
             updateBottomNavUI(binding.navHairTools, animate = true)
         }
         binding.navHistory.setDebouncedClickListener {
+            ZTAnalyticsUtils.logEvent("D_action_history")
             switchFragment(historyFragment, 2)
             updateBottomNavUI(binding.navHistory, animate = true)
         }

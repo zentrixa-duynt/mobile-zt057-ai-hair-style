@@ -15,14 +15,28 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import com.example.aihair.core.data.local.datastore.AppPreferences
+import com.example.aihair.core.data.local.datastore.UsageState
+import dev.zentrixa.common.admob.ZTRewardedAdUtils
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.stateIn
 
 @HiltViewModel
 class PhotoEditorViewModel @Inject constructor(
-    @ApplicationContext private val context: Context
+    @ApplicationContext private val context: Context,
+    private val appPreferences: AppPreferences
 ) : ViewModel() {
 
     private val _state = MutableStateFlow<PhotoEditorUiState>(PhotoEditorUiState.Success())
     val state = _state.asStateFlow()
+    
+    val usageState: StateFlow<UsageState> = appPreferences.usageState
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = UsageState("", 0, emptySet())
+        )
 
     private val _event = MutableSharedFlow<PhotoEditorEvent>()
     val event = _event.asSharedFlow()
@@ -61,27 +75,59 @@ class PhotoEditorViewModel @Inject constructor(
                 _state.update { currentState.copy(selectedPhotoUri = null) }
             }
             is PhotoEditorAction.SelectStyle -> {
-                val resId = mixedStyles.find { it.id == action.styleId }?.imageResId
-                val newColorId = if (currentState.selectedColorId == null) "none" else currentState.selectedColorId
-                _state.update { 
-                    currentState.copy(
-                        currentSelectedStyleId = action.styleId, 
-                        currentSelectedStyleResId = resId,
-                        selectedColorId = newColorId
-                    ) 
+                val index = mixedStyles.indexOfFirst { it.id == action.styleId }
+                val rewardConfig = ZTRewardedAdUtils.getRewardAdsConfig("reward_function_tool")
+                val isAdEnabled = rewardConfig?.enabled != false && rewardConfig?.placements?.get("p_unlock_tool") != false
+                val freeLimit = rewardConfig?.value?.toInt()?.takeIf { it > 0 } ?: 3
+                val isFree = index < freeLimit
+                val isLocked = isAdEnabled && !isFree && !usageState.value.unlockedItems.contains(action.styleId)
+                
+                if (isLocked) {
+                    viewModelScope.launch {
+                        _event.emit(PhotoEditorEvent.RequireRewardAdToUnlock(action.styleId, isColor = false))
+                    }
+                } else {
+                    val resId = mixedStyles.find { it.id == action.styleId }?.imageResId
+                    val newColorId = if (currentState.selectedColorId == null) "none" else currentState.selectedColorId
+                    _state.update { 
+                        currentState.copy(
+                            currentSelectedStyleId = action.styleId, 
+                            currentSelectedStyleResId = resId,
+                            selectedColorId = newColorId
+                        ) 
+                    }
                 }
             }
             is PhotoEditorAction.SelectColor -> {
-                if (action.colorId == "custom" && action.hex != null) {
-                    val matchingDefaultId = getMatchingDefaultColorId(action.hex)
-                    if (matchingDefaultId != null) {
-                        _state.update { currentState.copy(selectedColorId = matchingDefaultId) }
-                        return
-                    }
+                val index = colorStyles.indexOfFirst { it.id == action.colorId }
+                val isCustomColor = action.colorId == "custom"
+                val isNoneColor = action.colorId == "none"
+                val isLocked = if (!isCustomColor && !isNoneColor && index != -1) {
+                    val rewardConfig = ZTRewardedAdUtils.getRewardAdsConfig("reward_function_tool")
+                    val isAdEnabled = rewardConfig?.enabled != false && rewardConfig?.placements?.get("p_unlock_tool") != false
+                    val freeLimit = rewardConfig?.value?.toInt()?.takeIf { it > 0 } ?: 3
+                    val isFree = index < freeLimit
+                    isAdEnabled && !isFree && !usageState.value.unlockedItems.contains(action.colorId)
+                } else {
+                    false
                 }
-                
-                val newHex = action.hex ?: currentState.customColorHex
-                _state.update { currentState.copy(selectedColorId = action.colorId, customColorHex = newHex) }
+
+                if (isLocked) {
+                    viewModelScope.launch {
+                        _event.emit(PhotoEditorEvent.RequireRewardAdToUnlock(action.colorId, isColor = true))
+                    }
+                } else {
+                    if (action.colorId == "custom" && action.hex != null) {
+                        val matchingDefaultId = getMatchingDefaultColorId(action.hex)
+                        if (matchingDefaultId != null) {
+                            _state.update { currentState.copy(selectedColorId = matchingDefaultId) }
+                            return
+                        }
+                    }
+                    
+                    val newHex = action.hex ?: currentState.customColorHex
+                    _state.update { currentState.copy(selectedColorId = action.colorId, customColorHex = newHex) }
+                }
             }
             is PhotoEditorAction.ContinueClicked -> {
                 if (currentState.selectedPhotoUri != null) {
@@ -110,19 +156,58 @@ class PhotoEditorViewModel @Inject constructor(
                     }
                 }
             }
+            is PhotoEditorAction.UnlockItem -> {
+                val rewardConfig = ZTRewardedAdUtils.getRewardAdsConfig("reward_function_tool")
+                val isAdEnabled = rewardConfig?.enabled != false && rewardConfig?.placements?.get("p_unlock_tool") != false
+                if (isAdEnabled) {
+                    viewModelScope.launch {
+                        appPreferences.unlockItem(action.itemId)
+                    }
+                }
+                
+                if (action.isColor) {
+                    _state.update { currentState.copy(selectedColorId = action.itemId) }
+                } else {
+                    val resId = mixedStyles.find { it.id == action.itemId }?.imageResId
+                    val newColorId = if (currentState.selectedColorId == null) "none" else currentState.selectedColorId
+                    _state.update { 
+                        currentState.copy(
+                            currentSelectedStyleId = action.itemId, 
+                            currentSelectedStyleResId = resId,
+                            selectedColorId = newColorId
+                        ) 
+                    }
+                }
+            }
         }
     }
 
     fun getMixedStyles(): List<HairStyleItem> {
         val currentState = _state.value as? PhotoEditorUiState.Success
         val currentStyleId = currentState?.currentSelectedStyleId
-        return mixedStyles.map { it.copy(isSelected = it.id == currentStyleId) }
+        val rewardConfig = ZTRewardedAdUtils.getRewardAdsConfig("reward_function_tool")
+        val isAdEnabled = rewardConfig?.enabled != false && rewardConfig?.placements?.get("p_unlock_tool") != false
+        val freeLimit = rewardConfig?.value?.toInt()?.takeIf { it > 0 } ?: 3
+        val unlockedItems = usageState.value.unlockedItems
+        return mixedStyles.mapIndexed { index, item -> 
+            val isFree = index < freeLimit
+            val isLocked = isAdEnabled && !isFree && !unlockedItems.contains(item.id)
+            item.copy(isSelected = item.id == currentStyleId, isLocked = isLocked) 
+        }
     }
 
     fun getColorStyles(): List<HairStyleItem> {
         val currentState = _state.value as? PhotoEditorUiState.Success
         val currentColorId = currentState?.selectedColorId
-        return colorStyles.map { it.copy(isSelected = it.id == currentColorId) }
+        val rewardConfig = ZTRewardedAdUtils.getRewardAdsConfig("reward_function_tool")
+        val isAdEnabled = rewardConfig?.enabled != false && rewardConfig?.placements?.get("p_unlock_tool") != false
+        val freeLimit = rewardConfig?.value?.toInt()?.takeIf { it > 0 } ?: 3
+        val unlockedItems = usageState.value.unlockedItems
+        return colorStyles.mapIndexed { index, item -> 
+            val isFree = index < freeLimit
+            val isLocked = isAdEnabled && !isFree && !unlockedItems.contains(item.id)
+            item.copy(isSelected = item.id == currentColorId, isLocked = isLocked) 
+        }
     }
 
     private fun generateMixedStyles(): List<HairStyleItem> {

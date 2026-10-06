@@ -154,4 +154,18 @@ mas malinaw na imahe.</string>
     <string name="text_provides_detailed_insights_makeup">Nagbibigay ng detalyadong pananaw sa iyong hitsura ng makeup, balanse ng mukha, at perpektong paleta ng kulay.</string>
     <string name="msg_error_multiple_people">Maraming tao ang nakita sa larawan. Mangyaring pumili ng larawan na may iisang tao lamang.</string>
     <string name="msg_error_content_policy">Nilalabag ng larawan ang mga patakaran sa kaligtasan (hal. sensitibong nilalaman). Mangyaring sumubok ng ibang larawan.</string>
+    <string name="msg_daily_limit_reached">Naabot mo na ang iyong pang-araw-araw na limitasyon</string>
+    <string name="text_today_remaining_attempts">"Mga natitirang pagsubok ngayon "</string>
+
+    <!-- Report Dialog -->
+    <string name="text_flag_offensive_content">I-flag ang nakakasakit na nilalaman</string>
+    <string name="text_spam">Spam</string>
+    <string name="text_inappropriate_content">Hindi naaangkop na nilalaman</string>
+    <string name="text_copyright">Copyright</string>
+    <string name="text_offensive">Nakakasakit</string>
+    <string name="text_cancel">Kanselahin</string>
+    <string name="text_report">I-report</string>
+    <string name="msg_please_select_reason">Mangyaring pumili ng dahilan</string>
+    <string name="msg_reported_reason">Naiulat</string>
+    <string name="text_no_image_here">Walang larawan dito!</string>
 </resources>

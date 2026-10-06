@@ -154,4 +154,18 @@
     <string name="text_provides_detailed_insights_makeup">Надає детальну інформацію про ваш макіяж, баланс обличчя та ідеальну колірну палітру.</string>
     <string name="msg_error_multiple_people">На зображенні виявлено кілька осіб. Будь ласка, виберіть фото лише з однією людиною.</string>
     <string name="msg_error_content_policy">Зображення порушує політику безпеки (наприклад, чутливий вміст). Спробуйте інше фото.</string>
+    <string name="msg_daily_limit_reached">Ви досягли денного ліміту</string>
+    <string name="text_today_remaining_attempts">"Залишилося спроб сьогодні "</string>
+
+    <!-- Report Dialog -->
+    <string name="text_flag_offensive_content">Поскаржитися на неприйнятний контент</string>
+    <string name="text_spam">Спам</string>
+    <string name="text_inappropriate_content">Неприйнятний контент</string>
+    <string name="text_copyright">Авторські права</string>
+    <string name="text_offensive">Образливо</string>
+    <string name="text_cancel">Скасувати</string>
+    <string name="text_report">Поскаржитися</string>
+    <string name="msg_please_select_reason">Будь ласка, виберіть причину</string>
+    <string name="msg_reported_reason">Поскаржилися</string>
+    <string name="text_no_image_here">Тут немає зображення!</string>
 </resources>

@@ -1,5 +1,7 @@
 package com.example.aihair.feature.main.history.detail
 
+import dev.zentrixa.common.admob.ZTInterstitialAdUtils
+
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
@@ -9,6 +11,7 @@ import android.widget.Toast
 import androidx.core.content.FileProvider
 import com.example.aihair.core.utils.getImageRatio
 import com.example.aihair.core.utils.setDimensionRatio
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.aihair.core.ui.base.BaseActivity
@@ -76,7 +79,7 @@ class HistoryDetailActivity : BaseActivity<ActivityHistoryDetailBinding>(Activit
         }
 
         // 2. Nút Split - Before/After
-        binding.btnSplit.setOnTouchListener { _, event ->
+        val splitTouchListener = android.view.View.OnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     if (!originalImageUriStr.isNullOrEmpty()) {
@@ -101,6 +104,18 @@ class HistoryDetailActivity : BaseActivity<ActivityHistoryDetailBinding>(Activit
                 else -> false
             }
         }
+        
+        binding.btnSplit.setOnTouchListener(splitTouchListener)
+        binding.btnSplitHairType.setOnTouchListener(splitTouchListener)
+        
+        binding.btnFlag.setDebouncedClickListener {
+            com.example.aihair.feature.hair_result.component.ReportDialog(this).show()
+        }
+        
+        val historyType = intent.getIntExtra("EXTRA_HISTORY_TYPE", 0)
+        binding.btnFlag.isVisible = (historyType == 0)
+        binding.btnSplit.isVisible = (historyType == 0)
+        binding.btnSplitHairType.isVisible = (historyType == 1)
 
         // 3. Share
         binding.btnShare.setDebouncedClickListener {
@@ -146,7 +161,9 @@ class HistoryDetailActivity : BaseActivity<ActivityHistoryDetailBinding>(Activit
 
         // 5. Back
         binding.btnBack.setDebouncedClickListener {
-            finish()
+            ZTInterstitialAdUtils.loadAndShowInterstitialAd(this, "inter_back", "p_inter_back") {
+                finish()
+            }
         }
     }
 }

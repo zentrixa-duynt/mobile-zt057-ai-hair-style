@@ -10,11 +10,14 @@ import com.example.aihair.core.data.remote.dto.generation.GenerationConfig
 import com.example.aihair.core.data.remote.dto.generation.GenerationRequest
 import com.example.aihair.core.data.remote.UploadApi
 import com.example.aihair.core.utils.compressImageFile
+import com.example.aihair.core.utils.downloadAndCompressImage
+import com.example.aihair.core.utils.getImageDimensions
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dev.zentrixa.common.utils.ZTUtils
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -81,13 +84,32 @@ class GenerationRepository @Inject constructor(
                 ?: "gpt-image-1.5"
             val background =
                 remoteConfig.getString("generation_background").takeIf { it.isNotEmpty() }
-                    ?: "opaque"
+                    ?: "auto"
             val quality =
                 remoteConfig.getString("generation_quality").takeIf { it.isNotEmpty() } ?: "low"
-            val size =
-                remoteConfig.getString("generation_size").takeIf { it.isNotEmpty() } ?: "1024x1536"
+            val defaultSize = remoteConfig.getString("generation_size").takeIf { it.isNotEmpty() } ?: "1024x1536"
+            var size = defaultSize
+            val dimensions = context.getImageDimensions(localImageUri)
+            val parts = defaultSize.split("x")
+            
+            if (dimensions != null && parts.size == 2) {
+                val (origW, origH) = dimensions
+                val dim1 = parts[0].toIntOrNull() ?: 1024
+                val dim2 = parts[1].toIntOrNull() ?: 1536
+                val minDim = kotlin.math.min(dim1, dim2)
+                val maxDim = kotlin.math.max(dim1, dim2)
 
-            val genderStr = if (isFemale) "women's" else "men's"
+                val ratio = origW.toFloat() / origH.toFloat()
+                size = if (ratio > 1.1f) {
+                    "${maxDim}x${minDim}" // Landscape
+                } else if (ratio < 0.9f) {
+                    "${minDim}x${maxDim}" // Portrait
+                } else {
+                    "${minDim}x${minDim}" // Square
+                }
+            }
+
+            val genderStr = if (isFemale) "female" else "male"
             val prompt = if (isColorMode) {
                 "Change the person's hair color to $styleName. Keep the original face, lighting, background, and composition exactly the same."
             } else {
@@ -169,7 +191,8 @@ class GenerationRepository @Inject constructor(
                             "SUCCESS" -> {
                                 val url = body.taskResult?.url
                                 if (!url.isNullOrEmpty()) {
-                                    emit(GenerationState.Success(url))
+                                    val compressedUrl = context.downloadAndCompressImage(url) ?: url
+                                    emit(GenerationState.Success(compressedUrl))
                                 } else {
                                     emit(
                                         GenerationState.Error(
@@ -186,6 +209,8 @@ class GenerationRepository @Inject constructor(
                                 val errCode = body.errorReason?.code
                                 val errMsg = if (errCode == "CONTENT_POLICY") {
                                     context.getString(R.string.msg_error_content_policy)
+                                } else if (errCode == "UPSTREAM_ERROR") {
+                                    context.getString(R.string.msg_error_server_busy)
                                 } else {
                                     body.errorReason?.message ?: context.getString(R.string.msg_error_task_failed, "Unknown error")
                                 }
@@ -210,17 +235,23 @@ class GenerationRepository @Inject constructor(
                         delay(5000)
                     }
                 } else if (pollResponse != null && !pollResponse.isSuccessful) {
-                    val errorMsg = pollResponse.errorBody()?.string()
-                        ?: context.getString(R.string.msg_error_unknown)
-                    emit(
-                        GenerationState.Error(
-                            GenerationState.GenerationError.PollingError(
-                                pollResponse.code(),
-                                errorMsg
+                    val code = pollResponse.code()
+                    if (code == 502 || code == 503 || code == 504) {
+                        // Transient server error, keep polling
+                        delay(5000)
+                    } else {
+                        val errorMsg = pollResponse.errorBody()?.string()
+                            ?: context.getString(R.string.msg_error_unknown)
+                        emit(
+                            GenerationState.Error(
+                                GenerationState.GenerationError.PollingError(
+                                    code,
+                                    errorMsg
+                                )
                             )
                         )
-                    )
-                    break // Thoát vòng lặp khi gặp lỗi HTTP
+                        break // Thoát vòng lặp khi gặp lỗi HTTP
+                    }
                 } else {
                     // pollResponse == null, có thể do Exception (mất mạng)
                     delay(5000) // Tạm thời cứ delay và thử lại

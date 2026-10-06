@@ -2,6 +2,7 @@ package com.example.aihair.core.data.repository
 
 import android.content.Context
 import android.net.Uri
+import android.util.Log
 import com.example.aihair.BuildConfig
 import com.example.aihair.R
 import com.example.aihair.core.data.remote.dto.analysis.AnalysisState
@@ -72,11 +73,11 @@ class AnalysisRepository @Inject constructor(
             - `face_shape` (string): The shape of the face (e.g., Oval, Round, Square, Heart, Diamond).
             - `hairstyle_fit_rate` (integer): A score from 0 to 100 representing how well the current hairstyle fits the face.
             - `golden_ratio` (double): A score from 1.0 to 5.0 evaluating facial proportion balance.
-            - `golden_ratio_short_description` (string): A short sentence (1-2 lines) describing their facial proportions.
-            - `chin` (string): 1-2 words describing the chin (e.g., V-shaped, Pointed, Broad).
-            - `cheekbone` (string): 1-2 words describing the cheekbones (e.g., High, Prominent, Flat).
-            - `temple` (string): 1-2 words describing the temples (e.g., Narrow, Wide, Hollow).
-            - `apple_cheeks` (string): 1-2 words describing the apple cheeks (e.g., Plump, Flat, Full).
+            - `golden_ratio_short_description` (string): A short sentence (2 lines) describing their facial proportions.
+            - `chin` (string): 2-4 words describing the chin (e.g., V-shaped, Pointed, Broad).
+            - `cheekbone` (string): 2-4 words describing the cheekbones (e.g., High, Prominent, Flat).
+            - `temple` (string): 2-4 words describing the temples (e.g., Narrow, Wide, Hollow).
+            - `apple_cheeks` (string): 2-4 words describing the apple cheeks (e.g., Plump, Flat, Full).
             - `golden_ratio_keywords` (array of strings): Exactly 5 keywords describing the face's harmony.
             - `suitable_hair_styles` (array of strings): Choose at least 5 recommended hair styles that perfectly suit this face shape. 
             

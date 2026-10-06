@@ -1,12 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/txt_tag"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
-    android:layout_height="24dp"
-    android:background="@drawable/bg_result_tag"
-    android:fontFamily="@font/poppins_medium"
-    android:gravity="center"
-    android:includeFontPadding="false"
-    android:paddingHorizontal="8dp"
-    android:textColor="#FFFFFF"
-    android:textSize="12sp" />
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="0dp"
+    app:cardBackgroundColor="@android:color/transparent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <eightbitlab.com.blurview.BlurTarget
+            android:id="@+id/blur_target_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:id="@+id/txt_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:background="@drawable/bg_result_tag"
+                android:fontFamily="@font/poppins_medium"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:paddingHorizontal="8dp"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp" />
+        </eightbitlab.com.blurview.BlurTarget>
+
+        <eightbitlab.com.blurview.BlurView
+            android:id="@+id/blur_view_tag"
+            app:blurOverlayColor="#0D0B0B0C"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="@id/blur_target_tag"
+            app:layout_constraintBottom_toBottomOf="@id/blur_target_tag"
+            app:layout_constraintStart_toStartOf="@id/blur_target_tag"
+            app:layout_constraintEnd_toEndOf="@id/blur_target_tag" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

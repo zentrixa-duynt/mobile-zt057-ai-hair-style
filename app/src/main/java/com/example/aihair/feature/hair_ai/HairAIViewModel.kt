@@ -10,15 +10,28 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.example.aihair.core.data.local.datastore.AppPreferences
+import com.example.aihair.core.data.local.datastore.UsageState
+import dev.zentrixa.common.admob.ZTRewardedAdUtils
+import kotlinx.coroutines.flow.first
+
 @HiltViewModel
 class HairAIViewModel @Inject constructor(
-    @ApplicationContext private val context: Context
+    @ApplicationContext private val context: Context,
+    private val appPreferences: AppPreferences
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<HairAIUiState>(HairAIUiState.Success())
@@ -26,6 +39,12 @@ class HairAIViewModel @Inject constructor(
 
     private val _event = MutableSharedFlow<HairAIEvent>()
     val event: SharedFlow<HairAIEvent> = _event.asSharedFlow()
+
+    val usageState: StateFlow<UsageState> = appPreferences.usageState.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = UsageState("", 0, emptySet())
+    )
 
     private val femaleStyles = listOf(
         HairStyleItem("f_blunt_bob", "Blunt Bob", R.drawable.img_female_bluntbob),
@@ -58,18 +77,18 @@ class HairAIViewModel @Inject constructor(
     )
 
     private val colorStyles = listOf(
-        HairStyleItem(id = "c_platinum_blonde", nameResId = R.string.color_platinum_blonde, imageResId = R.drawable.img_color_platinumblonde),
-        HairStyleItem(id = "c_ash_blonde", nameResId = R.string.color_ash_blonde, imageResId = R.drawable.img_color_ashblonde),
-        HairStyleItem(id = "c_honey_blonde", nameResId = R.string.color_honey_blonde, imageResId = R.drawable.img_color_honeyblonde),
-        HairStyleItem(id = "c_caramel_brown", nameResId = R.string.color_caramel_brown, imageResId = R.drawable.img_color_caramelbrown),
-        HairStyleItem(id = "c_chocolate_brown", nameResId = R.string.color_chocolate_brown, imageResId = R.drawable.img_color_chocolatebrown),
-        HairStyleItem(id = "c_dark_brown", nameResId = R.string.color_dark_brown, imageResId = R.drawable.img_color_darkbrown),
-        HairStyleItem(id = "c_copper_red", nameResId = R.string.color_copper_red, imageResId = R.drawable.img_color_copperred),
-        HairStyleItem(id = "c_burgundy", nameResId = R.string.color_burgundy, imageResId = R.drawable.img_color_burgundy),
-        HairStyleItem(id = "c_natural_black", nameResId = R.string.color_natural_black, imageResId = R.drawable.img_color_naturalblack),
-        HairStyleItem(id = "c_silver_gray", nameResId = R.string.color_silver_gray, imageResId = R.drawable.img_color_silvergray),
-        HairStyleItem(id = "c_pastel_pink", nameResId = R.string.color_pastel_pink, imageResId = R.drawable.img_color_pastelpink),
-        HairStyleItem(id = "c_blue_black", nameResId = R.string.color_blue_black, imageResId = R.drawable.img_color_blueblack)
+        HairStyleItem(id = "c_platinum_blonde", name = "Platinum Blonde", nameResId = R.string.color_platinum_blonde, imageResId = R.drawable.img_color_platinumblonde),
+        HairStyleItem(id = "c_ash_blonde", name = "Ash Blonde", nameResId = R.string.color_ash_blonde, imageResId = R.drawable.img_color_ashblonde),
+        HairStyleItem(id = "c_honey_blonde", name = "Honey Blonde", nameResId = R.string.color_honey_blonde, imageResId = R.drawable.img_color_honeyblonde),
+        HairStyleItem(id = "c_caramel_brown", name = "Caramel Brown", nameResId = R.string.color_caramel_brown, imageResId = R.drawable.img_color_caramelbrown),
+        HairStyleItem(id = "c_chocolate_brown", name = "Chocolate Brown", nameResId = R.string.color_chocolate_brown, imageResId = R.drawable.img_color_chocolatebrown),
+        HairStyleItem(id = "c_dark_brown", name = "Dark Brown", nameResId = R.string.color_dark_brown, imageResId = R.drawable.img_color_darkbrown),
+        HairStyleItem(id = "c_copper_red", name = "Copper Red", nameResId = R.string.color_copper_red, imageResId = R.drawable.img_color_copperred),
+        HairStyleItem(id = "c_burgundy", name = "Burgundy", nameResId = R.string.color_burgundy, imageResId = R.drawable.img_color_burgundy),
+        HairStyleItem(id = "c_natural_black", name = "Natural Black", nameResId = R.string.color_natural_black, imageResId = R.drawable.img_color_naturalblack),
+        HairStyleItem(id = "c_silver_gray", name = "Silver Gray", nameResId = R.string.color_silver_gray, imageResId = R.drawable.img_color_silvergray),
+        HairStyleItem(id = "c_pastel_pink", name = "Pastel Pink", nameResId = R.string.color_pastel_pink, imageResId = R.drawable.img_color_pastelpink),
+        HairStyleItem(id = "c_blue_black", name = "Blue Black", nameResId = R.string.color_blue_black, imageResId = R.drawable.img_color_blueblack)
     )
 
     private var currentSelectedStyleId: String? = null
@@ -111,9 +130,20 @@ class HairAIViewModel @Inject constructor(
                 val styleId = currentSelectedStyleId
                 
                 if (photoUri != null && styleId != null) {
-                    val resolvedStyleName = getStyleName(styleId, currentState.isColorMode, currentState.isFemaleTabSelected) ?: styleId
                     viewModelScope.launch {
-                        _event.emit(HairAIEvent.NavigateToResult(
+                        val usage = appPreferences.usageState.first()
+                        val currentDate = SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(Date())
+                        val todayUsage = if (usage.lastUsageDate == currentDate) usage.usageCount else 0
+                        val dailyLimit = com.google.firebase.remoteconfig.FirebaseRemoteConfig.getInstance().getLong("limit_daily").toInt().takeIf { it > 0 } ?: 5
+                        
+                        if (todayUsage >= dailyLimit) {
+                            _event.emit(HairAIEvent.ShowError(context.getString(R.string.msg_daily_limit_reached)))
+                            return@launch
+                        }
+
+                        val resolvedStyleName = getStyleName(styleId, currentState.isColorMode, currentState.isFemaleTabSelected) ?: styleId
+
+                        _event.emit(HairAIEvent.RequireRewardAd(
                             imageUri = photoUri,
                             styleId = resolvedStyleName,
                             isColorMode = currentState.isColorMode,
@@ -125,6 +155,17 @@ class HairAIViewModel @Inject constructor(
                     viewModelScope.launch {
                         _event.emit(HairAIEvent.ShowError(context.getString(R.string.msg_error_select_photo_style_first)))
                     }
+                }
+            }
+            is HairAIAction.OnRewardAdEarned -> {
+                viewModelScope.launch {
+                    _event.emit(HairAIEvent.NavigateToResult(
+                        imageUri = action.imageUri,
+                        styleId = action.styleId,
+                        isColorMode = action.isColorMode,
+                        isVertical = action.isVertical,
+                        isFemale = action.isFemale
+                    ))
                 }
             }
         }

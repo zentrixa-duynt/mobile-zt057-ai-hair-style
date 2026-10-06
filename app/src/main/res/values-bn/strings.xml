@@ -154,4 +154,18 @@
     <string name="text_provides_detailed_insights_makeup">আপনার মেকআপ, মুখের ভারসাম্য এবং আদর্শ রঙের প্যালেট সম্পর্কে বিস্তারিত অন্তর্দৃষ্টি প্রদান করে।</string>
     <string name="msg_error_multiple_people">ছবিতে একাধিক ব্যক্তি সনাক্ত করা হয়েছে। দয়া করে এমন একটি ছবি নির্বাচন করুন যেখানে শুধুমাত্র একজন ব্যক্তি আছেন।</string>
     <string name="msg_error_content_policy">ছবিটি নিরাপত্তা নীতি লঙ্ঘন করে (যেমন সংবেদনশীল/NSFW বিষয়বস্তু)। দয়া করে অন্য একটি ছবি চেষ্টা করুন।</string>
+    <string name="msg_daily_limit_reached">আপনি আপনার দৈনিক সীমায় পৌঁছেছেন</string>
+    <string name="text_today_remaining_attempts">"আজ বাকি প্রচেষ্টা "</string>
+
+    <!-- Report Dialog -->
+    <string name="text_flag_offensive_content">আপত্তিকর বিষয়বস্তু ফ্ল্যাগ করুন</string>
+    <string name="text_spam">স্প্যাম</string>
+    <string name="text_inappropriate_content">অনুপযুক্ত বিষয়বস্তু</string>
+    <string name="text_copyright">কপিরাইট</string>
+    <string name="text_offensive">আপত্তিকর</string>
+    <string name="text_cancel">বাতিল করুন</string>
+    <string name="text_report">রিপোর্ট করুন</string>
+    <string name="msg_please_select_reason">অনুগ্রহ করে একটি কারণ নির্বাচন করুন</string>
+    <string name="msg_reported_reason">রিপোর্ট করা হয়েছে</string>
+    <string name="text_no_image_here">এখানে কোনো ছবি নেই!</string>
 </resources>

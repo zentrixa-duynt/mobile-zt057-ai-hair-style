@@ -4,5 +4,5 @@
     android:toXDelta="-100%p"
     android:duration="2500"
     android:repeatCount="infinite"
-    android:repeatMode="restart"
+    android:repeatMode="reverse"
     android:interpolator="@android:anim/linear_interpolator" />

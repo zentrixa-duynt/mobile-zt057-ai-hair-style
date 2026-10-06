@@ -154,4 +154,18 @@ javított képélesség érdekében.</string>
     <string name="text_provides_detailed_insights_makeup">Részletes betekintést nyújt a sminkjébe, az arc egyensúlyába és az ideális színpalettába.</string>
     <string name="msg_error_multiple_people">Több személy észlelhető a képen. Kérjük, válasszon olyan fotót, amelyen csak egy személy szerepel.</string>
     <string name="msg_error_content_policy">A kép sérti a biztonsági irányelveket (pl. érzékeny/NSFW tartalom). Kérjük, próbáljon meg egy másik fotót.</string>
+    <string name="msg_daily_limit_reached">Elérte a napi limitet</string>
+    <string name="text_today_remaining_attempts">"Ma hátralévő próbálkozások "</string>
+
+    <!-- Report Dialog -->
+    <string name="text_flag_offensive_content">Sértő tartalom megjelölése</string>
+    <string name="text_spam">Spam</string>
+    <string name="text_inappropriate_content">Nem megfelelő tartalom</string>
+    <string name="text_copyright">Szerzői jog</string>
+    <string name="text_offensive">Sértő</string>
+    <string name="text_cancel">Mégse</string>
+    <string name="text_report">Jelentés</string>
+    <string name="msg_please_select_reason">Kérjük, válasszon egy okot</string>
+    <string name="msg_reported_reason">Jelentve</string>
+    <string name="text_no_image_here">Nincs itt kép!</string>
 </resources>

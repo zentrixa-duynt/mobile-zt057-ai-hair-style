@@ -82,6 +82,10 @@ class MakeupResultViewModel @Inject constructor(
                         _state.update { MakeupResultUiState.Loading }
                     }
                     is AnalysisState.MakeupSuccess -> {
+                        val currentDate = java.text.SimpleDateFormat("yyyyMMdd", java.util.Locale.getDefault()).format(java.util.Date())
+                        try {
+                            appPreferences.incrementUsageCount(currentDate)
+                        } catch (e: Exception) { e.printStackTrace() }
                         _state.update { MakeupResultUiState.Success(analysisState.data) }
                     }
                     is AnalysisState.Error -> {

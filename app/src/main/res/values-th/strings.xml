@@ -154,4 +154,18 @@
     <string name="text_provides_detailed_insights_makeup">ให้ข้อมูลเชิงลึกเกี่ยวกับลุคการแต่งหน้า ความสมดุลของใบหน้า และพาเลตสีที่เหมาะกับคุณ</string>
     <string name="msg_error_multiple_people">ตรวจพบหลายคนในภาพ โปรดเลือกภาพที่มีเพียงคนเดียว</string>
     <string name="msg_error_content_policy">ภาพละเมิดนโยบายความปลอดภัย (เช่น เนื้อหาที่ละเอียดอ่อน/NSFW) โปรดลองใช้รูปภาพอื่น</string>
+    <string name="msg_daily_limit_reached">คุณถึงขีดจำกัดรายวันแล้ว</string>
+    <string name="text_today_remaining_attempts">"จำนวนครั้งที่เหลือในวันนี้ "</string>
+
+    <!-- Report Dialog -->
+    <string name="text_flag_offensive_content">รายงานเนื้อหาไม่เหมาะสม</string>
+    <string name="text_spam">สแปม</string>
+    <string name="text_inappropriate_content">เนื้อหาไม่เหมาะสม</string>
+    <string name="text_copyright">ลิขสิทธิ์</string>
+    <string name="text_offensive">ล่วงละเมิด</string>
+    <string name="text_cancel">ยกเลิก</string>
+    <string name="text_report">รายงาน</string>
+    <string name="msg_please_select_reason">โปรดเลือกเหตุผล</string>
+    <string name="msg_reported_reason">รายงานแล้ว</string>
+    <string name="text_no_image_here">ไม่มีรูปภาพที่นี่!</string>
 </resources>

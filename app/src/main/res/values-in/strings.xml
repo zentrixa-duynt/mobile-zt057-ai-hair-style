@@ -154,4 +154,18 @@ peningkatan kejelasan gambar.</string>
     <string name="text_provides_detailed_insights_makeup">Memberikan wawasan mendetail tentang tampilan riasan, keseimbangan wajah, dan palet warna ideal Anda.</string>
     <string name="msg_error_multiple_people">Banyak orang terdeteksi pada gambar. Silakan pilih foto dengan satu orang saja.</string>
     <string name="msg_error_content_policy">Gambar melanggar kebijakan keamanan (mis. konten sensitif/NSFW). Silakan coba foto lain.</string>
+    <string name="msg_daily_limit_reached">Anda telah mencapai batas harian</string>
+    <string name="text_today_remaining_attempts">"Sisa percobaan hari ini "</string>
+
+    <!-- Report Dialog -->
+    <string name="text_flag_offensive_content">Tandai konten yang menyinggung</string>
+    <string name="text_spam">Spam</string>
+    <string name="text_inappropriate_content">Konten tidak pantas</string>
+    <string name="text_copyright">Hak cipta</string>
+    <string name="text_offensive">Menyinggung</string>
+    <string name="text_cancel">Batal</string>
+    <string name="text_report">Laporkan</string>
+    <string name="msg_please_select_reason">Silakan pilih alasan</string>
+    <string name="msg_reported_reason">Dilaporkan</string>
+    <string name="text_no_image_here">Tidak ada gambar di sini!</string>
 </resources>

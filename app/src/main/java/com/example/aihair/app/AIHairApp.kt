@@ -71,7 +71,7 @@ class AIHairApp : Application() {
         remoteConfig.setDefaultsAsync(
             mapOf(
                 "generation_model" to "gpt-image-1.5",
-                "generation_background" to "opaque",
+                "generation_background" to "transparent",
                 "generation_quality" to "low",
                 "generation_size" to "1024x1536",
                 "analysis_models" to "gpt-5-nano,gpt-4o-mini,gpt-4o"
@@ -113,17 +113,17 @@ class AIHairApp : Application() {
             isProduction = BuildConfig.isProduction,
         )
 
-        ZTUtils.setZTAdsConfig(
-            config = ZTAdsConfig(
-                nativeAdConfig = ZTNativeAdConfig(
-                    backgroundAdsContainer = R.drawable.bg_ad_container,
-                    backgroundCTARes = R.drawable.bg_ad_cta_button,
-                    backgroundAdBadgeRes = R.drawable.bg_ad_badge,
-                    textColorPrimaryRes = R.color.ad_primary_text,
-                    textColorSecondaryRes = R.color.ad_secondary_text,
-                    textColorButtonRes = R.color.ad_btn_text,
-                    textColorBadge = R.color.ad_badge_text
-                )
+        ZTUtils.setZTNativeAdsConfig(
+            configKey = null,
+            placement = null,
+            config = ZTNativeAdConfig(
+                backgroundAdsContainer = R.drawable.bg_ad_container,
+                backgroundCTARes = R.drawable.bg_ad_cta_button,
+                backgroundAdBadgeRes = R.drawable.bg_ad_badge,
+                textColorPrimaryRes = R.color.ad_primary_text,
+                textColorSecondaryRes = R.color.ad_secondary_text,
+                textColorButtonRes = R.color.ad_btn_text,
+                textColorBadge = R.color.ad_badge_text
             )
         )
 
@@ -173,16 +173,10 @@ class AIHairApp : Application() {
                     listOnboardingPages = listOf(
                         OnboardingPageConfig(
                             layoutResId = R.layout.layout_ob_1,
-                            nativeAdConfigKey = "native_ob_1",
                             adContainerId = R.id.native_container1
-                        ),
-                        OnboardingNativeFullPageConfig(
-                            nativeAdConfigKey = "native_ob_full_12",
-                            adContainerId = dev.zentrixa.common.R.id.native_ob_23
                         ),
                         OnboardingPageConfig(
                             layoutResId = R.layout.layout_ob_2,
-                            nativeAdConfigKey = "native_ob_2",
                             adContainerId = R.id.native_container2
                         ),
                         OnboardingNativeFullPageConfig(
@@ -191,7 +185,6 @@ class AIHairApp : Application() {
                         ),
                         OnboardingPageConfig(
                             layoutResId = R.layout.layout_ob_3,
-                            nativeAdConfigKey = "native_ob_3",
                             adContainerId = R.id.native_container3
                         )
                     )

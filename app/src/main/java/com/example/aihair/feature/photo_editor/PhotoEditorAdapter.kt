@@ -15,6 +15,8 @@ fun createPhotoEditorAdapter(
         bindingInflater = ItemEditorThumbnailBinding::inflate,
         areItemsTheSame = { old, new -> old.id == new.id },
         bind = { binding, item, position ->
+            binding.root.clearAnimation()
+            
             if (item.nameResId != null) {
                 binding.txtThumbnailName.setText(item.nameResId)
             } else {
@@ -22,12 +24,17 @@ fun createPhotoEditorAdapter(
             }
             binding.txtThumbnailName.isSelected = item.isSelected
             
-            Glide.with(binding.imgThumbnail.context).clear(binding.imgThumbnail)
             Glide.with(binding.imgThumbnail.context)
                 .load(item.imageResId)
+                .placeholder(android.R.color.transparent)
+                .dontAnimate()
                 .into(binding.imgThumbnail)
 
             binding.viewStroke.isVisible = item.isSelected
+            val rewardConfig = dev.zentrixa.common.admob.ZTRewardedAdUtils.getRewardAdsConfig("reward_function_tool")
+            val isAdEnabled = rewardConfig?.enabled != false && rewardConfig?.placements?.get("p_unlock_tool") != false
+            val isTurnOffAllAds = dev.zentrixa.common.utils.ZTUtils.isTurnOffAllAds
+            binding.imgLock.isVisible = item.isLocked && isAdEnabled && !isTurnOffAllAds
 
             binding.root.setDebouncedClickListener {
                 onStyleClick(item.id)

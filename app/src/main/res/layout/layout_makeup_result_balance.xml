@@ -1,202 +1,237 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="16dp"
     android:layout_marginTop="16dp"
-    android:background="@drawable/bg_block_dark"
-    android:orientation="vertical"
-    android:padding="12dp">
-    
-    <TextView
-        android:id="@+id/txt_facial_balance_title"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="0dp"
+    app:cardBackgroundColor="@android:color/transparent">
+
+    <eightbitlab.com.blurview.BlurTarget
+        android:id="@+id/blur_target_balance"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/text_facial_feature_balance"
-        android:textColor="#6A7282"
-        android:textSize="12sp"
-        android:fontFamily="@font/poppins_medium"
-        android:includeFontPadding="false"
-        android:layout_marginBottom="4dp"
-        android:singleLine="true"
-        android:ellipsize="marquee"
-        android:marqueeRepeatLimit="marquee_forever"
-        android:focusable="true"
-        android:focusableInTouchMode="true" />
-        
-    <TableLayout
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_block_dark"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/txt_facial_balance_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/text_facial_feature_balance"
+                android:textColor="#6A7282"
+                android:textSize="12sp"
+                android:fontFamily="@font/poppins_medium"
+                android:includeFontPadding="false"
+                android:layout_marginBottom="4dp"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:visibility="invisible" />
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="1"
+                android:layout_marginTop="4dp">
+                
+                <!-- Brow -->
+                <TableRow android:gravity="center_vertical">
+                    <TextView
+                        android:text="@string/text_brow"
+                        android:textColor="#FFFFFF"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/poppins_medium"
+                        android:includeFontPadding="false" />
+                    <ProgressBar
+                        android:id="@+id/progress_brow"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="8dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="16dp"
+                        android:progressDrawable="@drawable/bg_progress_bar_pink"
+                        android:max="100"
+                        android:progress="82" />
+                    <TextView
+                        android:id="@+id/txt_score_brow"
+                        tools:text="82"
+                        android:textColor="#F6339A"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/poppins_medium"
+                        android:includeFontPadding="false"
+                        android:gravity="end" />
+                </TableRow>
+
+                <!-- Eyes -->
+                <TableRow android:gravity="center_vertical" android:layout_marginTop="12dp">
+                    <TextView
+                        android:text="@string/text_eyes"
+                        android:textColor="#FFFFFF"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/poppins_medium"
+                        android:includeFontPadding="false" />
+                    <ProgressBar
+                        android:id="@+id/progress_eyes"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="8dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="16dp"
+                        android:progressDrawable="@drawable/bg_progress_bar_pink"
+                        android:max="100"
+                        android:progress="86" />
+                    <TextView
+                        android:id="@+id/txt_score_eyes"
+                        tools:text="86"
+                        android:textColor="#F6339A"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/poppins_medium"
+                        android:includeFontPadding="false"
+                        android:gravity="end" />
+                </TableRow>
+                
+                <!-- Skin -->
+                <TableRow android:gravity="center_vertical" android:layout_marginTop="12dp">
+                    <TextView
+                        android:text="@string/text_skin"
+                        android:textColor="#FFFFFF"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/poppins_medium"
+                        android:includeFontPadding="false" />
+                    <ProgressBar
+                        android:id="@+id/progress_skin"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="8dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="16dp"
+                        android:progressDrawable="@drawable/bg_progress_bar_pink"
+                        android:max="100"
+                        android:progress="78" />
+                    <TextView
+                        android:id="@+id/txt_score_skin"
+                        tools:text="78"
+                        android:textColor="#F6339A"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/poppins_medium"
+                        android:includeFontPadding="false"
+                        android:gravity="end" />
+                </TableRow>
+
+                <!-- Cheeks -->
+                <TableRow android:gravity="center_vertical" android:layout_marginTop="12dp">
+                    <TextView
+                        android:text="@string/text_cheeks"
+                        android:textColor="#FFFFFF"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/poppins_medium"
+                        android:includeFontPadding="false" />
+                    <ProgressBar
+                        android:id="@+id/progress_cheeks"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="8dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="16dp"
+                        android:progressDrawable="@drawable/bg_progress_bar_pink"
+                        android:max="100"
+                        android:progress="79" />
+                    <TextView
+                        android:id="@+id/txt_score_cheeks"
+                        tools:text="79"
+                        android:textColor="#F6339A"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/poppins_medium"
+                        android:includeFontPadding="false"
+                        android:gravity="end" />
+                </TableRow>
+
+                <!-- Lips -->
+                <TableRow android:gravity="center_vertical" android:layout_marginTop="12dp">
+                    <TextView
+                        android:text="@string/text_lips"
+                        android:textColor="#FFFFFF"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/poppins_medium"
+                        android:includeFontPadding="false" />
+                    <ProgressBar
+                        android:id="@+id/progress_lips"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="8dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="16dp"
+                        android:progressDrawable="@drawable/bg_progress_bar_pink"
+                        android:max="100"
+                        android:progress="85" />
+                    <TextView
+                        android:id="@+id/txt_score_lips"
+                        tools:text="85"
+                        android:textColor="#F6339A"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/poppins_medium"
+                        android:includeFontPadding="false"
+                        android:gravity="end" />
+                </TableRow>
+                
+                <!-- Harmony -->
+                <TableRow android:gravity="center_vertical" android:layout_marginTop="12dp">
+                    <TextView
+                        android:text="@string/text_harmony"
+                        android:textColor="#FFFFFF"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/poppins_medium"
+                        android:includeFontPadding="false" />
+                    <ProgressBar
+                        android:id="@+id/progress_harmony"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="8dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="16dp"
+                        android:progressDrawable="@drawable/bg_progress_bar_pink"
+                        android:max="100"
+                        android:progress="83" />
+                    <TextView
+                        android:id="@+id/txt_score_harmony"
+                        tools:text="83"
+                        android:textColor="#F6339A"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/poppins_medium"
+                        android:includeFontPadding="false"
+                        android:gravity="end" />
+                </TableRow>
+            </TableLayout>
+        </LinearLayout>
+    </eightbitlab.com.blurview.BlurTarget>
+
+    <eightbitlab.com.blurview.BlurView
+        android:id="@+id/blur_view_balance"
+        app:blurOverlayColor="#0D0B0B0C"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:stretchColumns="1">
-        
-        <!-- Brow -->
-        <TableRow android:gravity="center_vertical">
-            <TextView
-                android:text="@string/text_brow"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp"
-                android:fontFamily="@font/poppins_medium"
-                android:includeFontPadding="false" />
-            <ProgressBar
-                android:id="@+id/progress_brow"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="0dp"
-                android:layout_height="8dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="16dp"
-                android:progressDrawable="@drawable/bg_progress_bar_pink"
-                android:max="100"
-                android:progress="82" />
-            <TextView
-                android:id="@+id/txt_score_brow"
-                tools:text="82"
-                android:textColor="#F6339A"
-                android:textSize="14sp"
-                android:fontFamily="@font/poppins_medium"
-                android:includeFontPadding="false"
-                android:gravity="end" />
-        </TableRow>
+        android:layout_height="match_parent">
 
-        <!-- Eyes -->
-        <TableRow android:gravity="center_vertical" android:layout_marginTop="12dp">
-            <TextView
-                android:text="@string/text_eyes"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp"
-                android:fontFamily="@font/poppins_medium"
-                android:includeFontPadding="false" />
-            <ProgressBar
-                android:id="@+id/progress_eyes"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="0dp"
-                android:layout_height="8dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="16dp"
-                android:progressDrawable="@drawable/bg_progress_bar_pink"
-                android:max="100"
-                android:progress="86" />
-            <TextView
-                android:id="@+id/txt_score_eyes"
-                tools:text="86"
-                android:textColor="#F6339A"
-                android:textSize="14sp"
-                android:fontFamily="@font/poppins_medium"
-                android:includeFontPadding="false"
-                android:gravity="end" />
-        </TableRow>
-        
-        <!-- Skin -->
-        <TableRow android:gravity="center_vertical" android:layout_marginTop="12dp">
-            <TextView
-                android:text="@string/text_skin"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp"
-                android:fontFamily="@font/poppins_medium"
-                android:includeFontPadding="false" />
-            <ProgressBar
-                android:id="@+id/progress_skin"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="0dp"
-                android:layout_height="8dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="16dp"
-                android:progressDrawable="@drawable/bg_progress_bar_pink"
-                android:max="100"
-                android:progress="78" />
-            <TextView
-                android:id="@+id/txt_score_skin"
-                tools:text="78"
-                android:textColor="#F6339A"
-                android:textSize="14sp"
-                android:fontFamily="@font/poppins_medium"
-                android:includeFontPadding="false"
-                android:gravity="end" />
-        </TableRow>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:text="@string/text_facial_feature_balance"
+            android:textColor="#6A7282"
+            android:textSize="12sp"
+            android:fontFamily="@font/poppins_medium"
+            android:includeFontPadding="false" />
 
-        <!-- Cheeks -->
-        <TableRow android:gravity="center_vertical" android:layout_marginTop="12dp">
-            <TextView
-                android:text="@string/text_cheeks"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp"
-                android:fontFamily="@font/poppins_medium"
-                android:includeFontPadding="false" />
-            <ProgressBar
-                android:id="@+id/progress_cheeks"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="0dp"
-                android:layout_height="8dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="16dp"
-                android:progressDrawable="@drawable/bg_progress_bar_pink"
-                android:max="100"
-                android:progress="79" />
-            <TextView
-                android:id="@+id/txt_score_cheeks"
-                tools:text="79"
-                android:textColor="#F6339A"
-                android:textSize="14sp"
-                android:fontFamily="@font/poppins_medium"
-                android:includeFontPadding="false"
-                android:gravity="end" />
-        </TableRow>
+    </eightbitlab.com.blurview.BlurView>
 
-        <!-- Lips -->
-        <TableRow android:gravity="center_vertical" android:layout_marginTop="12dp">
-            <TextView
-                android:text="@string/text_lips"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp"
-                android:fontFamily="@font/poppins_medium"
-                android:includeFontPadding="false" />
-            <ProgressBar
-                android:id="@+id/progress_lips"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="0dp"
-                android:layout_height="8dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="16dp"
-                android:progressDrawable="@drawable/bg_progress_bar_pink"
-                android:max="100"
-                android:progress="85" />
-            <TextView
-                android:id="@+id/txt_score_lips"
-                tools:text="85"
-                android:textColor="#F6339A"
-                android:textSize="14sp"
-                android:fontFamily="@font/poppins_medium"
-                android:includeFontPadding="false"
-                android:gravity="end" />
-        </TableRow>
-        
-        <!-- Harmony -->
-        <TableRow android:gravity="center_vertical" android:layout_marginTop="12dp">
-            <TextView
-                android:text="@string/text_harmony"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp"
-                android:fontFamily="@font/poppins_medium"
-                android:includeFontPadding="false" />
-            <ProgressBar
-                android:id="@+id/progress_harmony"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="0dp"
-                android:layout_height="8dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="16dp"
-                android:progressDrawable="@drawable/bg_progress_bar_pink"
-                android:max="100"
-                android:progress="83" />
-            <TextView
-                android:id="@+id/txt_score_harmony"
-                tools:text="83"
-                android:textColor="#F6339A"
-                android:textSize="14sp"
-                android:fontFamily="@font/poppins_medium"
-                android:includeFontPadding="false"
-                android:gravity="end" />
-        </TableRow>
-    </TableLayout>
-</LinearLayout>
+</androidx.cardview.widget.CardView>

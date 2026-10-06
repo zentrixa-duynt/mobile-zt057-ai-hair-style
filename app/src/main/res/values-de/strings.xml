@@ -31,7 +31,8 @@
     <string name="text_ai_analyzes_your_face_shape_to">KI analysiert Ihre Gesichtsform, um Haarschnitte und Farben vorzuschlagen, die zu Ihren Gesichtszügen passen.</string>
     <string name="text_next">Weiter</string>
     <string name="text_ai_is_working_its_magic">KI wirkt ihre Magie!</string>
-    <string name="text_please_don_t_close_the_app_dur">Bitte schließen Sie die App während der Verarbeitung nicht\nDies dauert in der Regel 5-10 Sekunden.</string>
+    <string name="text_please_don_t_close_the_app_dur">Bitte schließen Sie die App während der Verarbeitung nicht
+Dies dauert normalerweise einige Minuten.</string>
     <string name="text_result">Ergebnis</string>
     <string name="text_share">Anteil</string>
     <string name="text_save">Speichern</string>
@@ -152,4 +153,18 @@
     <string name="text_provides_detailed_insights_makeup">Bietet detaillierte Einblicke in Ihren Make-up-Look, Ihre Gesichtssymmetrie und Ihre ideale Farbpalette.</string>
     <string name="msg_error_multiple_people">Auf dem Bild wurden mehrere Personen erkannt. Bitte wählen Sie ein Foto mit nur einer Person aus.</string>
     <string name="msg_error_content_policy">Das Bild verstößt gegen Sicherheitsrichtlinien (z. B. sensible/NSFW-Inhalte). Bitte versuchen Sie es mit einem anderen Foto.</string>
+    <string name="msg_daily_limit_reached">Sie haben Ihr Tageslimit erreicht</string>
+    <string name="text_today_remaining_attempts">"Heute verbleibende Versuche "</string>
+
+    <!-- Report Dialog -->
+    <string name="text_flag_offensive_content">Anstößige Inhalte melden</string>
+    <string name="text_spam">Spam</string>
+    <string name="text_inappropriate_content">Unangemessene Inhalte</string>
+    <string name="text_copyright">Urheberrecht</string>
+    <string name="text_offensive">Anstößig</string>
+    <string name="text_cancel">Abbrechen</string>
+    <string name="text_report">Melden</string>
+    <string name="msg_please_select_reason">Bitte wählen Sie einen Grund</string>
+    <string name="msg_reported_reason">Gemeldet</string>
+    <string name="text_no_image_here">Kein Bild hier!</string>
 </resources>

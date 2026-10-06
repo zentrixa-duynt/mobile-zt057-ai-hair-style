@@ -154,4 +154,18 @@
     <string name="text_provides_detailed_insights_makeup">آپ کے میک اپ، چہرے کے توازن، اور مثالی رنگوں کی تفصیلی بصیرت فراہم کرتا ہے۔</string>
     <string name="msg_error_multiple_people">تصویر میں متعدد افراد کا پتہ چلا ہے۔ براہ کرم ایسی تصویر منتخب کریں جس میں صرف ایک شخص ہو۔</string>
     <string name="msg_error_content_policy">تصویر حفاظتی پالیسیوں کی خلاف ورزی کرتی ہے (جیسے حساس مواد)۔ براہ کرم کوئی اور تصویر آزمائیں۔</string>
+    <string name="msg_daily_limit_reached">آپ اپنی روزانہ کی حد کو پہنچ چکے ہیں</string>
+    <string name="text_today_remaining_attempts">"آج باقی کوششیں "</string>
+
+    <!-- Report Dialog -->
+    <string name="text_flag_offensive_content">نامناسب مواد کی اطلاع دیں</string>
+    <string name="text_spam">سپیم</string>
+    <string name="text_inappropriate_content">نامناسب مواد</string>
+    <string name="text_copyright">کاپی رائٹ</string>
+    <string name="text_offensive">جارحانہ</string>
+    <string name="text_cancel">منسوخ کریں</string>
+    <string name="text_report">رپورٹ کریں</string>
+    <string name="msg_please_select_reason">براہ کرم ایک وجہ منتخب کریں</string>
+    <string name="msg_reported_reason">رپورٹ کیا گیا</string>
+    <string name="text_no_image_here">یہاں کوئی تصویر نہیں ہے!</string>
 </resources>

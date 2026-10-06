@@ -1,5 +1,7 @@
 package com.example.aihair.feature.language
 
+import dev.zentrixa.common.admob.ZTInterstitialAdUtils
+
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -46,7 +48,9 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>(ActivityLanguageB
         setupLanguageList()
         
         binding.btnBack.setDebouncedClickListener {
-            viewModel.onAction(LanguageAction.ConfirmSelection)
+            ZTInterstitialAdUtils.loadAndShowInterstitialAd(this, "inter_back", "p_inter_back") {
+                viewModel.onAction(LanguageAction.ConfirmSelection)
+            }
         }
 
         collectViewModel()

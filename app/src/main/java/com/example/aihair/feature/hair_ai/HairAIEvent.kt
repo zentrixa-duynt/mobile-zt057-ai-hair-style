@@ -9,4 +9,12 @@ sealed interface HairAIEvent {
         val isVertical: Boolean,
         val isFemale: Boolean
     ) : HairAIEvent
+    
+    data class RequireRewardAd(
+        val imageUri: String,
+        val styleId: String,
+        val isColorMode: Boolean,
+        val isVertical: Boolean,
+        val isFemale: Boolean
+    ) : HairAIEvent
 }

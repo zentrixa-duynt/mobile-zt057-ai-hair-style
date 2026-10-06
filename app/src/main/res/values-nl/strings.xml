@@ -154,4 +154,18 @@ een verbeterde beeldhelderheid.</string>
     <string name="text_provides_detailed_insights_makeup">Biedt gedetailleerd inzicht in uw make-uplook, gezichtsbalans en ideaal kleurenpalet.</string>
     <string name="msg_error_multiple_people">Meerdere personen gedetecteerd op de afbeelding. Selecteer een foto met slechts één persoon.</string>
     <string name="msg_error_content_policy">De afbeelding is in strijd met het veiligheidsbeleid (bijv. gevoelige/NSFW-inhoud). Probeer een andere foto.</string>
+    <string name="msg_daily_limit_reached">U heeft uw dagelijkse limiet bereikt</string>
+    <string name="text_today_remaining_attempts">"Vandaag resterende pogingen "</string>
+
+    <!-- Report Dialog -->
+    <string name="text_flag_offensive_content">Aanstootgevende inhoud markeren</string>
+    <string name="text_spam">Spam</string>
+    <string name="text_inappropriate_content">Ongepaste inhoud</string>
+    <string name="text_copyright">Auteursrecht</string>
+    <string name="text_offensive">Aanstootgevend</string>
+    <string name="text_cancel">Annuleren</string>
+    <string name="text_report">Melden</string>
+    <string name="msg_please_select_reason">Selecteer een reden</string>
+    <string name="msg_reported_reason">Gemeld</string>
+    <string name="text_no_image_here">Geen afbeelding hier!</string>
 </resources>

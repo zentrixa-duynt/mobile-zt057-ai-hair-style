@@ -31,7 +31,8 @@
     <string name="text_ai_analyzes_your_face_shape_to">AIはあなたの顔の形を分析し、あなたの特徴に合ったヘアカットや色を提案します。</string>
     <string name="text_next">次へ</string>
     <string name="text_ai_is_working_its_magic">AIが魔法を働かせています！</string>
-    <string name="text_please_don_t_close_the_app_dur">処理中はアプリを閉じないでください\ n通常5 ～ 10秒かかります。</string>
+    <string name="text_please_don_t_close_the_app_dur">処理中はアプリを閉じないでください
+通常、これには数分かかります。</string>
     <string name="text_result">結果</string>
     <string name="text_share">共有</string>
     <string name="text_save">保存</string>
@@ -152,4 +153,18 @@
     <string name="text_provides_detailed_insights_makeup">メイクアップ、顔のバランス、理想的なカラーパレットに関する詳細な分析情報を提供します。</string>
     <string name="msg_error_multiple_people">画像に複数の人が検出されました。一人だけが写っている写真を選択してください。</string>
     <string name="msg_error_content_policy">画像が安全ポリシー（機密/NSFWコンテンツなど）に違反しています。別の写真を試してください。</string>
+    <string name="msg_daily_limit_reached">1日の上限に達しました</string>
+    <string name="text_today_remaining_attempts">"今日の残りの試行回数 "</string>
+
+    <!-- Report Dialog -->
+    <string name="text_flag_offensive_content">不適切なコンテンツを報告</string>
+    <string name="text_spam">スパム</string>
+    <string name="text_inappropriate_content">不適切なコンテンツ</string>
+    <string name="text_copyright">著作権</string>
+    <string name="text_offensive">不快</string>
+    <string name="text_cancel">キャンセル</string>
+    <string name="text_report">報告する</string>
+    <string name="msg_please_select_reason">理由を選択してください</string>
+    <string name="msg_reported_reason">報告済み</string>
+    <string name="text_no_image_here">ここには画像がありません！</string>
 </resources>

@@ -13,84 +13,90 @@
         android:layout_height="match_parent"
         android:visibility="visible">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card_processing_image"
-            android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_processing_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="0dp"
-            app:cardBackgroundColor="@android:color/transparent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintVertical_bias="0.4">
+            app:layout_constraintBottom_toTopOf="@id/progress_bar">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_processing_image"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginBottom="24dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:layout_constraintBottom_toTopOf="@id/txt_processing_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
 
-                <!-- Single Image View for dynamic ratio -->
-                <ImageView
-                    android:id="@+id/img_processing_photo"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    app:layout_constraintDimensionRatio="3:4"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:scaleType="centerCrop"
-                    android:visibility="visible"
-                    tools:src="@tools:sample/backgrounds/scenic" />
+                    android:layout_height="wrap_content">
 
-                <ImageView
-                    android:id="@+id/img_swipe_analyst"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    app:layout_constraintTop_toTopOf="@id/img_processing_photo"
-                    app:layout_constraintBottom_toBottomOf="@id/img_processing_photo"
-                    app:layout_constraintStart_toStartOf="@id/img_processing_photo"
-                    app:layout_constraintEnd_toEndOf="@id/img_processing_photo"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/img_swipe_analyst"
-                    android:visibility="invisible" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
+                    <!-- Single Image View for dynamic ratio -->
+                    <ImageView
+                        android:id="@+id/img_processing_photo"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        app:layout_constraintDimensionRatio="3:4"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:scaleType="centerCrop"
+                        android:visibility="visible"
+                        tools:src="@tools:sample/backgrounds/scenic" />
 
-        <TextView
-            android:id="@+id/txt_processing_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginHorizontal="16dp"
-            android:textAlignment="center"
-            android:text="@string/text_ai_is_working_its_magic"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:fontFamily="@font/poppins_semibold"
-            android:includeFontPadding="false"
-            app:layout_constraintTop_toBottomOf="@id/card_processing_image"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+                    <ImageView
+                        android:id="@+id/img_swipe_analyst"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        app:layout_constraintTop_toTopOf="@id/img_processing_photo"
+                        app:layout_constraintBottom_toBottomOf="@id/img_processing_photo"
+                        app:layout_constraintStart_toStartOf="@id/img_processing_photo"
+                        app:layout_constraintEnd_toEndOf="@id/img_processing_photo"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/img_swipe_analyst"
+                        android:visibility="invisible" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
 
-        <TextView
-            android:id="@+id/txt_processing_desc"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginHorizontal="16dp"
-            android:textAlignment="center"
-            android:text="@string/text_please_don_t_close_the_app_dur"
-            android:textColor="#FFFFFF"
-            android:textSize="12sp"
-            android:fontFamily="@font/poppins_regular"
-            android:includeFontPadding="false"
-            android:gravity="center"
-            app:layout_constraintTop_toBottomOf="@id/txt_processing_title"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            <TextView
+                android:id="@+id/txt_processing_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginHorizontal="16dp"
+                android:textAlignment="center"
+                android:text="@string/text_ai_is_working_its_magic"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:fontFamily="@font/poppins_semibold"
+                android:includeFontPadding="false"
+                app:layout_constraintBottom_toTopOf="@id/txt_processing_desc"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/txt_processing_desc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:textAlignment="center"
+                android:text="@string/text_please_don_t_close_the_app_dur"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"
+                android:fontFamily="@font/poppins_regular"
+                android:includeFontPadding="false"
+                android:gravity="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ProgressBar
             android:id="@+id/progress_bar"
@@ -102,9 +108,18 @@
             android:progressDrawable="@drawable/bg_progress"
             android:max="10000"
             android:progress="0"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/frNativeAd_processing"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
+
+        <dev.zentrixa.common.admob.ZTNativeAdView
+            android:id="@+id/frNativeAd_processing"
+            app:ad_config_key="native_function"
+            app:ad_placement="p_native_process"
+            android:background="@android:color/transparent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -159,21 +174,33 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card_result_image"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginHorizontal="30dp"
-            app:layout_constrainedHeight="true"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="0dp"
-            app:cardBackgroundColor="@android:color/transparent"
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:fillViewport="true"
             app:layout_constraintTop_toBottomOf="@id/header_result"
-            app:layout_constraintBottom_toTopOf="@id/layout_actions"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintBottom_toTopOf="@id/frNativeAd_result">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="24dp">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_result_image"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginHorizontal="30dp"
+                    app:layout_constrainedHeight="true"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="@android:color/transparent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/layout_actions"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
             
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -193,24 +220,64 @@
                     android:visibility="visible"
                     tools:src="@tools:sample/backgrounds/scenic" />
 
-                <!-- Split Icon -->
-                <FrameLayout
-                    android:id="@+id/btn_split"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginEnd="12dp"
-                    android:layout_marginBottom="12dp"
-                    android:background="@drawable/bg_circle_dark_translucent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent">
+                <!-- Overlay Buttons -->
+                    <!-- Split Icon -->
+                    <FrameLayout
+                        android:id="@+id/btn_split"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="12dp"
+                        android:layout_marginStart="12dp"
+                        android:background="@drawable/bg_circle_dark_translucent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent">
 
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_split"
-                        app:tint="#FFFFFF" />
-                </FrameLayout>
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_split"
+                            app:tint="#FFFFFF" />
+                    </FrameLayout>
+
+                    <!-- Flag Icon -->
+                    <FrameLayout
+                        android:id="@+id/btn_flag"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:background="@drawable/bg_circle_dark_translucent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_flag"
+                            app:tint="#FFFFFF" />
+                    </FrameLayout>
+
+                    <!-- Split Icon for Hair Type -->
+                    <FrameLayout
+                        android:id="@+id/btn_split_hair_type"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:background="@drawable/bg_circle_dark_translucent"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_split"
+                            app:tint="#FFFFFF" />
+                    </FrameLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
@@ -285,23 +352,121 @@
         </LinearLayout>
 
         <!-- Create Again Button -->
-        <TextView
+        <FrameLayout
             android:id="@+id/btn_create_again"
-            android:layout_width="0dp"
-            android:layout_height="52dp"
-            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
             android:layout_marginHorizontal="16dp"
-            android:text="@string/text_create_again"
-            android:textColor="#030712"
-            android:textSize="16sp"
-            android:fontFamily="@font/poppins_medium"
-            android:includeFontPadding="false"
-            android:gravity="center"
+            android:layout_marginTop="16dp"
             android:background="@drawable/bg_btn_create"
             android:enabled="true"
             app:layout_constraintTop_toBottomOf="@id/layout_actions"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:duplicateParentState="true">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:duplicateParentState="true">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/ic_sparkle"
+                        app:tint="@color/color_btn_create_text"
+                        android:duplicateParentState="true" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/text_create_again"
+                        android:textColor="@color/color_btn_create_text"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/poppins_medium"
+                        android:includeFontPadding="false"
+                        android:duplicateParentState="true" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:duplicateParentState="true">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_today_remaining_attempts"
+                        android:textColor="@color/color_btn_create_text"
+                        android:textSize="10sp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:includeFontPadding="false"
+                        android:duplicateParentState="true" />
+
+                    <TextView
+                        android:id="@+id/txt_today_remaining"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="5"
+                        android:textColor="@color/color_btn_create_text"
+                        android:textSize="10sp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:includeFontPadding="false"
+                        android:duplicateParentState="true" />
+
+                    <TextView
+                        android:id="@+id/txt_total_remaining"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_slash_five"
+                        android:textColor="@color/color_btn_create_text"
+                        android:textSize="10sp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:includeFontPadding="false"
+                        android:duplicateParentState="true" />
+                </LinearLayout>
+            </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/img_ad_icon_create_again"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="top|end"
+            android:background="@drawable/bg_ad_icon_container"
+            android:layout_marginEnd="6dp"
+            android:layout_marginTop="6dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_gravity="center"
+                app:tint="#030712"
+                android:src="@drawable/ic_play" />
+        </FrameLayout>
+        </FrameLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+        <dev.zentrixa.common.admob.ZTNativeAdView
+            android:id="@+id/frNativeAd_result"
+            android:background="@android:color/transparent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     

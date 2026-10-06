@@ -29,19 +29,31 @@
             app:tint="#FFFFFF" />
     </LinearLayout>
 
-    <!-- Image Container -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_result_image"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:layout_marginHorizontal="30dp"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="0dp"
-        app:cardBackgroundColor="@android:color/transparent"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
         app:layout_constraintTop_toBottomOf="@id/header"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintBottom_toTopOf="@id/frNativeAd">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="24dp">
+
+            <!-- Image Container -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_result_image"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:layout_marginHorizontal="30dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
         
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -64,9 +76,48 @@
                 android:id="@+id/btn_split"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginEnd="12dp"
                 android:layout_marginBottom="12dp"
-                android:background="@drawable/bg_btn_brush"
+                android:layout_marginStart="12dp"
+                android:background="@drawable/bg_circle_dark_translucent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_split"
+                    app:tint="#FFFFFF" />
+            </FrameLayout>
+
+            <!-- Flag Icon -->
+            <FrameLayout
+                android:id="@+id/btn_flag"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="12dp"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/bg_circle_dark_translucent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_flag"
+                    app:tint="#FFFFFF" />
+            </FrameLayout>
+
+            <!-- Split Icon for Hair Type -->
+            <FrameLayout
+                android:id="@+id/btn_split_hair_type"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="12dp"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/bg_circle_dark_translucent"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
 
@@ -80,17 +131,18 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Action Buttons -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp"
-        android:layout_marginHorizontal="16dp"
-        android:weightSum="2"
-        app:layout_constraintTop_toBottomOf="@id/card_result_image"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+            <!-- Action Buttons -->
+            <LinearLayout
+                android:id="@+id/layout_actions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp"
+                android:layout_marginHorizontal="16dp"
+                android:weightSum="2"
+                app:layout_constraintTop_toBottomOf="@id/card_result_image"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
 
         <!-- Share Button -->
         <LinearLayout
@@ -146,7 +198,19 @@
                 android:textSize="16sp"
                 android:includeFontPadding="false"
                 android:fontFamily="@font/poppins_semibold" />
-        </LinearLayout>
-    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <dev.zentrixa.common.admob.ZTNativeAdView
+        android:id="@+id/frNativeAd"
+        app:ad_config_key="native_function"
+        app:ad_placement="p_native_result"
+        android:background="@android:color/transparent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -157,3 +157,28 @@ suspend fun Context.compressImageFile(uriStr: String, maxWidth: Int = 1024, maxH
         return@withContext null
     }
 }
+
+/**
+ * Tải ảnh từ HTTP URL, nén lại và lưu vào thư mục cache nội bộ.
+ * Trả về URI nội bộ (dạng chuỗi) nếu thành công, ngược lại trả về null.
+ */
+suspend fun Context.downloadAndCompressImage(urlStr: String, quality: Int = 85): String? = withContext(Dispatchers.IO) {
+    if (!urlStr.startsWith("http")) return@withContext urlStr
+    try {
+        val bitmap = Glide.with(this@downloadAndCompressImage)
+            .asBitmap()
+            .load(urlStr)
+            .submit()
+            .get()
+            
+        val tempFile = File(cacheDir, "result_compressed_${System.currentTimeMillis()}.jpg")
+        tempFile.outputStream().use { out ->
+            bitmap.compress(Bitmap.CompressFormat.JPEG, quality, out)
+        }
+        bitmap.recycle()
+        return@withContext Uri.fromFile(tempFile).toString()
+    } catch (e: Exception) {
+        e.printStackTrace()
+        return@withContext null
+    }
+}

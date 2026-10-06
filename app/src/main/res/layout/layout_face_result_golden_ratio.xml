@@ -1,66 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="16dp"
     android:layout_marginTop="16dp"
-    android:background="@drawable/bg_block_dark"
-    android:orientation="vertical"
-    android:padding="12dp">
-    
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/text_golden_ratio"
-        android:textColor="#6A7282"
-        android:textSize="12sp"
-        android:fontFamily="@font/poppins_medium"
-        android:includeFontPadding="false" />
-    
-    <LinearLayout
+    app:cardCornerRadius="12dp"
+    app:cardElevation="0dp"
+    app:cardBackgroundColor="@android:color/transparent">
+
+    <eightbitlab.com.blurview.BlurTarget
+        android:id="@+id/blur_target"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginTop="4dp">
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_block_dark"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/txt_title_golden_ratio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_golden_ratio"
+                android:textSize="12sp"
+                android:textColor="#6A7282"
+                android:fontFamily="@font/poppins_medium"
+                android:includeFontPadding="false"
+                android:visibility="invisible" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="4dp">
+                <TextView
+                    android:id="@+id/txt_golden_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="4.2"
+                    android:textColor="#F6339A"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:includeFontPadding="false" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="/5"
+                    android:textColor="#6A7282"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:includeFontPadding="false" />
+            </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/progress_golden_ratio"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:layout_marginTop="8dp"
+                android:progressDrawable="@drawable/bg_progress_golden_ratio"
+                android:max="50"
+                android:progress="42" />
+
+            <TextView
+                android:id="@+id/txt_golden_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/text_your_facial_proportions_are_be"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"
+                android:fontFamily="@font/poppins_medium"
+                android:includeFontPadding="false" />
+        </LinearLayout>
+    </eightbitlab.com.blurview.BlurTarget>
+
+    <eightbitlab.com.blurview.BlurView
+        android:id="@+id/blur_view"
+        app:blurOverlayColor="#0D0B0B0C"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
         <TextView
-            android:id="@+id/txt_golden_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="4.2"
-            android:textColor="#F6339A"
-            android:textSize="16sp"
-            android:fontFamily="@font/poppins_semibold"
-            android:includeFontPadding="false" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="/5"
+            android:layout_margin="12dp"
+            android:text="@string/text_golden_ratio"
             android:textColor="#6A7282"
-            android:textSize="16sp"
-            android:fontFamily="@font/poppins_semibold"
+            android:textSize="12sp"
+            android:fontFamily="@font/poppins_medium"
             android:includeFontPadding="false" />
-    </LinearLayout>
 
-    <ProgressBar
-        android:id="@+id/progress_golden_ratio"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="8dp"
-        android:layout_marginTop="8dp"
-        android:progressDrawable="@drawable/bg_progress_golden_ratio"
-        android:max="50"
-        android:progress="42" />
 
-    <TextView
-        android:id="@+id/txt_golden_desc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="@string/text_your_facial_proportions_are_be"
-        android:textColor="#FFFFFF"
-        android:textSize="12sp"
-        android:fontFamily="@font/poppins_medium"
-        android:includeFontPadding="false" />
-</LinearLayout>
+    </eightbitlab.com.blurview.BlurView>
+
+</androidx.cardview.widget.CardView>
