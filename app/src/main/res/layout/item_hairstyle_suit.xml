@@ -70,18 +70,40 @@
                 android:fontFamily="@font/poppins_regular"
                 android:includeFontPadding="false" />
 
-            <TextView
-                android:id="@+id/btn_apply"
+            <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="4dp"
-                android:background="@drawable/bg_btn_apply"
-                android:text="@string/text_apply"
-                android:textColor="#FFFFFF"
-                android:textSize="10sp"
-                android:fontFamily="@font/poppins_regular"
-                android:includeFontPadding="false" />
+                android:clipChildren="false">
+
+                <TextView
+                    android:id="@+id/btn_apply"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="4dp"
+                    android:background="@drawable/bg_btn_apply"
+                    android:text="@string/text_apply"
+                    android:textColor="#FFFFFF"
+                    android:textSize="10sp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:includeFontPadding="false" />
+
+                <FrameLayout
+                    android:id="@+id/img_ad_icon_apply"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:layout_gravity="top|end"
+                    android:background="@drawable/bg_ad_icon_container"
+                    android:visibility="visible">
+
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_gravity="center"
+                        app:tint="#030712"
+                        android:src="@drawable/ic_play" />
+                </FrameLayout>
+            </FrameLayout>
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

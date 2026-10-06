@@ -1,5 +1,7 @@
 package com.example.aihair.feature.analysis
 
+import dev.zentrixa.common.admob.ZTInterstitialAdUtils
+
 import android.graphics.Color
 import android.content.Intent
 import android.net.Uri
@@ -16,6 +18,8 @@ import com.example.aihair.core.ui.transition.animateSlideFadeInAfterMorph
 import com.example.aihair.core.ui.transition.setupMorphTransition
 import com.example.aihair.databinding.ActivityAnalysisBinding
 import com.example.aihair.feature.pick_gender.PickGenderActivity
+import dev.zentrixa.common.admob.ZTAppOpenResume
+import dev.zentrixa.common.firebase.ZTAnalyticsUtils
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
@@ -47,7 +51,9 @@ class AnalysisActivity : BaseActivity<ActivityAnalysisBinding>(ActivityAnalysisB
         })
 
         binding.btnBack.setDebouncedClickListener {
-            onBackPressedDispatcher.onBackPressed()
+            ZTInterstitialAdUtils.loadAndShowInterstitialAd(this, "inter_back", "p_inter_back") {
+                onBackPressedDispatcher.onBackPressed()
+            }
         }
 
         // Micro-animation: Slide and fade in the back button
@@ -55,18 +61,50 @@ class AnalysisActivity : BaseActivity<ActivityAnalysisBinding>(ActivityAnalysisB
 
         val analysisType = intent.getStringExtra(EXTRA_ANALYSIS_TYPE)
         if (analysisType == TYPE_MAKEUP) {
+            ZTAnalyticsUtils.logEvent("S_screen_ai_make")
             binding.txtTitle.text = getString(R.string.text_ai_makeup_analysis)
             binding.txtDesc.text = getString(R.string.text_provides_detailed_insights_makeup)
         } else {
+            ZTAnalyticsUtils.logEvent("S_screen_ai_face")
             binding.txtTitle.text = getString(R.string.text_ai_face_analysis)
             binding.txtDesc.text = getString(R.string.text_provides_detailed_insights_int)
         }
 
         binding.btnTryItNow.setDebouncedClickListener {
+            if (analysisType == TYPE_MAKEUP) {
+                ZTAnalyticsUtils.logEvent("D_action_try_make")
+            } else {
+                ZTAnalyticsUtils.logEvent("D_action_try_face")
+            }
+            if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.TIRAMISU) {
+                ZTAppOpenResume.disableOpenAdResumeOneTime()
+            }
             pickMedia.launch("image/*")
         }
 
         startMorphAnimation()
+
+        val transition = window.sharedElementEnterTransition
+        if (transition != null) {
+            transition.addListener(object : android.transition.Transition.TransitionListener {
+                override fun onTransitionEnd(transition: android.transition.Transition) {
+                    transition.removeListener(this)
+                    binding.scrollContent.post {
+                        binding.scrollContent.smoothScrollTo(0, binding.scrollContent.getChildAt(0).height)
+                    }
+                }
+                override fun onTransitionCancel(transition: android.transition.Transition) {
+                    transition.removeListener(this)
+                }
+                override fun onTransitionStart(transition: android.transition.Transition) {}
+                override fun onTransitionPause(transition: android.transition.Transition) {}
+                override fun onTransitionResume(transition: android.transition.Transition) {}
+            })
+        } else {
+            binding.scrollContent.postDelayed({
+                binding.scrollContent.smoothScrollTo(0, binding.scrollContent.getChildAt(0).height)
+            }, 300)
+        }
     }
 
     private fun startMorphAnimation() {

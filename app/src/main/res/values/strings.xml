@@ -33,7 +33,7 @@
     <string name="text_ai_analyzes_your_face_shape_to">AI analyzes your face shape to suggest haircuts and colors that match your features.</string>
     <string name="text_next">Next</string>
     <string name="text_ai_is_working_its_magic">AI is Working its magic!</string>
-    <string name="text_please_don_t_close_the_app_dur">Please don’t close the app during processing\nThis usually takes 5-10 seconds.</string>
+    <string name="text_please_don_t_close_the_app_dur">Please don’t close the app during processing\nThis usually takes several minutes.</string>
     <string name="text_result">Result</string>
     <string name="text_share">Share</string>
     <string name="text_save">Save</string>
@@ -74,6 +74,8 @@
     <string name="text_this_information_will_improve">This information will improve our selection of model images for the generation of your photos</string>
     <string name="text_other">Other</string>
     <string name="text_analyze_now">Analyze Now</string>
+    <string name="text_today_remaining_attempts">"Today remaining attempts "</string>
+    <string name="text_slash_five" translatable="false">/5</string>
     <string name="text_delete">Delete</string>
     <string name="text_transform_your_hairstyle">Transform Your Hairstyle</string>
     <string name="text_change_your_hair_color">Change Your Hair Color</string>
@@ -137,6 +139,7 @@
     <string name="msg_error_saving_image">Error saving image</string>
     <string name="msg_error_processing_image">Error processing image</string>
     <string name="msg_delete_success">Image deleted from history</string>
+    <string name="msg_daily_limit_reached">You have reached your daily limit</string>
 
     <string name="msg_error_select_color_first">Please select a color before coloring</string>
     <string name="msg_error_select_photo_first">Please select a photo first</string>
@@ -159,4 +162,16 @@
     <string name="text_no_internet_connection">No Internet Connection</string>
     <string name="text_please_turn_on_wifi">Please turn on and connect to a Wi-Fi network</string>
     <string name="text_go_to_setting">Go to setting</string>
+
+    <!-- Report Dialog -->
+    <string name="text_flag_offensive_content">Flag offensive content</string>
+    <string name="text_spam">Spam</string>
+    <string name="text_inappropriate_content">Inappropriate content</string>
+    <string name="text_copyright">Copyright</string>
+    <string name="text_offensive">Offensive</string>
+    <string name="text_cancel">Cancel</string>
+    <string name="text_report">Report</string>
+    <string name="msg_please_select_reason">Please select a reason</string>
+    <string name="msg_reported_reason">Reported</string>
+    <string name="text_no_image_here">No image here!</string>
 </resources>

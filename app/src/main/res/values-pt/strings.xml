@@ -154,4 +154,18 @@ maior clareza de imagem.</string>
     <string name="text_provides_detailed_insights_makeup">Fornece insights detalhados sobre sua maquiagem, equilíbrio facial e paleta de cores ideal.</string>
     <string name="msg_error_multiple_people">Várias pessoas detectadas na imagem. Selecione uma foto com apenas uma pessoa.</string>
     <string name="msg_error_content_policy">A imagem viola as políticas de segurança (ex: conteúdo sensível). Tente outra foto.</string>
+    <string name="msg_daily_limit_reached">Você atingiu seu limite diário</string>
+    <string name="text_today_remaining_attempts">"Tentativas restantes hoje "</string>
+
+    <!-- Report Dialog -->
+    <string name="text_flag_offensive_content">Sinalizar conteúdo ofensivo</string>
+    <string name="text_spam">Spam</string>
+    <string name="text_inappropriate_content">Conteúdo inapropriado</string>
+    <string name="text_copyright">Direitos autorais</string>
+    <string name="text_offensive">Ofensivo</string>
+    <string name="text_cancel">Cancelar</string>
+    <string name="text_report">Denunciar</string>
+    <string name="msg_please_select_reason">Selecione um motivo</string>
+    <string name="msg_reported_reason">Denunciado</string>
+    <string name="text_no_image_here">Nenhuma imagem aqui!</string>
 </resources>

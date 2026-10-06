@@ -31,7 +31,8 @@
     <string name="text_ai_analyzes_your_face_shape_to">AI phân tích hình dạng khuôn mặt của bạn để đề xuất kiểu tóc và màu sắc phù hợp với đặc điểm của bạn.</string>
     <string name="text_next">Kế tiếp</string>
     <string name="text_ai_is_working_its_magic">AI đang xử lý phép thuật của mình!</string>
-    <string name="text_please_don_t_close_the_app_dur">Vui lòng không đóng ứng dụng trong khi xử lý\nQuá trình này thường mất 5-10 giây.</string>
+    <string name="text_please_don_t_close_the_app_dur">Vui lòng không đóng ứng dụng trong khi xử lý
+Quá trình này thường mất vài phút.</string>
     <string name="text_result">Kết quả</string>
     <string name="text_share">Chia sẻ</string>
     <string name="text_save">Lưu</string>
@@ -154,4 +155,18 @@
     <string name="text_provides_detailed_insights_makeup">Cung cấp thông tin chi tiết về lớp trang điểm, sự cân đối của khuôn mặt và bảng màu lý tưởng của bạn.</string>
     <string name="msg_error_multiple_people">Phát hiện có nhiều người trong ảnh. Vui lòng chọn một bức ảnh chỉ có một người.</string>
     <string name="msg_error_content_policy">Hình ảnh vi phạm chính sách an toàn (ví dụ: nội dung nhạy cảm/NSFW). Vui lòng thử một bức ảnh khác.</string>
+    <string name="msg_daily_limit_reached">Bạn đã đạt đến giới hạn hàng ngày</string>
+    <string name="text_today_remaining_attempts">"Số lần thử còn lại trong ngày "</string>
+
+    <!-- Report Dialog -->
+    <string name="text_flag_offensive_content">Báo cáo nội dung vi phạm</string>
+    <string name="text_spam">Spam</string>
+    <string name="text_inappropriate_content">Nội dung không phù hợp</string>
+    <string name="text_copyright">Bản quyền</string>
+    <string name="text_offensive">Nội dung phản cảm</string>
+    <string name="text_cancel">Hủy</string>
+    <string name="text_report">Báo cáo</string>
+    <string name="msg_please_select_reason">Vui lòng chọn một lý do</string>
+    <string name="msg_reported_reason">Đã báo cáo</string>
+    <string name="text_no_image_here">Không có hình ảnh ở đây!</string>
 </resources>

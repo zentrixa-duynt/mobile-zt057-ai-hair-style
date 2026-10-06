@@ -1,5 +1,7 @@
 package com.example.aihair.feature.photo_editor.binder
 
+import dev.zentrixa.common.admob.ZTInterstitialAdUtils
+
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.ColorMatrixColorFilter
@@ -76,7 +78,9 @@ class PhotoEditorViewBinder(
         })
 
         binding.btnBack.setDebouncedClickListener {
-            activity.onBackPressedDispatcher.onBackPressed()
+            ZTInterstitialAdUtils.loadAndShowInterstitialAd(activity, "inter_back", "p_inter_back") {
+                activity.onBackPressedDispatcher.onBackPressed()
+            }
         }
 
         if (isMorph) {

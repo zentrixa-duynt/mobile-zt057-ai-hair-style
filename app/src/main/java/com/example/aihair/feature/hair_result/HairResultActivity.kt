@@ -1,5 +1,8 @@
 package com.example.aihair.feature.hair_result
 
+import dev.zentrixa.common.admob.ZTInterstitialAdUtils
+import dev.zentrixa.common.firebase.ZTAnalyticsUtils
+
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -22,6 +25,7 @@ import com.example.aihair.core.ui.click.setDebouncedClickListener
 import com.example.aihair.core.ui.lifecycle.collectFlow
 import com.example.aihair.core.utils.NetworkUtils
 import com.example.aihair.databinding.ActivityHairResultBinding
+import com.example.aihair.feature.hair_result.component.ReportDialog
 import com.example.aihair.feature.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -39,7 +43,7 @@ class HairResultActivity : BaseActivity<ActivityHairResultBinding>(ActivityHairR
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        
+
         val localImageUriString = intent.getStringExtra("EXTRA_IMAGE_URI")
         originalImageUriString = intent.getStringExtra("EXTRA_ORIGINAL_IMAGE_URI") ?: localImageUriString
         val historyType = intent.getIntExtra("EXTRA_HISTORY_TYPE", 0).also { historyType = it }
@@ -81,8 +85,7 @@ class HairResultActivity : BaseActivity<ActivityHairResultBinding>(ActivityHairR
 
         val targetImageView = binding.imgResultPhoto
 
-        // 2. Ấn giữ btn_split thì ảnh gốc hiện ra
-        binding.btnSplit.setOnTouchListener { _, event ->
+        val splitTouchListener = android.view.View.OnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     if (!originalImageUriString.isNullOrEmpty()) {
@@ -107,6 +110,10 @@ class HairResultActivity : BaseActivity<ActivityHairResultBinding>(ActivityHairR
                 else -> false
             }
         }
+
+        // 2. Ấn giữ btn_split thì ảnh gốc hiện ra
+        binding.btnSplit.setOnTouchListener(splitTouchListener)
+        binding.btnSplitHairType.setOnTouchListener(splitTouchListener)
         
         // 3. Share
         binding.btnShare.setDebouncedClickListener {
@@ -120,17 +127,34 @@ class HairResultActivity : BaseActivity<ActivityHairResultBinding>(ActivityHairR
         
         // 5. btn_create_again hiển thị khi từ Hair AI sang (historyType == 0)
         binding.btnCreateAgain.isVisible = (historyType == 0)
+        binding.btnFlag.isVisible = (historyType == 0)
+        binding.btnSplit.isVisible = (historyType == 0)
+        binding.btnSplitHairType.isVisible = (historyType == 1)
+        
+        val rewardConfig = dev.zentrixa.common.admob.ZTRewardedAdUtils.getRewardAdsConfig("reward_function_AI")
+        val isAdEnabled = rewardConfig?.enabled != false && rewardConfig?.placements?.get("p_reward_create") != false
+        binding.imgAdIconCreateAgain.isVisible = isAdEnabled && !dev.zentrixa.common.utils.ZTUtils.isTurnOffAllAds
+        
         binding.btnCreateAgain.setDebouncedClickListener {
             viewModel.onAction(HairResultAction.CreateAgainClicked)
         }
         // 6. ấn btn_home về lại main activity
         binding.btnHome.setDebouncedClickListener {
-            viewModel.onAction(HairResultAction.HomeClicked)
+            ZTInterstitialAdUtils.loadAndShowInterstitialAd(this, "inter_back", "p_inter_back") {
+                viewModel.onAction(HairResultAction.HomeClicked)
+            }
         }
         
         // 7. xử lý btn_back
         binding.btnBack.setDebouncedClickListener {
-            viewModel.onAction(HairResultAction.BackClicked)
+            ZTInterstitialAdUtils.loadAndShowInterstitialAd(this, "inter_back", "p_inter_back") {
+                viewModel.onAction(HairResultAction.BackClicked)
+            }
+        }
+        
+        // 8. nút cờ Report
+        binding.btnFlag.setDebouncedClickListener {
+            ReportDialog(this).show()
         }
 
         viewModel.onAction(HairResultAction.LoadData(
@@ -146,6 +170,15 @@ class HairResultActivity : BaseActivity<ActivityHairResultBinding>(ActivityHairR
     }
 
     private fun collectViewModel() {
+        collectFlow(viewModel.usageState) { usage ->
+            val currentDate = java.text.SimpleDateFormat("yyyyMMdd", java.util.Locale.getDefault()).format(java.util.Date())
+            val todayUsage = if (usage.lastUsageDate == currentDate) usage.usageCount else 0
+            val dailyLimit = com.google.firebase.remoteconfig.FirebaseRemoteConfig.getInstance().getLong("limit_daily").toInt().takeIf { it > 0 } ?: 5
+            
+            binding.txtTodayRemaining.text = "${dailyLimit - todayUsage}".takeIf { (dailyLimit - todayUsage) >= 0 } ?: "0"
+            binding.txtTotalRemaining.text = "/$dailyLimit"
+        }
+
         collectFlow(viewModel.uiState) { state ->
             when (state) {
                 is HairResultUiState.Loading -> {
@@ -185,9 +218,22 @@ class HairResultActivity : BaseActivity<ActivityHairResultBinding>(ActivityHairR
                     // Bật hiệu ứng quét ảnh từ phải sang trái
                     binding.imgSwipeAnalyst.isVisible = true
                     val scanAnim = AnimationUtils.loadAnimation(this, R.anim.anim_scan_right_to_left)
+                    var isFlipped = false
+                    scanAnim.setAnimationListener(object : android.view.animation.Animation.AnimationListener {
+                        override fun onAnimationStart(animation: android.view.animation.Animation?) {
+                            binding.imgSwipeAnalyst.scaleX = 1f
+                        }
+                        override fun onAnimationEnd(animation: android.view.animation.Animation?) {}
+                        override fun onAnimationRepeat(animation: android.view.animation.Animation?) {
+                            isFlipped = !isFlipped
+                            binding.imgSwipeAnalyst.scaleX = if (isFlipped) -1f else 1f
+                        }
+                    })
                     binding.imgSwipeAnalyst.startAnimation(scanAnim)
                 }
                 is HairResultUiState.Success -> {
+                    ZTAnalyticsUtils.logEvent("S_screen_result_view")
+
                     // Chuyển sang màn hình Kết quả
                     binding.layoutProcessing.isVisible = false
                     binding.layoutResult.isVisible = true
@@ -196,6 +242,8 @@ class HairResultActivity : BaseActivity<ActivityHairResultBinding>(ActivityHairR
                     binding.progressBar.progress = 10000
                     binding.imgSwipeAnalyst.clearAnimation()
                     binding.imgSwipeAnalyst.isVisible = false
+                    
+                    binding.frNativeAdResult.setConfig("native_function", "p_native_result")
                     
                     croppedImageUriString = state.imageUrl
                     if (!croppedImageUriString.isNullOrEmpty()) {
@@ -250,6 +298,22 @@ class HairResultActivity : BaseActivity<ActivityHairResultBinding>(ActivityHairR
                 }
                 is HairResultEvent.NavigateBack -> {
                     finish()
+                }
+                is HairResultEvent.RequireRewardAdToCreateAgain -> {
+                    var isAdDone = false
+                    dev.zentrixa.common.admob.ZTRewardedAdUtils.loadAndShowRewardAd(
+                        this@HairResultActivity,
+                        "reward_function_AI",
+                        "p_reward_create",
+                        onAdEarned = {
+                            isAdDone = true
+                        },
+                        onAdClosed = { isEarned ->
+                            if (isEarned || isAdDone) {
+                                viewModel.onAction(HairResultAction.ProceedCreateAgain)
+                            }
+                        }
+                    )
                 }
             }
         }

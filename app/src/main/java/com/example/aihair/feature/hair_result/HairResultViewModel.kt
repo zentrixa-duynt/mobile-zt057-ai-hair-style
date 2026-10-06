@@ -20,16 +20,25 @@ import android.net.Uri
 import com.example.aihair.feature.main.history.HistoryItem
 import com.example.aihair.feature.main.history.data.HistoryRepository
 import com.example.aihair.core.utils.saveImageToGallery
-
+import com.example.aihair.core.data.local.datastore.AppPreferences
+import dev.zentrixa.common.admob.ZTRewardedAdUtils
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import kotlinx.coroutines.flow.first
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 @HiltViewModel
 class HairResultViewModel @Inject constructor(
     private val generationRepository: GenerationRepository,
     private val historyRepository: HistoryRepository,
+    private val appPreferences: AppPreferences,
     @ApplicationContext private val context: Context
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<HairResultUiState>(HairResultUiState.Loading)
     val uiState = _uiState.asStateFlow()
+    
+    val usageState = appPreferences.usageState
 
     private var currentLocalImageUri: String? = null
     private var currentOriginalImageUri: String? = null
@@ -49,6 +58,7 @@ class HairResultViewModel @Inject constructor(
             HairResultAction.HomeClicked -> handleHomeClicked()
             HairResultAction.BackClicked -> handleBackClicked()
             HairResultAction.CreateAgainClicked -> handleCreateAgainClicked()
+            HairResultAction.ProceedCreateAgain -> handleProceedCreateAgain()
         }
     }
 
@@ -93,8 +103,27 @@ class HairResultViewModel @Inject constructor(
 
     private fun handleCreateAgainClicked() {
         val uri = currentLocalImageUri ?: return
-        _uiState.value = HairResultUiState.Loading
-        startGenerationProcess(uri, currentOriginalImageUri, currentHistoryType, currentStyleName, currentIsColorMode, currentIsFemale)
+        viewModelScope.launch {
+            val usage = appPreferences.usageState.first()
+            val currentDate = SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(Date())
+            val todayUsage = if (usage.lastUsageDate == currentDate) usage.usageCount else 0
+            val dailyLimit = FirebaseRemoteConfig.getInstance().getLong("limit_daily").toInt().takeIf { it > 0 } ?: 5
+
+            if (todayUsage >= dailyLimit) {
+                _event.emit(HairResultEvent.ShowToast(context.getString(R.string.msg_daily_limit_reached)))
+                return@launch
+            }
+
+            _event.emit(HairResultEvent.RequireRewardAdToCreateAgain)
+        }
+    }
+
+    private fun handleProceedCreateAgain() {
+        val uri = currentLocalImageUri ?: return
+        viewModelScope.launch {
+            _uiState.value = HairResultUiState.Loading
+            startGenerationProcess(uri, currentOriginalImageUri, currentHistoryType, currentStyleName, currentIsColorMode, currentIsFemale)
+        }
     }
 
     private fun handleLoadData(action: HairResultAction.LoadData) {
@@ -131,6 +160,10 @@ class HairResultViewModel @Inject constructor(
                         _uiState.value = HairResultUiState.Loading
                     }
                     is GenerationState.Success -> {
+                        val currentDate = java.text.SimpleDateFormat("yyyyMMdd", java.util.Locale.getDefault()).format(java.util.Date())
+                        try {
+                            appPreferences.incrementUsageCount(currentDate)
+                        } catch (e: Exception) { e.printStackTrace() }
                         _uiState.value = HairResultUiState.Success(state.imageUrl)
                         saveToHistory(originalImageUri, state.imageUrl, historyType)
                     }

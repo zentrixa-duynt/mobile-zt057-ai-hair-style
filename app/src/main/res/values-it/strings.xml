@@ -154,4 +154,18 @@ una maggiore chiarezza dell\'immagine.</string>
     <string name="text_provides_detailed_insights_makeup">Fornisce approfondimenti dettagliati sul tuo look, sull\'equilibrio del viso e sulla tavolozza dei colori ideale.</string>
     <string name="msg_error_multiple_people">Rilevate più persone nell\'immagine. Seleziona una foto con una sola persona.</string>
     <string name="msg_error_content_policy">L\'immagine viola le norme di sicurezza (es. contenuti sensibili). Prova un\'altra foto.</string>
+    <string name="msg_daily_limit_reached">Hai raggiunto il tuo limite giornaliero</string>
+    <string name="text_today_remaining_attempts">"Tentativi rimanenti oggi "</string>
+
+    <!-- Report Dialog -->
+    <string name="text_flag_offensive_content">Segnala contenuto offensivo</string>
+    <string name="text_spam">Spam</string>
+    <string name="text_inappropriate_content">Contenuto inappropriato</string>
+    <string name="text_copyright">Copyright</string>
+    <string name="text_offensive">Offensivo</string>
+    <string name="text_cancel">Annulla</string>
+    <string name="text_report">Segnala</string>
+    <string name="msg_please_select_reason">Seleziona un motivo</string>
+    <string name="msg_reported_reason">Segnalato</string>
+    <string name="text_no_image_here">Nessuna immagine qui!</string>
 </resources>

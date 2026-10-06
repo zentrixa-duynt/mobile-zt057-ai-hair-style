@@ -16,6 +16,7 @@ import com.example.aihair.databinding.FragmentHistoryBinding
 import com.example.aihair.feature.main.history.detail.HistoryDetailActivity
 import com.google.android.material.appbar.AppBarLayout
 import dagger.hilt.android.AndroidEntryPoint
+import dev.zentrixa.common.admob.ZTInterstitialAdUtils
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -26,13 +27,16 @@ class HistoryFragment : Fragment() {
 
     private val viewModel: HistoryViewModel by viewModels()
     private val adapter by lazy {
-        createHistoryAdapter { item ->
-            val intent = Intent(requireContext(), HistoryDetailActivity::class.java).apply {
-                putExtra("EXTRA_HISTORY_ID", item.id)
-                putExtra("EXTRA_IMAGE_URI", item.resultImageUri)
-                putExtra("EXTRA_ORIGINAL_IMAGE_URI", item.originalImageUri)
+        HistoryAdapter { item ->
+            ZTInterstitialAdUtils.loadAndShowInterstitialAd(requireActivity(), "inter_function", "p_inter_function") {
+                val intent = Intent(requireContext(), HistoryDetailActivity::class.java).apply {
+                    putExtra("EXTRA_HISTORY_ID", item.id)
+                    putExtra("EXTRA_IMAGE_URI", item.resultImageUri)
+                    putExtra("EXTRA_ORIGINAL_IMAGE_URI", item.originalImageUri)
+                    putExtra("EXTRA_HISTORY_TYPE", item.type)
+                }
+                startActivity(intent)
             }
-            startActivity(intent)
         }
     }
 
@@ -50,6 +54,11 @@ class HistoryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.rvHistory.adapter = adapter
+        (binding.rvHistory.layoutManager as? androidx.recyclerview.widget.GridLayoutManager)?.spanSizeLookup = object : androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int {
+                return if (adapter.getItemViewType(position) == HistoryAdapter.TYPE_AD) 2 else 1
+            }
+        }
 
         // Sync tabs with categories: 0 = Hair AI, 1 = Hair Tools
         val tabTitles = listOf(
@@ -70,7 +79,17 @@ class HistoryFragment : Fragment() {
 
     private fun updateAdapterData(historyList: List<HistoryItem>) {
         val filteredList = historyList.filter { it.type == currentTabIndex }
-        adapter.submitList(filteredList) {
+        val items = mutableListOf<HistoryAdapterItem>()
+        filteredList.forEachIndexed { index, item ->
+            items.add(HistoryAdapterItem.Item(item))
+            if (index == 1) { // Sau 2 history dau tien
+                items.add(HistoryAdapterItem.Ad)
+            }
+        }
+        
+        binding.layoutEmpty.visibility = if (filteredList.isEmpty()) View.VISIBLE else View.GONE
+        
+        adapter.submitList(items) {
             binding.rvHistory.post {
                 val canScroll = binding.rvHistory.computeVerticalScrollRange() > binding.rvHistory.height
                 val params = binding.tabBarContainer.layoutParams as AppBarLayout.LayoutParams

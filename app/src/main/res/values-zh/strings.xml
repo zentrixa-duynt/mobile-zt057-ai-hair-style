@@ -154,4 +154,18 @@
     <string name="text_provides_detailed_insights_makeup">提供有关您的妆容、面部平衡和理想调色板的详细见解。</string>
     <string name="msg_error_multiple_people">图片中检测到多人。请选择仅包含一个人的照片。</string>
     <string name="msg_error_content_policy">该图片违反了安全政策（例如敏感/NSFW内容）。请尝试其他照片。</string>
+    <string name="msg_daily_limit_reached">您已达到每日上限</string>
+    <string name="text_today_remaining_attempts">"今日剩余尝试次数 "</string>
+
+    <!-- Report Dialog -->
+    <string name="text_flag_offensive_content">标记违规内容</string>
+    <string name="text_spam">垃圾内容</string>
+    <string name="text_inappropriate_content">不适当内容</string>
+    <string name="text_copyright">版权</string>
+    <string name="text_offensive">冒犯性</string>
+    <string name="text_cancel">取消</string>
+    <string name="text_report">举报</string>
+    <string name="msg_please_select_reason">请选择一个原因</string>
+    <string name="msg_reported_reason">已举报</string>
+    <string name="text_no_image_here">这里没有图像！</string>
 </resources>

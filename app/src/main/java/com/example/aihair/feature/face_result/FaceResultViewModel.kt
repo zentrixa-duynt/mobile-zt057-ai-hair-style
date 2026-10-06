@@ -120,6 +120,10 @@ class FaceResultViewModel @Inject constructor(
                         _state.update { FaceResultUiState.Loading }
                     }
                     is AnalysisState.FaceSuccess -> {
+                        val currentDate = java.text.SimpleDateFormat("yyyyMMdd", java.util.Locale.getDefault()).format(java.util.Date())
+                        try {
+                            appPreferences.incrementUsageCount(currentDate)
+                        } catch (e: Exception) { e.printStackTrace() }
                         val recommendedStyles = filteredStyles.filter { item ->
                             analysisState.data.suitableHairStyles.contains(item.name)
                         }

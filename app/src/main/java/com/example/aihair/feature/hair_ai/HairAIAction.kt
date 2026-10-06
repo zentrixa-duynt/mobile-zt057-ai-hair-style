@@ -9,4 +9,11 @@ sealed interface HairAIAction {
     data class PhotoSelected(val uri: Uri, val isVertical: Boolean) : HairAIAction
     object RemovePhoto : HairAIAction
     object CreateClicked : HairAIAction
+    data class OnRewardAdEarned(
+        val imageUri: String,
+        val styleId: String,
+        val isColorMode: Boolean,
+        val isVertical: Boolean,
+        val isFemale: Boolean
+    ) : HairAIAction
 }

@@ -154,4 +154,18 @@ poboljšanu jasnoću slike.</string>
     <string name="text_provides_detailed_insights_makeup">Pruža detaljne uvide u vaš izgled šminke, ravnotežu lica i idealnu paletu boja.</string>
     <string name="msg_error_multiple_people">Na slici je otkriveno više osoba. Odaberite fotografiju sa samo jednom osobom.</string>
     <string name="msg_error_content_policy">Slika krši sigurnosna pravila (npr. osjetljiv sadržaj). Pokušajte s drugom fotografijom.</string>
+    <string name="msg_daily_limit_reached">Dosegli ste svoj dnevni limit</string>
+    <string name="text_today_remaining_attempts">"Danas preostalo pokušaja "</string>
+
+    <!-- Report Dialog -->
+    <string name="text_flag_offensive_content">Označi uvredljiv sadržaj</string>
+    <string name="text_spam">Neželjeni sadržaj</string>
+    <string name="text_inappropriate_content">Neprikladan sadržaj</string>
+    <string name="text_copyright">Autorska prava</string>
+    <string name="text_offensive">Uvredljivo</string>
+    <string name="text_cancel">Odustani</string>
+    <string name="text_report">Prijavi</string>
+    <string name="msg_please_select_reason">Odaberite razlog</string>
+    <string name="msg_reported_reason">Prijavljeno</string>
+    <string name="text_no_image_here">Ovdje nema slike!</string>
 </resources>

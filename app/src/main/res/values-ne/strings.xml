@@ -154,4 +154,18 @@
     <string name="text_provides_detailed_insights_makeup">तपाइँको मेकअप, अनुहारको सन्तुलन, र आदर्श रङ प्यालेटको बारेमा विस्तृत अन्तर्दृष्टि प्रदान गर्दछ।</string>
     <string name="msg_error_multiple_people">तस्बिरमा धेरै व्यक्तिहरू फेला परे। कृपया एउटा मात्र व्यक्ति भएको फोटो छान्नुहोस्।</string>
     <string name="msg_error_content_policy">छविले सुरक्षा नीतिहरू उल्लङ्घन गर्दछ (जस्तै संवेदनशील/NSFW सामग्री)। कृपया अर्को तस्बिर प्रयास गर्नुहोस्।</string>
+    <string name="msg_daily_limit_reached">तपाईंले आफ्नो दैनिक सीमा पार गर्नुभयो</string>
+    <string name="text_today_remaining_attempts">"आज बाँकी प्रयासहरू "</string>
+
+    <!-- Report Dialog -->
+    <string name="text_flag_offensive_content">आपत्तिजनक सामग्री फ्ल्याग गर्नुहोस्</string>
+    <string name="text_spam">स्पाम</string>
+    <string name="text_inappropriate_content">अनुपयुक्त सामग्री</string>
+    <string name="text_copyright">प्रतिलिपि अधिकार</string>
+    <string name="text_offensive">आपत्तिजनक</string>
+    <string name="text_cancel">रद्द गर्नुहोस्</string>
+    <string name="text_report">रिपोर्ट गर्नुहोस्</string>
+    <string name="msg_please_select_reason">कृपया कारण चयन गर्नुहोस्</string>
+    <string name="msg_reported_reason">रिपोर्ट गरियो</string>
+    <string name="text_no_image_here">यहाँ कुनै छवि छैन!</string>
 </resources>

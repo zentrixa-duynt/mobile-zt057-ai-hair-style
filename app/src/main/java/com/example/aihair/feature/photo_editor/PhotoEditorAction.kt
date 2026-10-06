@@ -7,5 +7,6 @@ sealed interface PhotoEditorAction {
     object RemovePhoto : PhotoEditorAction
     data class SelectStyle(val styleId: String) : PhotoEditorAction
     data class SelectColor(val colorId: String, val hex: String? = null) : PhotoEditorAction
+    data class UnlockItem(val itemId: String, val isColor: Boolean) : PhotoEditorAction
     data class ContinueClicked(val croppedImageUri: String) : PhotoEditorAction
 }

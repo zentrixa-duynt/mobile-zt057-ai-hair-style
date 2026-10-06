@@ -6,6 +6,7 @@ import com.example.aihair.core.ui.base.BaseActivity
 import com.example.aihair.core.ui.click.setDebouncedClickListener
 import com.example.aihair.databinding.ActivitySettingsBinding
 import com.example.aihair.feature.language.LanguageActivity
+import dev.zentrixa.common.admob.ZTInterstitialAdUtils
 import com.example.aihair.feature.main.MainActivity
 import com.example.aihair.core.language.AppLanguageManager
 import com.example.aihair.core.language.LanguageProvider

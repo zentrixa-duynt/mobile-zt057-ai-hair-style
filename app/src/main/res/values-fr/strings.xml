@@ -31,7 +31,8 @@
     <string name="text_ai_analyzes_your_face_shape_to">L\'IA analyse la forme de votre visage pour suggérer des coupes de cheveux et des couleurs qui correspondent à vos traits.</string>
     <string name="text_next">Suivant</string>
     <string name="text_ai_is_working_its_magic">L\'IA opère sa magie !</string>
-    <string name="text_please_don_t_close_the_app_dur">Veuillez ne pas fermer l\'application pendant le traitement.\nCela prend généralement 5 à 10 secondes.</string>
+    <string name="text_please_don_t_close_the_app_dur">Veuillez ne pas fermer l\'application pendant le traitement
+Cela prend généralement plusieurs minutes.</string>
     <string name="text_result">Résultat</string>
     <string name="text_share">Partager</string>
     <string name="text_save">Sauvegarder</string>
@@ -152,4 +153,18 @@
     <string name="text_provides_detailed_insights_makeup">Fournit des informations détaillées sur votre maquillage, l\'équilibre de votre visage et votre palette de couleurs idéale.</string>
     <string name="msg_error_multiple_people">Plusieurs personnes détectées sur l\'image. Veuillez sélectionner une photo avec une seule personne.</string>
     <string name="msg_error_content_policy">L\'image viole les politiques de sécurité (par ex. contenu sensible). Veuillez essayer une autre photo.</string>
+    <string name="msg_daily_limit_reached">Vous avez atteint votre limite quotidienne</string>
+    <string name="text_today_remaining_attempts">"Tentatives restantes aujourd\'hui "</string>
+
+    <!-- Report Dialog -->
+    <string name="text_flag_offensive_content">Signaler un contenu offensant</string>
+    <string name="text_spam">Spam</string>
+    <string name="text_inappropriate_content">Contenu inapproprié</string>
+    <string name="text_copyright">Droit d\'auteur</string>
+    <string name="text_offensive">Offensant</string>
+    <string name="text_cancel">Annuler</string>
+    <string name="text_report">Signaler</string>
+    <string name="msg_please_select_reason">Veuillez sélectionner un motif</string>
+    <string name="msg_reported_reason">Signalé</string>
+    <string name="text_no_image_here">Pas d\'image ici !</string>
 </resources>

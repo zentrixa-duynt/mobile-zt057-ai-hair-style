@@ -31,7 +31,8 @@
     <string name="text_ai_analyzes_your_face_shape_to">La IA analiza la forma de tu rostro para sugerir cortes de pelo y colores que combinen con tus rasgos.</string>
     <string name="text_next">Próximo</string>
     <string name="text_ai_is_working_its_magic">¡La IA está haciendo su magia!</string>
-    <string name="text_please_don_t_close_the_app_dur">No cierres la aplicación durante el procesamiento.\nEsto suele tardar entre 5 y 10 segundos.</string>
+    <string name="text_please_don_t_close_the_app_dur">No cierres la aplicación durante el procesamiento
+Esto generalmente toma varios minutos.</string>
     <string name="text_result">Resultado</string>
     <string name="text_share">Compartir</string>
     <string name="text_save">Ahorrar</string>
@@ -152,4 +153,18 @@
     <string name="text_provides_detailed_insights_makeup">Proporciona información detallada sobre tu maquillaje, equilibrio facial y paleta de colores ideal.</string>
     <string name="msg_error_multiple_people">Se han detectado varias personas en la imagen. Seleccione una foto con una sola persona.</string>
     <string name="msg_error_content_policy">La imagen infringe las políticas de seguridad (p. ej., contenido sensible). Prueba con otra foto.</string>
+    <string name="msg_daily_limit_reached">Has alcanzado tu límite diario</string>
+    <string name="text_today_remaining_attempts">"Intentos restantes hoy "</string>
+
+    <!-- Report Dialog -->
+    <string name="text_flag_offensive_content">Marcar contenido ofensivo</string>
+    <string name="text_spam">Spam</string>
+    <string name="text_inappropriate_content">Contenido inapropiado</string>
+    <string name="text_copyright">Derechos de autor</string>
+    <string name="text_offensive">Ofensivo</string>
+    <string name="text_cancel">Cancelar</string>
+    <string name="text_report">Denunciar</string>
+    <string name="msg_please_select_reason">Seleccione un motivo</string>
+    <string name="msg_reported_reason">Denunciado</string>
+    <string name="text_no_image_here">¡No hay imagen aquí!</string>
 </resources>

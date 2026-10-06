@@ -6,6 +6,7 @@ import android.graphics.Matrix
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -93,7 +94,12 @@ class PhotoEditorActivity : BaseActivity<ActivityPhotoEditorBinding>(ActivityPho
             hairType = intent.getIntExtra(EXTRA_HAIR_TYPE, TYPE_HAIR_STYLE),
             isMorph = intent.getBooleanExtra("EXTRA_IS_MORPH", false),
             onAction = { action -> viewModel.onAction(action) },
-            onPickMedia = { pickMedia.launch("image/*") },
+            onPickMedia = {
+                if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.TIRAMISU) {
+                    dev.zentrixa.common.admob.ZTAppOpenResume.disableOpenAdResumeOneTime()
+                }
+                pickMedia.launch("image/*")
+            },
             onProcessAndContinue = { processAndContinue() },
             onSubmitList = { submitListToAdapter() }
         )
@@ -199,6 +205,13 @@ class PhotoEditorActivity : BaseActivity<ActivityPhotoEditorBinding>(ActivityPho
             }
         }
 
+        collectFlow(viewModel.usageState) {
+            val state = viewModel.state.value as? PhotoEditorUiState.Success
+            if (state != null) {
+                viewBinder.bind(state)
+            }
+        }
+
         collectFlow(viewModel.event) { event ->
             handleEvent(event)
         }
@@ -221,6 +234,22 @@ class PhotoEditorActivity : BaseActivity<ActivityPhotoEditorBinding>(ActivityPho
                     putExtra("EXTRA_COLOR_HEX", event.colorHex)
                 }
                 startActivity(intent)
+            }
+            is PhotoEditorEvent.RequireRewardAdToUnlock -> {
+                var isAdDone = false
+                dev.zentrixa.common.admob.ZTRewardedAdUtils.loadAndShowRewardAd(
+                    this,
+                    "reward_function_tool",
+                    "p_unlock_tool",
+                    onAdEarned = {
+                        isAdDone = true
+                    },
+                    onAdClosed = { isEarned ->
+                        if (isEarned || isAdDone) {
+                            viewModel.onAction(PhotoEditorAction.UnlockItem(event.itemId, event.isColor))
+                        }
+                    }
+                )
             }
         }
     }

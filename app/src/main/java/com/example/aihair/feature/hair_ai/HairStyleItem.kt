@@ -8,5 +8,6 @@ data class HairStyleItem(
     val name: String = "",
     @DrawableRes val imageResId: Int,
     @StringRes val nameResId: Int? = null,
-    val isSelected: Boolean = false
+    val isSelected: Boolean = false,
+    val isLocked: Boolean = false
 )

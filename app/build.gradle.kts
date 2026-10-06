@@ -138,7 +138,7 @@ dependencies {
     implementation("com.airbnb.android:lottie:6.6.7")
 
     // Titan SDK
-    implementation("com.github.zentrixa.titan:titan-android-sdk:1.0.0.beta")
+    implementation("com.github.zentrixa.titan:titan-android-sdk:1.0.0.beta08")
 
     // Firebase
     implementation(platform(libs.firebase.bom))
@@ -149,4 +149,7 @@ dependencies {
 
     // Coroutines Play Services (for .await() on Firebase Tasks)
     implementation(libs.kotlinx.coroutines.play.services)
+
+    // BlurView
+    implementation("com.github.Dimezis:BlurView:version-3.2.0")
 }

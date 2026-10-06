@@ -9,4 +9,5 @@ sealed interface PhotoEditorEvent {
         val styleId: String?,
         val colorHex: String?
     ) : PhotoEditorEvent
+    data class RequireRewardAdToUnlock(val itemId: String, val isColor: Boolean) : PhotoEditorEvent
 }

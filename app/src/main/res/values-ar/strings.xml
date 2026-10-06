@@ -154,4 +154,18 @@
     <string name="text_provides_detailed_insights_makeup">يوفر رؤى تفصيلية حول مظهر مكياجك، وتوازن وجهك، ولوحة الألوان المثالية.</string>
     <string name="msg_error_multiple_people">تم اكتشاف عدة أشخاص في الصورة. يرجى اختيار صورة بها شخص واحد فقط.</string>
     <string name="msg_error_content_policy">الصورة تنتهك سياسات الأمان (مثل المحتوى الحساس). يرجى تجربة صورة أخرى.</string>
+    <string name="msg_daily_limit_reached">لقد وصلت إلى الحد اليومي الخاص بك</string>
+    <string name="text_today_remaining_attempts">"المحاولات المتبقية اليوم "</string>
+
+    <!-- Report Dialog -->
+    <string name="text_flag_offensive_content">الإبلاغ عن محتوى مسيء</string>
+    <string name="text_spam">بريد مزعج</string>
+    <string name="text_inappropriate_content">محتوى غير لائق</string>
+    <string name="text_copyright">حقوق النشر</string>
+    <string name="text_offensive">مسيء</string>
+    <string name="text_cancel">إلغاء</string>
+    <string name="text_report">إبلاغ</string>
+    <string name="msg_please_select_reason">يرجى تحديد سبب</string>
+    <string name="msg_reported_reason">تم الإبلاغ عن</string>
+    <string name="text_no_image_here">لا توجد صورة هنا!</string>
 </resources>

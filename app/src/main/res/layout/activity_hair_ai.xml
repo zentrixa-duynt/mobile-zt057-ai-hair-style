@@ -152,23 +152,122 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
+        android:orientation="vertical"
         android:background="#030712"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/frNativeAd"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <TextView
-            android:id="@+id/btn_create"
+
+    <FrameLayout
+        android:id="@+id/btn_create_ads"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@drawable/bg_btn_create"
+        android:visibility="visible"
+        android:enabled="false">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:text="@string/text_create"
-            android:textColor="@color/color_btn_create_text"
-            android:textSize="16sp"
-            android:fontFamily="@font/poppins_medium"
-            android:includeFontPadding="false"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
             android:gravity="center"
-            android:background="@drawable/bg_btn_create"
-            android:enabled="false" />
+            android:duplicateParentState="true">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:duplicateParentState="true">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/ic_sparkle"
+                    app:tint="@color/color_btn_create_text"
+                    android:duplicateParentState="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/text_create"
+                    android:textColor="@color/color_btn_create_text"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:includeFontPadding="false"
+                    android:duplicateParentState="true" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:duplicateParentState="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_today_remaining_attempts"
+                    android:textColor="@color/color_btn_create_text"
+                    android:textSize="10sp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:includeFontPadding="false"
+                    android:duplicateParentState="true" />
+
+                <TextView
+                    android:id="@+id/txt_today_remaining"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5"
+                    android:textColor="@color/color_btn_create_text"
+                    android:textSize="10sp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:includeFontPadding="false"
+                    android:duplicateParentState="true" />
+
+                <TextView
+                    android:id="@+id/txt_total_remaining"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_slash_five"
+                    android:textColor="@color/color_btn_create_text"
+                    android:textSize="10sp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:includeFontPadding="false"
+                    android:duplicateParentState="true" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/img_ad_icon_create"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="top|end"
+            android:background="@drawable/bg_ad_icon_container"
+            android:layout_marginEnd="6dp"
+            android:layout_marginTop="6dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_gravity="center"
+                app:tint="#030712"
+                android:src="@drawable/ic_play" />
+        </FrameLayout>
+    </FrameLayout>
     </LinearLayout>
+
+    <dev.zentrixa.common.admob.ZTNativeAdView
+        android:id="@+id/frNativeAd"
+        app:ad_config_key="native_function"
+        app:ad_placement="p_native_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

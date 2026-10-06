@@ -29,6 +29,26 @@
             android:layout_height="match_parent"
             android:background="@drawable/bg_editor_thumbnail_stroke"
             android:visibility="gone" />
+            
+        <FrameLayout
+            android:id="@+id/img_lock"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_gravity="top|end"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/bg_item_lock"
+            android:padding="2dp"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_play"
+                app:tint="#F6339A" />
+        </FrameLayout>
     </androidx.cardview.widget.CardView>
 
     <TextView

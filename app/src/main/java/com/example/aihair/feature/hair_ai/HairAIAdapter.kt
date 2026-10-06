@@ -7,7 +7,7 @@ import com.example.aihair.core.ui.click.setDebouncedClickListener
 import com.example.aihair.databinding.ItemStyleBinding
 
 fun createHairAIAdapter(
-    onStyleClick: (String) -> Unit
+    onStyleClick: (HairStyleItem) -> Unit
 ): BaseAdapter<HairStyleItem, ItemStyleBinding> {
     var lastAnimatedPosition = -1
     return BaseAdapter(
@@ -25,7 +25,7 @@ fun createHairAIAdapter(
             binding.viewSelectionBorder.isSelected = item.isSelected
             
             binding.root.setDebouncedClickListener {
-                onStyleClick(item.id)
+                onStyleClick(item)
             }
             
             if (position > lastAnimatedPosition) {

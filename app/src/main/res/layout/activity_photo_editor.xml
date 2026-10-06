@@ -475,8 +475,16 @@
         android:fontFamily="@font/poppins_medium"
         android:textAllCaps="false"
         android:includeFontPadding="false"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/frNativeAd"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <dev.zentrixa.common.admob.ZTNativeAdView
+        android:id="@+id/frNativeAd"
+        app:ad_config_key="native_function"
+        app:ad_placement="p_native_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -171,8 +171,6 @@ class BeforeAfterSliderView @JvmOverloads constructor(
         super.onDetachedFromWindow()
         autoPlayAnimatorSet?.cancel()
         scope.cancel()
-        leftBitmap?.recycle()
-        rightBitmap?.recycle()
     }
 
     override fun onWindowVisibilityChanged(visibility: Int) {

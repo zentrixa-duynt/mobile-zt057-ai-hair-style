@@ -20,6 +20,14 @@ fun createHairstyleSuitAdapter(
                 binding.txtHairstyleName.text = item.name
             }
 
+            val rewardConfig = dev.zentrixa.common.admob.ZTRewardedAdUtils.getRewardAdsConfig("reward_function_AI")
+            val isAdEnabled = rewardConfig?.enabled != false && rewardConfig?.placements?.get("p_reward_apply") != false
+            binding.imgAdIconApply.visibility = if (isAdEnabled && !dev.zentrixa.common.utils.ZTUtils.isTurnOffAllAds) {
+                android.view.View.VISIBLE
+            } else {
+                android.view.View.GONE
+            }
+
             binding.btnApply.setDebouncedClickListener {
                 onItemClick(item)
             }

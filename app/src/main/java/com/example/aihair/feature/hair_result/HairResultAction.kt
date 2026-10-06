@@ -15,4 +15,5 @@ sealed class HairResultAction {
     data object HomeClicked : HairResultAction()
     data object BackClicked : HairResultAction()
     data object CreateAgainClicked : HairResultAction()
+    data object ProceedCreateAgain : HairResultAction()
 }

@@ -154,4 +154,18 @@ yüz özelliklerine dair detaylı analizler sunar.</string>
     <string name="text_provides_detailed_insights_makeup">Makyaj görünümünüz, yüz dengeniz ve ideal renk paletiniz hakkında ayrıntılı bilgiler sağlar.</string>
     <string name="msg_error_multiple_people">Resimde birden fazla kişi algılandı. Lütfen sadece bir kişinin olduğu bir fotoğraf seçin.</string>
     <string name="msg_error_content_policy">Görüntü güvenlik politikalarını ihlal ediyor (örn. hassas/uygunsuz içerik). Lütfen başka bir fotoğraf deneyin.</string>
+    <string name="msg_daily_limit_reached">Günlük sınırınıza ulaştınız</string>
+    <string name="text_today_remaining_attempts">"Bugün kalan deneme sayısı "</string>
+
+    <!-- Report Dialog -->
+    <string name="text_flag_offensive_content">Rahatsız edici içeriği işaretle</string>
+    <string name="text_spam">Spam</string>
+    <string name="text_inappropriate_content">Uygunsuz içerik</string>
+    <string name="text_copyright">Telif hakkı</string>
+    <string name="text_offensive">Rahatsız edici</string>
+    <string name="text_cancel">İptal</string>
+    <string name="text_report">Bildir</string>
+    <string name="msg_please_select_reason">Lütfen bir neden seçin</string>
+    <string name="msg_reported_reason">Bildirildi</string>
+    <string name="text_no_image_here">Burada resim yok!</string>
 </resources>

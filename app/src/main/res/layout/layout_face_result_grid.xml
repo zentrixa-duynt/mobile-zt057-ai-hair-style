@@ -24,13 +24,19 @@
             android:padding="12dp"
             android:gravity="center_vertical">
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/txt_title_hair_style"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/text_hair_style"
                 android:textColor="#6A7282"
                 android:textSize="12sp"
                 android:fontFamily="@font/poppins_medium"
-                android:includeFontPadding="false"/>
+                android:includeFontPadding="false"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:focusable="true"
+                android:focusableInTouchMode="true"/>
             <TextView
                 android:id="@+id/txt_hair_style"
                 android:layout_width="match_parent"
@@ -58,13 +64,19 @@
             android:padding="12dp"
             android:gravity="center_vertical">
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/txt_title_hair_color"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/text_hair_color"
                 android:textColor="#6A7282"
                 android:textSize="12sp"
                 android:fontFamily="@font/poppins_medium"
-                android:includeFontPadding="false"/>
+                android:includeFontPadding="false"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:focusable="true"
+                android:focusableInTouchMode="true"/>
             <TextView
                 android:id="@+id/txt_hair_color"
                 android:layout_width="match_parent"
@@ -100,16 +112,22 @@
             android:padding="12dp"
             android:gravity="center_vertical">
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/txt_title_face_shape"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/text_face_shape"
                 android:textColor="#6A7282"
                 android:textSize="12sp"
                 android:fontFamily="@font/poppins_medium"
-                android:includeFontPadding="false"/>
+                android:includeFontPadding="false"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:focusable="true"
+                android:focusableInTouchMode="true"/>
             <TextView
                 android:id="@+id/txt_face_shape"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:text="Oval"
                 android:textColor="#FFFFFF"
@@ -134,16 +152,22 @@
             android:padding="12dp"
             android:gravity="center_vertical">
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/txt_title_fit_rate"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/text_hairstyle_fit_rate"
                 android:textColor="#6A7282"
                 android:textSize="12sp"
                 android:fontFamily="@font/poppins_medium"
-                android:includeFontPadding="false"/>
+                android:includeFontPadding="false"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:focusable="true"
+                android:focusableInTouchMode="true"/>
             <TextView
                 android:id="@+id/txt_fit_rate"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:text="85%"
                 android:textColor="#FFFFFF"
